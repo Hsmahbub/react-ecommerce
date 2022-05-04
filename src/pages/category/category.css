@@ -1,0 +1,177 @@
+.category {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+}
+.leftBar {
+	width: 26%;
+}
+.leftBar h3 {
+	font-size: 20px;
+	letter-spacing: 1px;
+	line-height: 60px;
+	color: #242628;
+	font-weight: bold;
+	font-family: "Poppins";
+}
+.leftBar .catList {
+	margin-left: 1rem;
+	padding-bottom: 1.5rem;
+}
+.leftBar .catList ul {
+	list-style: square;
+}
+.leftBar .catList ul li {
+	font-size: 14px;
+	letter-spacing: 0px;
+	line-height: 35px;
+	color: #232323;
+	font-family: "Roboto";
+}
+.priceFilter {
+	border-top: 1px solid gainsboro;
+}
+.range input {
+	width: 100%;
+}
+.priceRange {
+	display: flex;
+}
+.priceRange input {
+	font-size: 14px;
+	font-family: "Roboto";
+	width: 44%;
+	height: 30px;
+	border: 1px solid #eeeeee;
+	text-align: center;
+}
+.filterBtn {
+	width: 20%;
+	height: 30px;
+	background: #00b97c;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	cursor: pointer;
+}
+.sizeFilter {
+	border-top: 1px solid gainsboro;
+	margin-top: 1.5rem;
+}
+.sizeFilter .sizes {
+	display: flex;
+	flex-wrap: wrap;
+}
+.sizeFilter .sizes p {
+	border: 1px solid #eeeeee;
+	width: 45px;
+	height: 30px;
+	align-items: center;
+	justify-content: center;
+	display: flex;
+	font-size: 14px;
+	letter-spacing: 0px;
+	line-height: 60px;
+	color: #777777;
+	font-family: "Roboto";
+	margin-right: 0.3rem;
+	margin-bottom: 0.3rem;
+	cursor: pointer;
+	transition: background-color 0.5s;
+}
+.sizeFilter .sizes p:hover {
+	background-color: #3cb878;
+	color: white;
+}
+.colorFilter {
+	border-top: 1px solid gainsboro;
+	margin-top: 1.5rem;
+}
+.colorFilter div {
+	display: flex;
+	align-items: center;
+	margin-bottom: 0.5rem;
+}
+.chooseColor {
+	margin-right: 0.5rem;
+	width: 10px;
+	height: 10px;
+	border: 1px solid #a1a1a1;
+}
+.topRated {
+	border-top: 1px solid gainsboro;
+	margin-top: 2rem;
+}
+.ratedProduct {
+	cursor: pointer;
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	align-items: center;
+}
+.ratedProduct__img {
+	height: inherit;
+}
+.ratedProduct__nameAndPrice {
+	width: 65%;
+	display: flex;
+	height: 100px;
+	flex-direction: column;
+	justify-content: space-around;
+	padding-left: 0.5rem;
+}
+.ratedProduct__nameAndPrice .pprice {
+	font-size: 18px;
+	letter-spacing: 1px;
+	line-height: 24px;
+	color: #3cb878;
+	font-family: "Droid Serif";
+}
+.pname {
+	font-size: 14px;
+	letter-spacing: 1px;
+	line-height: 20px;
+	color: #232323;
+	font-weight: 500;
+	font-family: "Poppins";
+}
+
+.offer-banner {
+	border-top: 1px solid gainsboro;
+	margin-top: 1.5rem;
+}
+.banner-mag {
+	margin-top: 2rem;
+}
+.categoryProduct {
+	width: 72%;
+}
+.catprod-title {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid gainsboro;
+	font-size: 14px;
+	letter-spacing: 0px;
+	line-height: 14px;
+	color: #777777;
+	font-family: "Roboto";
+}
+.sort {
+	width: 50%;
+	border: none;
+	font-size: 14px;
+	letter-spacing: 0px;
+	line-height: 14px;
+	color: #777777;
+	font-family: "Roboto";
+	outline: none;
+}
+.filterProducts{
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: center;
+}

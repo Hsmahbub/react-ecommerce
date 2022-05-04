@@ -1,0 +1,133 @@
+.navbar {
+	filter: drop-shadow(0px 1px 5px rgba(0, 0, 0, 0.05));
+	background-color: #ffffff;
+}
+.innerNav {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.logo {
+	font-size: 24px;
+	letter-spacing: 0px;
+	line-height: 14px;
+	font-family: "Poppins";
+}
+.logo .color {
+	color: #00b97c;
+}
+.links {
+	display: flex;
+	align-items: center;
+}
+.links p {
+	margin: 0 1rem;
+	font-size: 16px;
+	letter-spacing: 0px;
+	line-height: 14px;
+	transition: 1s;
+	font-weight: 500;
+	font-family: "Poppins";
+	text-align: center;
+	text-transform: uppercase;
+}
+.links p a {
+	transition: all 0.5s;
+}
+.links p a:hover {
+	color: #3cb878;
+	transform: scale(1.3);
+}
+.searchAndOther {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.carts {
+	margin: 0 0.5rem;
+	width: 100%;
+	display: flex;
+	font-size: 22px;
+}
+.quantity {
+	font-size: 16px;
+	transform: translate(-6px, -10px);
+	width: 20px;
+	height: 20px;
+	color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	background: #00b97c;
+	font-family: "Poppins";
+}
+.search {
+	
+	cursor: pointer;
+}
+.menuBar {
+	margin-left: 0.5rem;
+	display: none;
+	cursor: pointer;
+}
+.toggleMenu {
+	display: flex;
+	flex-direction: column;
+	text-transform: uppercase;
+	filter: drop-shadow(0px 1px 5px rgba(0, 0, 0, 0.05));
+	background-color: #ffffff;
+	width: fit-content;
+	right: 106px;
+	transition: height .5s;
+	position: absolute;
+	overflow: hidden;
+	display: none;
+	width: 150px;
+	top: 86px;
+	z-index: 2;
+}
+.menuItem {width: 100%;
+	padding: 1rem;
+	text-align: left;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	transition: all 1s;
+}
+.menuItem:hover{
+	background-color: #F2F2F2;
+	cursor: pointer;
+}
+
+.hide{
+	height: 0px !important;
+}
+/* responsive  */
+@media screen and (max-width: 1050px) {
+	.link_container {
+		display: none;
+	}
+	.toggleMenu {
+		display: flex;
+	}
+	.menuBar {
+		display: flex;
+	}
+	.search {
+		margin-right: .5rem;
+	}
+}
+
+@media screen and (max-width: 800px) {
+	.toggleMenu {
+		right: 75px;
+		top: 54px;
+	}
+}
+@media screen and (max-width: 500px) {
+	.toggleMenu {
+		right: 20px;
+	}
+	.navbar {
+		padding: 1rem !important;
+	}
+}

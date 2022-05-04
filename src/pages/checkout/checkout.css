@@ -1,0 +1,177 @@
+.checkout {
+	width: 1200px;
+	margin: 0 auto;
+}
+.billings {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.billing-input {
+	width: 60%;
+}
+.billing-input h1 {
+	font-size: 14px;
+	letter-spacing: 1px;
+	line-height: 60px;
+	color: #242628;
+	font-weight: bold;
+	font-family: "Poppins";
+}
+.billing-input .form-data label {
+	font-size: 14px;
+	line-height: 20px;
+	color: #232323;
+	font-family: "Roboto";
+}
+.nameData,
+.emailAndPhone {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+}
+.form-data input,.country select {
+	width: 100%;
+	height: 30px;
+	outline: none;
+	padding: 0 1rem;
+	margin-top: 0.5rem;
+	border: 1px solid #a3a2a3;
+}
+.nameData .fname,
+.email {
+	width: 45%;
+}
+.nameData .lname,
+.emailAndPhone .phones {
+	width: 45%;
+}
+.creataAccount {
+	font-size: 14px;
+	line-height: 20px;
+	color: #232323;
+	font-family: "Roboto";
+	margin: 1rem 0; 
+}
+
+
+
+/* for detals  */
+.billing-details {
+	width: 35%;
+}
+.billing-details h2 {
+	font-size: 14px;
+	letter-spacing: 1px;
+	color: #242628;
+	font-weight: bold;
+	font-family: "Poppins";
+}
+.bill {
+	padding-left: 1.5rem;
+	padding-top: 1.5rem;
+	border-top: 1px solid #a3a2a3;
+	border-left: 1px solid #a3a2a3;
+	border-right: 1px solid #a3a2a3;
+	border-bottom: 2px solid #a3a2a3;
+}
+
+.pTiltle {
+	margin-top: 1rem;
+	padding-bottom: 0.2rem;
+	border-bottom: 1px solid #e3e3e3;
+}
+.pNameAndPrice,
+.subtotalAndShipping {
+	margin-top: 1rem;
+	padding-bottom: 1rem;
+	border-bottom: 1px solid #e3e3e3;
+}
+.single-item {
+	margin-bottom: 0.5rem;
+}
+.total p {
+	padding: 1rem 0;
+	font-size: 18px;
+	line-height: 20px;
+	color: #232323;
+	font-weight: 500;
+	font-family: "Roboto";
+}
+.pTiltle,
+.single-item,
+.subTotal,
+.shipping,
+.total {
+	display: flex;
+	justify-content: space-between;
+	padding-right: 1rem;
+	font-size: 14px;
+	line-height: 20px;
+	color: #232323;
+	font-family: "Roboto";
+}
+.payments {
+	padding-left: 1.5rem;
+	padding-top: 1.5rem;
+	border-top: none;
+	border-left: 1px solid #a3a2a3;
+	border-right: 1px solid #a3a2a3;
+	border-bottom: 1px solid #a3a2a3;
+}
+.payment-methods {
+	font-size: 14px;
+	letter-spacing: 1px;
+	line-height: 20px;
+	color: #232323;
+	font-family: "Roboto";
+}
+.payment-methods label {
+	margin-left: 0.5rem;
+}
+.bank-transfer {
+	margin-bottom: 1rem;
+}
+.bank-pay-details {
+	margin-bottom: 1rem;
+	background: #f8f8f8;
+	padding-left: 1rem;
+	font-size: 14px;
+	line-height: 24px;
+	color: #232323;
+	font-family: "Roboto";
+}
+.cheque-pay {
+	margin-bottom: 1rem;
+}
+.paypal {
+	margin-bottom: 1rem;
+}
+.order-btn {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 1rem;
+}
+/* responsive */
+@media screen and (max-width:1220px){
+	.checkout{
+		width: unset;
+	}
+	.billings{
+		flex-direction:column;
+	}
+	.billing-input{
+		width: 100%;
+	}
+	.billing-details{
+		width: 100%;
+	}
+	.payments, .bill {
+		padding-left: 1rem;
+		padding-top: 1rem;
+
+	}
+
+}
