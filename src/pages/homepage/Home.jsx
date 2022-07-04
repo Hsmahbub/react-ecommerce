@@ -1,6 +1,7 @@
 import React from "react";
 import "./home.css";
-import product from "../data";
+import { useGlobalContext } from "../../context";
+// import product from "../data";
 import {
 	Navbar,
 	Topheader,
@@ -21,34 +22,35 @@ const img = [img1, img2, img3, img4];
 const images = [img6, img5, img7];
 
 function Home() {
+	const { product } = useGlobalContext()
+	const bestSellerProduct = product.slice(0,10)
 	return (
 		<div className="home">
 			<Topheader />
 			<Navbar />
 			<Slider />
-			<div className="section__padding selleTextAndProduct">
-				<div className="inner__selleTextAndProduct">
-					<div className="description">
-						<div className="descript">
-							<h1>BEST SELLERS</h1>
-							<span>The best productions from us</span>
-							<p>
-								Lorem ipsum dolor sit amet consectetur,
-								<br /> adipisicing elit. Maxime corporis quod,
-								sed nulla harum recusandae.
-							</p>
-						</div>
-					</div>
-					<>
-						{product.map((item, index) => (
+			<div className="section__padding seller-text-and-product">
+				<div className="description">
+					<h1>BEST SELLERS</h1>
+					<span>The best productions from us</span>
+					<p>
+						Lorem ipsum dolor sit amet consectetur,
+						<br /> adipisicing elit. Maxime corporis quod, sed nulla
+						harum recusandae.
+					</p>
+				</div>
+				<>
+					{bestSellerProduct.map((item, index) => (
+						<div key={index}>
 							<Product
-								name={item.name}
+								name={item.title}
 								price={item.price}
+								img={item.image}
 								id={index}
 							/>
-						))}
-					</>
-				</div>
+						</div>
+					))}
+				</>
 			</div>
 			<div className="service">
 				{img.map((item, index) => (

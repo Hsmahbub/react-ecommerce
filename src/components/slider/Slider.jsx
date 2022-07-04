@@ -1,7 +1,7 @@
 import React from "react";
 import "./slider.css";
 import { AiOutlineArrowRight, AiOutlineArrowLeft } from "react-icons/ai";
-import { useState, useEffect } from "react";
+import { useGlobalContext } from "../../context";
 
 const data = [
 	{
@@ -16,26 +16,10 @@ const data = [
 ];
 
 function Slider() {
-	const [slideIndex, setSlideIndex] = useState(0);
-	useEffect(() => {
-		const interval = setInterval(() => {
-			setSlideIndex((prevState) => (prevState > 0 ? prevState - 1 : 2));
-		}, 5000);
-
-		return () => clearInterval(interval);
-	}, []);
-
-	const handleClick = (direction) => {
-		if (direction === "right") {
-			setSlideIndex((prevState) => (prevState > 0 ? prevState - 1 : 2));
-			console.log(slideIndex);
-		} else {
-			setSlideIndex((prevState) => (prevState < 2 ? prevState + 1 : 0));
-			console.log(slideIndex);
-		}
-	};
+	const { slideIndex, handleClick, toggle } = useGlobalContext();
+	const { index } = toggle;
 	return (
-		<div className="slider_container">
+		<div className="slider_container" style={{ zIndex: index }}>
 			<div
 				className="arrow"
 				style={{ left: "20px" }}

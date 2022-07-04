@@ -1,12 +1,16 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Footer, Navbar, Topheader } from "../../components";
 import { FaSearch } from "react-icons/fa";
+import { Footer, Navbar, Product, Topheader } from "../../components";
+import { useGlobalContext } from "../../context";
+import Size from "./Size";
+import Color from "./Color";
 import "./category.css";
-import offer from "./Shop-Gird-leftsidebar.png";
-import pImg from "./p9.png";
-import { Product } from "../../components";
 import data from "./data";
+import pImg from "./p9.png";
+import offer from "./Shop-Gird-leftsidebar.png";
 function Category() {
+	const { setMinVal, setMaxVal, minVal, maxVal } = useGlobalContext();
+	const categoryHandler = () => {};
 	return (
 		<div>
 			<Topheader />
@@ -16,70 +20,83 @@ function Category() {
 					<a href="#">Home </a> &gt;&gt; <a href="#">Page </a>&gt;&gt;
 					<a href="#">Shop </a>&gt;&gt;<a href="#">Category</a>
 				</div>
-
 				<div className="category">
-					<div className="leftBar">
+					<div className="left-bar">
 						<h3>Category</h3>
-						<div className="catList">
+						<div className="product-category-list">
 							<ul>
-								<li>Accesseries (15)</li>
-								<li>Dresses (50)</li>
-								<li>Women (150)</li>
-								<li>Men (150)</li>
-								<li>Watch (150)</li>
-								<li>Bags (150)</li>
-								<li>Clothing (150)</li>
+								<li
+									onClick={() =>
+										categoryHandler("accesseries")
+									}
+								>
+									Accesseries (15)
+								</li>
+								<li onClick={() => categoryHandler("dresses")}>
+									Dresses (50)
+								</li>
+								<li onClick={() => categoryHandler("women")}>
+									Women (150)
+								</li>
+								<li onClick={() => categoryHandler("men")}>
+									Men (150)
+								</li>
+								<li onClick={() => categoryHandler("watch")}>
+									Watch (150)
+								</li>
+								<li onClick={() => categoryHandler("bags")}>
+									Bags (150)
+								</li>
+								<li onClick={() => categoryHandler("clothing")}>
+									Clothing (150)
+								</li>
 							</ul>
 						</div>
-						<div className="priceFilter">
+						<div className="category-price-filter">
 							<h3>Price Filter</h3>
-							<div className="range">
-								<input type="range" />
-							</div>
-							<br />
-							<div className="priceRange">
-								<input type="number" min="10" value="10" />
-								<input type="number" value="3000" />
-								<span className="filterBtn">
+							<div className="price-range">
+								<input
+									type="number"
+									onChange={(e) => setMinVal(e.target.value)}
+									min="10"
+									value={minVal}
+								/>
+								<input
+									onChange={(e) => setMaxVal(e.target.value)}
+									type="number"
+									max={"3000"}
+									value={maxVal}
+								/>
+								<span className="price-search-btn">
 									<FaSearch />
 								</span>
 							</div>
 						</div>
-						<div className="sizeFilter">
+						<div className="size-filter">
 							<h3>Size</h3>
-							<div className="sizes">
-								<p>XS</p>
-								<p>S</p>
-								<p>M</p>
-								<p>L</p>
-								<p>SL</p>
-								<p>XL</p>
-								<p>XXL</p>
+							<div className="size-item">
+								<Size value={"XS"} />
+								<Size value={"SM"} />
+								<Size value={"M"} />
+								<Size value={"L"} />
+								<Size value={"SL"} />
+								<Size value={"XL"} />
+								<Size value={"XXL"} />
 							</div>
 						</div>
-						<div className="colorFilter">
+
+						<div className="color-filter">
 							<h3>Color</h3>
-							<div>
-								<span className="chooseColor"></span>
-								<span>Black</span>
-							</div>
-							<div>
-								<span className="chooseColor"></span>
-								<span>Blue</span>
-							</div>
-							<div>
-								<span className="chooseColor"></span>
-								<span>White</span>
-							</div>
-							<div>
-								<span className="chooseColor"></span>
-								<span>Yellow</span>
-							</div>
+							<Color value="Black" />
+							<Color value="Red" />
+							<Color value="Blue" />
+							<Color value="Green" />
+							<Color value="Gray" />
 						</div>
-						<div className="topRated">
+						<div className="category-top-rated">
 							<h3>Top Rated</h3>
-							<div className="ratedProduct">
-								<div className="ratedProduct__img">
+							<div className="top-rated-product">
+								<div className="top-rated-product__img">
 									<img
 										src={pImg}
 										width="80px"
@@ -87,54 +104,22 @@ function Category() {
 										alt="img"
 									/>
 								</div>
-								<div className="ratedProduct__nameAndPrice">
-									<p className="pname">
+								<div className="top-rated-product__name-and-price">
+									<p className="top-rated-product-name">
 										Casuals mens ful sleve shirt
 									</p>
-									<p className="pprice">$200.00</p>
-								</div>
-							</div>
-							<div className="ratedProduct">
-								<div className="ratedProduct__img">
-									<img
-										src={pImg}
-										width="80px"
-										height="100px"
-										alt="img"
-									/>
-								</div>
-								<div className="ratedProduct__nameAndPrice">
-									<p className="pname">
-										Casuals mens ful sleve shirt
-									</p>
-									<p className="pprice">$200.00</p>
-								</div>
-							</div>
-							<div className="ratedProduct">
-								<div className="ratedProduct__img">
-									<img
-										src={pImg}
-										width="80px"
-										height="100px"
-										alt="img"
-									/>
-								</div>
-								<div className="ratedProduct__nameAndPrice">
-									<p className="pname">
-										Casuals mens ful sleve shirt
-									</p>
-									<p className="pprice">$200.00</p>
+									<p className="top-rated-product-price">$200.00</p>
 								</div>
 							</div>
 						</div>
 						<div className="offer-banner">
-							<div className="banner-mag">
+							<div className="banner-image">
 								<img src={offer} alt="offer" />
 							</div>
 						</div>
 					</div>
-					<div className="categoryProduct">
-						<div className="catprod-title">
+					<div className="category-product">
+						<div className="category-product-title">
 							<p>Showing result 1-12 of 44</p>
 							<select name="sort" id="sort" className="sort">
 								<option value="">Sort by newness</option>
@@ -142,13 +127,15 @@ function Category() {
 								<option value="">Sort by high-price</option>
 							</select>
 						</div>
-						<div className="filterProducts">
+						<div className="filter-products">
 							{data.map((item, index) => (
-								<Product
-									name={item.name}
-									price={item.price}
-									index={index}
-								/>
+								<div key={index}>
+									<Product
+										name={item.name}
+										price={item.price}
+										index={index}
+									/>
+								</div>
 							))}
 						</div>
 					</div>

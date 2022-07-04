@@ -1,65 +1,57 @@
 .cart {
+	font-family: "Poppins";
 	width: 1200px;
 	margin: 1rem auto;
 }
 .page__index {
 	margin-bottom: 1rem;
 }
-.list__table {
+
+.cart-list {
 	width: 100%;
-	text-align: center;
+}
+.row {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-bottom: 1px solid gray;
+	border-right: 1px solid gray;
+	border-left: 1px solid gray;
+	position: relative;
 	border-collapse: collapse;
 }
-.list__table tr th {
-	padding: 0.5rem;
-}
-.tdStyle{
+.col {
+	width: 25%;
 	display: flex;
+	flex-direction: column;
 	align-items: center;
-	justify-content: space-around;
-}
-.list__table tr th,
-tr td {
-	border: 1px solid rgba(0, 0, 0, 0.1);
-}
-.list__table tr td {
+	justify-content: center;
 	padding: 1rem;
-}
-.list__table tr td p {
-	font-size: 14px;
-	letter-spacing: 1px;
-	line-height: 20px;
-	color: #232323;
-	font-weight: 500;
-	font-family: "Poppins";
-}
-.prod__image {
-	width: 100px;
-	
-}
-.prod__image img {
-	width: 100%;
-}
-.clAndsz {
-	text-align: left;
-	width: 100%;
-}
-.quantity__box input {
-	width: 50px;
 	text-align: center;
-	height: 35px;
-	margin: 0 auto;
-	background-color: #ffffff;
-	border: 1px solid #d4d4d4;
 }
-
-.totalPrcie {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+.cart-product img {
+	width: 80px;
+	margin-bottom: 1rem;
 }
-.last_child {
-	text-align: right;
+.cartDeleteBtn {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	border: none;
+	cursor: pointer;
+	background-color: white;
+}
+.quantity input {
+	width: 35px;
+	height: 30px;
+	text-align: center;
+	outline: none;
+}
+.btn-col {
+	padding: 0.5rem;
+	align-items: flex-end;
+	justify-content: flex-end;
 }
 .updateBtn {
 	font-size: 14px;
@@ -174,15 +166,15 @@ button {
 }
 
 /* responsive part  */
-@media screen and (max-width:1200px) {
-	.cart{
+@media screen and (max-width: 1200px) {
+	.cart {
 		width: unset;
 	}
 	.proccess button {
-		padding: .5rem;
+		padding: 0.5rem;
 	}
 }
-@media screen and (max-width:600px) {
+@media screen and (max-width: 600px) {
 	.list__table {
 		width: 100%;
 		text-align: center;
@@ -191,14 +183,14 @@ button {
 	.list__table tr th {
 		padding: unset;
 	}
-	.tdStyle{
+	.tdStyle {
 		flex-direction: column;
 		align-items: center;
 		justify-content: space-around;
 	}
 	.list__table tr th,
 	tr td {
-		border: none
+		border: none;
 	}
 	.list__table tr td {
 		padding: unset;
@@ -210,5 +202,23 @@ button {
 		color: #232323;
 		font-weight: 500;
 		font-family: "Poppins";
+	}
+	.couponAndVoucher {
+		flex-direction: column;
+	}
+	.voucher {
+		width: unset;
+	}
+	.coupon {
+		width: unset;
+	}
+	.btn-col {
+		font-size: 12px;
+	}
+	.updateBtn {
+		font-size: 13px;
+	}
+	.continueBtn {
+		line-height: 22px;
 	}
 }

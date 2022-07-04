@@ -32,11 +32,7 @@
 	text-transform: uppercase;
 }
 .links p a {
-	transition: all 0.5s;
-}
-.links p a:hover {
-	color: #3cb878;
-	transform: scale(1.3);
+	display: block;
 }
 .searchAndOther {
 	display: flex;
@@ -49,7 +45,7 @@
 	display: flex;
 	font-size: 22px;
 }
-.quantity {
+.cart-quantity {
 	font-size: 16px;
 	transform: translate(-6px, -10px);
 	width: 20px;
@@ -61,9 +57,9 @@
 	border-radius: 50%;
 	background: #00b97c;
 	font-family: "Poppins";
+	cursor: pointer;
 }
 .search {
-	
 	cursor: pointer;
 }
 .menuBar {
@@ -71,34 +67,63 @@
 	display: none;
 	cursor: pointer;
 }
+.search-input-field {
+	position: absolute;
+	top: 55px;
+	overflow: hidden;
+	right: 92px;
+	width: 200px;
+	display: flex;
+	transition:all .5s;
+}
+.search-input-field input {
+	width: 70%;
+	height: 25px;
+	border-radius: 5px 0 0 5px;
+	border: 1px solid #29af2e85;
+	outline: none;
+	padding-left: 10px;
+}
+.search-input-field button {
+	border: none;
+	background-color: #00b97c;
+	color: white;
+	border-radius: 0px 5px 5px 0;
+	width: 30%;
+	font-size: 12px;
+	cursor: pointer;
+	height: 25px;
+	padding: 5px;
+}
 .toggleMenu {
+	background-color: #193359;
 	display: flex;
 	flex-direction: column;
 	text-transform: uppercase;
 	filter: drop-shadow(0px 1px 5px rgba(0, 0, 0, 0.05));
-	background-color: #ffffff;
-	width: fit-content;
-	right: 106px;
-	transition: height .5s;
+	color: #fff;
+	right: 0px;
+	transition: height 0.5s;
 	position: absolute;
 	overflow: hidden;
 	display: none;
-	width: 150px;
+	width: 100vw;
 	top: 86px;
-	z-index: 2;
 }
-.menuItem {width: 100%;
+.menuItem {
+	width: 100%;
 	padding: 1rem;
 	text-align: left;
 	border: 1px solid rgba(0, 0, 0, 0.1);
 	transition: all 1s;
 }
-.menuItem:hover{
-	background-color: #F2F2F2;
+.menuItem:hover {
+	background-color: #f2f2f2;
+	color: #000;
 	cursor: pointer;
 }
 
-.hide{
+.hide {
 	height: 0px !important;
 }
 /* responsive  */
@@ -113,21 +138,30 @@
 		display: flex;
 	}
 	.search {
-		margin-right: .5rem;
+		margin-right: 0.5rem;
+	}
+	.links p {
+		margin: 0;
 	}
 }
 
 @media screen and (max-width: 800px) {
 	.toggleMenu {
-		right: 75px;
+		right: 0px;
 		top: 54px;
+	}
+	.search-input-field {
+		top: -20px;
 	}
 }
 @media screen and (max-width: 500px) {
 	.toggleMenu {
-		right: 20px;
+		right: 0px;
 	}
 	.navbar {
 		padding: 1rem !important;
+	}
+	.search-input-field {
+		right: 50px;
 	}
 }

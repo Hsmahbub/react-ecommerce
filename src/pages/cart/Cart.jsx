@@ -1,111 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
+import { useGlobalContext } from "../../context";
+import CartComponent from "../../components/cart/DeskCart";
 import { Footer, Navbar, Topheader } from "../../components/index";
 import "./cart.css";
-import data from "./data";
-
-const Tr = ({ img, name, price, color, size, quantitys, keys }) => {
-	const [quantity, setQuantity] = useState(1);
-	const [isDisplay, setDisplay] = useState("initials");
-	const handleChange = (e) => {
-		setQuantity(e.target.value);
-	};
-
-	const handlClick = (e) => {
-		e.target.className === keys
-			? setDisplay("none")
-			: setDisplay("initials");
-	};
-	return (
-		<tr className={keys} style={{ display: isDisplay }}>
-			<td>
-				<div className="tdStyle">
-					<div className="prod__image">
-						<img src={img} alt="prod" />
-					</div>
-					<div className="prod__name">
-						<p>{name}</p>
-					</div>
-				</div>
-			</td>
-			<td>
-				<div className="clAndsz">
-					<p>Size:{size}</p>
-					<p>Color:{color}</p>
-				</div>
-			</td>
-			<td>
-				<div className="quantity__box">
-					<input
-						type="number"
-						onChange={(e) => handleChange(e)}
-						value={quantity}
-						min="1"
-					/>
-				</div>
-			</td>
-			<td>
-				<p>{price}</p>
-			</td>
-			<td>
-				<div className="totalPrcie">
-					<p>{`$${quantity * price}`}</p>
-					<div className="input">
-						<span className={keys} onClick={handlClick}>
-							cross
-						</span>
-					</div>
-				</div>
-			</td>
-		</tr>
-	);
-};
-
-const CartComponent = () => {
-	return (
-		<div className="cart__list">
-			<div className="cart-list__table">
-				<table className="list__table " id="cart1">
-					<tbody>
-						<tr>
-							<th>Product</th>
-							<th>Color & Size</th>
-							<th>Quantity</th>
-							<th>Price</th>
-							<th>Total</th>
-						</tr>
-						<>
-							{data.map((item) => (
-								<Tr
-									img={item.img}
-									name={item.name}
-									price={item.price}
-									color={item.color}
-									size={item.size}
-									quantitys={item.quantity}
-									keys={item.id}
-								/>
-							))}
-						</>
-						<tr>
-							<td colSpan={5}>
-								<p className="last_child">
-									<span className="updateBtn">
-										UPDATE CART
-									</span>
-									<span className="continueBtn">
-										CONTUNUE SHOPPING
-									</span>
-								</p>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	);
-};
 
 function Cart() {
 	return (
@@ -221,7 +119,7 @@ function Cart() {
 								<div className="calwrap">
 									<div>
 										<p>Subtotal</p>
-										<p>$450</p>
+										<p>${}</p>
 									</div>
 									<div>
 										<p>Coupon</p>

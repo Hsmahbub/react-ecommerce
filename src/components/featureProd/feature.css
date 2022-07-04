@@ -25,10 +25,12 @@
 }
 .title span {
 	text-align: center;
+	font-family: roboto;
+	font-style: italic;
 }
 @media screen and (max-width: 500px) {
 	.title h1 {
 		font-size: 18px;
-		line-height: 21px;
+		line-height: 50px;
 	}
 }

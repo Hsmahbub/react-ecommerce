@@ -5,8 +5,8 @@ import "./navbar.css";
 import { HiShoppingCart } from "react-icons/hi";
 import { FaSearch } from "react-icons/fa";
 import { VscThreeBars, VscClose } from "react-icons/vsc";
+import { useGlobalContext } from "../../context";
 import { useState } from "react";
-
 const Links = ({ styles }) => (
 	<>
 		<p className={styles}>
@@ -31,14 +31,17 @@ const Links = ({ styles }) => (
 );
 
 function Navbar() {
-	const [toggle, setToggle] = useState({
-		isFalse: false,
-		height: { height: "0px" },
+	const { toggle, handleToggle, toggleClose, setSearch } = useGlobalContext();
+	const { height, isFalse } = toggle;
+	const [searchVal, setSearchVal] = useState("");
+	const [isInput, setIsInput] = useState(false);
+	const [styleObject, setStyleObject] = useState({
+		width: "0px",
+		display: "hidden",
 	});
-	const { isFalse, height, } = toggle;
 	return (
 		<>
-			<div className="navbar section__padding">
+			<nav className="navbar section__padding">
 				<div className="innerNav">
 					<div className="logo">
 						<p>
@@ -55,47 +58,70 @@ function Navbar() {
 					<div className="searchAndOther">
 						<div className="carts">
 							<HiShoppingCart />
-							<div className="quantity">2</div>
+							<div className="cart-quantity">2</div>
 						</div>
-						<div className="search">
+						<div
+							className="search"
+							onClick={() => {
+								if (!isInput) {
+									setIsInput(true);
+									setStyleObject({
+										width: "200px",
+										display: "visible",
+									});
+								} else {
+									setIsInput(false);
+									setStyleObject({
+										width: "0px",
+										display: "hidden",
+									});
+								}
+							}}
+						>
 							<FaSearch />
+						</div>
+						<div
+							className="search-input-field"
+							style={{ width: styleObject.width }}
+						>
+							<input
+								type="text"
+								style={{ visibility: styleObject.display }}
+								value={searchVal}
+								onChange={(e) => setSearchVal(e.target.value)}
+							/>
+							<button
+								type="button"
+								style={{ visibility: styleObject.display }}
+								onClick={() => {
+									setSearch(searchVal);
+								}}
+							>
+								Search
+							</button>
 						</div>
 
 						<div className="menuBar">
 							{isFalse ? (
-								<span
-									onClick={() =>
-										setToggle({
-											isFalse: false,
-											index: 1,
-											height: { height: "0px" },
-										})
-									}
-								>
+								<span onClick={toggleClose}>
 									<VscClose />
 								</span>
 							) : (
-								<span
-									onClick={() =>
-										setToggle({
-											isFalse: true,
-											index: -1,
-											height: { height: "288px" },
-										})
-									}
-								>
+								<span onClick={handleToggle}>
 									<VscThreeBars />
 								</span>
 							)}
 						</div>
 
-						<div className="links toggleMenu slide-fwd-center" style={height}>
+						<div
+							className="links toggleMenu slide-fwd-center"
+							style={height}
+						>
 							<Links styles={"menuItem"} />
 						</div>
 					</div>
 				</div>
-			</div>
-
+			</nav>
 		</>
 	);
 }

@@ -3,10 +3,10 @@
 	width: 100%;
 	justify-content: space-between;
 }
-.leftBar {
+.left-bar {
 	width: 26%;
 }
-.leftBar h3 {
+.left-bar h3 {
 	font-size: 20px;
 	letter-spacing: 1px;
 	line-height: 60px;
@@ -14,30 +14,32 @@
 	font-weight: bold;
 	font-family: "Poppins";
 }
-.leftBar .catList {
+.left-bar .product-category-list {
 	margin-left: 1rem;
 	padding-bottom: 1.5rem;
 }
-.leftBar .catList ul {
+.left-bar .product-category-list ul {
 	list-style: square;
 }
-.leftBar .catList ul li {
+.left-bar .product-category-list ul li {
 	font-size: 14px;
 	letter-spacing: 0px;
-	line-height: 35px;
+	margin: 20px 0;
+	line-height: unset;
 	color: #232323;
+	cursor: pointer;
 	font-family: "Roboto";
 }
-.priceFilter {
+.left-bar .product-category-list ul li:hover{
+	color: #3cb878;
+}
+.category-price-filter {
 	border-top: 1px solid gainsboro;
 }
-.range input {
-	width: 100%;
-}
-.priceRange {
+.price-range {
 	display: flex;
 }
-.priceRange input {
+.price-range input {
 	font-size: 14px;
 	font-family: "Roboto";
 	width: 44%;
@@ -45,7 +47,7 @@
 	border: 1px solid #eeeeee;
 	text-align: center;
 }
-.filterBtn {
+.price-search-btn {
 	width: 20%;
 	height: 30px;
 	background: #00b97c;
@@ -55,15 +57,15 @@
 	color: white;
 	cursor: pointer;
 }
-.sizeFilter {
+.size-filter {
 	border-top: 1px solid gainsboro;
 	margin-top: 1.5rem;
 }
-.sizeFilter .sizes {
+.size-filter .size-item {
 	display: flex;
 	flex-wrap: wrap;
 }
-.sizeFilter .sizes p {
+.size-filter .size-item p {
 	border: 1px solid #eeeeee;
 	width: 45px;
 	height: 30px;
@@ -78,17 +80,17 @@
 	margin-right: 0.3rem;
 	margin-bottom: 0.3rem;
 	cursor: pointer;
-	transition: background-color 0.5s;
+	transition: all 0.5s;
 }
-.sizeFilter .sizes p:hover {
+.size-filter .size-item p:hover {
 	background-color: #3cb878;
 	color: white;
 }
-.colorFilter {
+.color-filter {
 	border-top: 1px solid gainsboro;
 	margin-top: 1.5rem;
 }
-.colorFilter div {
+.color-filter div {
 	display: flex;
 	align-items: center;
 	margin-bottom: 0.5rem;
@@ -99,21 +101,21 @@
 	height: 10px;
 	border: 1px solid #a1a1a1;
 }
-.topRated {
+.category-top-rated {
 	border-top: 1px solid gainsboro;
 	margin-top: 2rem;
 }
-.ratedProduct {
+.top-rated-product {
 	cursor: pointer;
 	display: flex;
 	width: 100%;
 	justify-content: space-between;
 	align-items: center;
 }
-.ratedProduct__img {
+.top-rated-product__img {
 	height: inherit;
 }
-.ratedProduct__nameAndPrice {
+.top-rated-product__name-and-price {
 	width: 65%;
 	display: flex;
 	height: 100px;
@@ -121,14 +123,14 @@
 	justify-content: space-around;
 	padding-left: 0.5rem;
 }
-.ratedProduct__nameAndPrice .pprice {
+.top-rated-product__name-and-price .top-rated-product-price {
 	font-size: 18px;
 	letter-spacing: 1px;
 	line-height: 24px;
 	color: #3cb878;
 	font-family: "Droid Serif";
 }
-.pname {
+.top-rated-product-name {
 	font-size: 14px;
 	letter-spacing: 1px;
 	line-height: 20px;
@@ -136,18 +138,17 @@
 	font-weight: 500;
 	font-family: "Poppins";
 }
-
 .offer-banner {
 	border-top: 1px solid gainsboro;
 	margin-top: 1.5rem;
 }
-.banner-mag {
+.banner-image {
 	margin-top: 2rem;
 }
-.categoryProduct {
+.category-product {
 	width: 72%;
 }
-.catprod-title {
+.category-product-title {
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
@@ -169,9 +170,25 @@
 	font-family: "Roboto";
 	outline: none;
 }
-.filterProducts{
+.filter-products {
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: row;
 	justify-content: center;
+}
+
+/* resposive  */
+@media screen and (max-width: 500px) {
+	.left-bar {
+		width: 35%;
+	}
+	.offer-banner {
+		display: none;
+	}
+	.category-top-rated {
+		display: none;
+	}
+	.category-product {
+		width: 65%;
+	}
 }
