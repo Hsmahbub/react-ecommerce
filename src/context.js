@@ -1,5 +1,7 @@
 import { useState, useEffect, useContext, createContext } from "react";
-import data from "./pages/cart/data";
+// import data from "./pages/cart/data";
+import commerce from "./lib/commerce";
+import data from "./data";
 const AppContext = createContext();
 const AppProvider = ({ children }) => {
 	//for navbar
@@ -41,21 +43,17 @@ const AppProvider = ({ children }) => {
 		}
 	};
 	// product details
-	const [product, setProduct] = useState([]);
+	const [products, setProducts] = useState([]);
+	const fetchProducts = async () => {
+		const { data } = await commerce.products.list()
+		setProducts(data)
+	};
 	useEffect(() => {
-		fetch("https://fakestoreapi.com/products")
-			.then((res) => res.json())
-			.then((json) => setProduct(json));
+		fetchProducts();
 	}, []);
 	// for cart page
 	const [dynamicData, setDynamicData] = useState([]);
 	const [cartProd, setCartProd] = useState([]);
-	useEffect(() => {
-		fetch("https://fakestoreapi.com/carts")
-			.then((res) => res.json())
-			.then((json) => setCartProd(json));
-		setDynamicData(data);
-	}, []);
 	// category
 	const [filterObj, setFilterObj] = useState([]);
 	const [filterSize, setFilterSize] = useState();
@@ -72,7 +70,7 @@ const AppProvider = ({ children }) => {
 				handleToggle,
 				toggleClose,
 				//product
-				product,
+				products,
 				dynamicData,
 				cartProd,
 				//slider

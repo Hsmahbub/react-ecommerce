@@ -1,21 +1,19 @@
 import { useState } from "react";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-import { FaShoppingCart } from "react-icons/fa";
-import { ImLoop } from "react-icons/im";
-import { MdFavorite, MdOutlineFavoriteBorder } from "react-icons/md";
-import product from "./p9.png";
+// import { FaShoppingCart } from "react-icons/fa";
+// import { ImLoop } from "react-icons/im";
+// import { MdFavorite, MdOutlineFavoriteBorder } from "react-icons/md";
 import "./product.css";
 
-function Product({ name, price, id, img }) {
-	const cropName = name.slice(0,10)
-	const [love, setLove] = useState(false);
+function Product({ name, price, img }) {
+	// const [love, setLove] = useState(false);
 	return (
-		<div className="productBox" key={id}>
+		<div className="productBox">
 			<div className="productImage">
-				<img src={img} alt="45" />
+				<img src={img} alt='img' width='100%' height={'100%'} />
 			</div>
 			<div className="productIconsAndDesc">
-				<div className="product-icon">
+				{/* <div className="product-icon">
 					<div className="cartIcon iconBox">
 						<FaShoppingCart />
 					</div>
@@ -31,9 +29,9 @@ function Product({ name, price, id, img }) {
 					<div className="loopIcon iconBox">
 						<ImLoop />
 					</div>
-				</div>
+				</div> */}
 				<div className="productDesc">
-					<div className="productName">{cropName}</div>
+					<div className="productName">{name}</div>
 					<div className="price">{price}</div>
 					<div className="star">
 						<AiFillStar />

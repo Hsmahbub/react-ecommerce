@@ -19,7 +19,7 @@ function Slider() {
 	const { slideIndex, handleClick, toggle } = useGlobalContext();
 	const { index } = toggle;
 	return (
-		<div className="slider_container" style={{ zIndex: index }}>
+		<div className="slider_container">
 			<div
 				className="arrow"
 				style={{ left: "20px" }}

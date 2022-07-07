@@ -4,6 +4,7 @@
 	background-color: #121212;
 	display: flex;
     overflow: hidden;
+	z-index: 1;
 }
 .wrapper {
 	height: 100%;
@@ -24,7 +25,6 @@
 	margin: auto;
 	cursor: pointer;
 	opacity: 0.5;
-	z-index: 1;
 }
 .slide{
     display: flex;
@@ -44,5 +44,13 @@
 @media  screen and (max-width:1200px) {
 	.slider_container{
 		height: unset;
+	}
+}
+@media  screen and (max-width:1000px) {
+	.arrow{
+		display: none;
+	}
+	.slider_container{
+		z-index: -1;
 	}
 }

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useGlobalContext } from "../../context";
+// import { useGlobalContext } from "../../context";
 import CartComponent from "../../components/cart/DeskCart";
 import { Footer, Navbar, Topheader } from "../../components/index";
 import "./cart.css";

@@ -109,6 +109,7 @@
 	display: none;
 	width: 100vw;
 	top: 86px;
+	z-index: 1;
 }
 .menuItem {
 	width: 100%;

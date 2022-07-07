@@ -1,5 +1,6 @@
 .feature__product {
 	width: 100%;
+	margin-bottom: 2rem;
 }
 .innerFeatureProd {
 	display: flex;
@@ -10,7 +11,7 @@
 .productList {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: center;
+	justify-content: space-around;
 }
 .title {
 	margin-top: 2rem;

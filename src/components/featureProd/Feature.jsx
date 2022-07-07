@@ -1,11 +1,11 @@
 import React from "react";
 import "./feature.css";
 import { Product } from "../index";
-import data from "./data";
+import data from "../../data";
 import { useGlobalContext } from "../../context";
 
 function Feature() {
-	const { product } = useGlobalContext();
+	const { products } = useGlobalContext();
 	return (
 		<div className="section__padding feature__product">
 			<div className="innerFeatureProd">
@@ -14,12 +14,12 @@ function Feature() {
 					<span>Newest trends from top brands</span>
 				</div>
 				<div className="productList">
-					{product.map((item, index) => (
+					{products.map((item, index) => (
 						<div key={index}>
 							<Product
-								name={item.title}
-								price={item.price}
-								img={item.image}
+								name={item.name}
+								price={item.price.formatted_with_symbol}
+								img={item.image.url}
 								key={index}
 							/>
 						</div>

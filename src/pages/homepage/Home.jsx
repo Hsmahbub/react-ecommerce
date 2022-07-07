@@ -22,15 +22,13 @@ const img = [img1, img2, img3, img4];
 const images = [img6, img5, img7];
 
 function Home() {
-	const { product } = useGlobalContext()
-	const bestSellerProduct = product.slice(0,10)
+	const { products } = useGlobalContext()
 	return (
 		<div className="home">
 			<Topheader />
 			<Navbar />
 			<Slider />
-			<div className="section__padding seller-text-and-product">
-				<div className="description">
+			<div className="description">
 					<h1>BEST SELLERS</h1>
 					<span>The best productions from us</span>
 					<p>
@@ -39,17 +37,18 @@ function Home() {
 						harum recusandae.
 					</p>
 				</div>
+			<div className="section__padding seller-text-and-product">
 				<>
-					{bestSellerProduct.map((item, index) => (
-						<div key={index}>
+					{products.map((item) => (
+						<div key={item.id} >
 							<Product
-								name={item.title}
-								price={item.price}
-								img={item.image}
-								id={index}
+								name={item.name}
+								price={item.price.formatted_with_symbol}
+								img={item.image.url}
+								id={item.id}
 							/>
 						</div>
-					))}
+					))} 
 				</>
 			</div>
 			<div className="service">
