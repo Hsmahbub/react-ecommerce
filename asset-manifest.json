@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/react-ecommerce/static/css/main.e8bbfbad.css",
-    "main.js": "/react-ecommerce/static/js/main.c4349182.js",
+    "main.css": "/react-ecommerce/static/css/main.05449109.css",
+    "main.js": "/react-ecommerce/static/js/main.93667d90.js",
     "static/media/Shop-Gird-leftsidebar.png": "/react-ecommerce/static/media/Shop-Gird-leftsidebar.92ac0eb4b5ea8721adb6.png",
     "static/media/p9.png": "/react-ecommerce/static/media/p9.3b5e4bcb7dcb988897cb.png",
     "static/media/img1 (1).png": "/react-ecommerce/static/media/img1 (1).2e395729eb91b25c0b8e.png",
     "static/media/img1 (2).png": "/react-ecommerce/static/media/img1 (2).22f9719d927c753c67d2.png",
     "static/media/img1 (3).png": "/react-ecommerce/static/media/img1 (3).73d1bbcb188aee46d35a.png",
     "index.html": "/react-ecommerce/index.html",
-    "main.e8bbfbad.css.map": "/react-ecommerce/static/css/main.e8bbfbad.css.map",
-    "main.c4349182.js.map": "/react-ecommerce/static/js/main.c4349182.js.map"
+    "main.05449109.css.map": "/react-ecommerce/static/css/main.05449109.css.map",
+    "main.93667d90.js.map": "/react-ecommerce/static/js/main.93667d90.js.map"
   },
   "entrypoints": [
-    "static/css/main.e8bbfbad.css",
-    "static/js/main.c4349182.js"
+    "static/css/main.05449109.css",
+    "static/js/main.93667d90.js"
   ]
 }
