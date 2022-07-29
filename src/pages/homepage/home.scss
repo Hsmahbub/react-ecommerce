@@ -1,0 +1,50 @@
+@import "../../responsive-breakpoint.scss";
+.home {
+	.homepage-banner {
+		background-color: #333333;
+		display: flex;
+		width: 100%;
+		@include large-down{
+			padding-top:2rem ;
+		}
+	}
+	.homepage-banner .img img {
+		width: 100%;
+	}
+	.homepage-banner .img {
+		@include small-down{
+			height: 250px;
+		}
+		height: 330px;
+		width: 100%;
+	}
+	.homepage-banner .img img {
+		height: 100%;
+		width: 100%;
+	}
+}
+/* responsive  */
+@media screen and (max-width: 1000px) {
+	.seller-text-and-product {
+		flex-wrap: wrap;
+	}
+	.homepage-banner .img {
+		height: 100%;
+	}
+}
+@media screen and (max-width: 500px) {
+	.description {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		padding-bottom: 1rem;
+	}
+	.description p {
+		font-size: 11px;
+		line-height: 17px;
+		width: 87%;
+		text-align: center;
+		margin: 0 auto;
+	}
+}

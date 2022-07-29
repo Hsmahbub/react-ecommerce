@@ -1,46 +1,90 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/anchor-has-content */
 import React from "react";
-import "./navbar.css";
+import "./navbar.scss";
+import { NavBottom, } from "./NavBottom";
+import Navtop from "./Navtop";
+import { Link } from "react-router-dom";
 import { HiShoppingCart } from "react-icons/hi";
-import { FaSearch } from "react-icons/fa";
+import { LogoutApi } from "../../Database Managment/auth";
 import { VscThreeBars, VscClose } from "react-icons/vsc";
 import { useGlobalContext } from "../../context";
 import { useState } from "react";
-const Links = ({ styles }) => (
-	<>
-		<p className={styles}>
-			<a href="#">home</a>
-		</p>
-		<p className={styles}>
-			<a href="#">women</a>
-		</p>
-		<p className={styles}>
-			<a href="#">men</a>
-		</p>
-		<p className={styles}>
-			<a href="#">kids</a>
-		</p>
-		<p className={styles}>
-			<a href="#">jewellery</a>
-		</p>
-		<p className={styles}>
-			<a href="#">accessories</a>
-		</p>
-	</>
-);
 
-function Navbar() {
-	const { toggle, handleToggle, toggleClose, setSearch } = useGlobalContext();
-	const { height, isFalse } = toggle;
-	const [searchVal, setSearchVal] = useState("");
-	const [isInput, setIsInput] = useState(false);
-	const [styleObject, setStyleObject] = useState({
-		width: "0px",
-		display: "hidden",
-	});
+export const Links = ({ styles, link, link2, logout }) => {
+	const { loginData, setLoginData } = useGlobalContext();
+	const profile = loginData;
 	return (
 		<>
+			<Link to="/">
+				<p className={styles}>
+					<a href="#">home</a>
+				</p>
+			</Link>
+			<p className={styles}>
+				<a href="#">women</a>
+			</p>
+			<p className={styles}>
+				<a href="#">men</a>
+			</p>
+			<p className={styles}>
+				<a href="#">kids</a>
+			</p>
+			<p className={styles}>
+				<a href="#">jewellery</a>
+			</p>
+			<Link to={`/${link}`}>
+				{!profile && (
+					<p className={styles}>
+						<a href="#">{link}</a>
+					</p>
+				)}
+			</Link>
+			<Link to={`/${link2}`}>
+				{!profile && (
+					<p className={styles}>
+						<a href="#">{link2}</a>
+					</p>
+				)}
+			</Link>
+
+			{profile && (
+				<p
+					className={styles}
+					onClick={() => {
+						LogoutApi();
+						setLoginData("");
+					}}
+				>
+					<a href="#">{logout}</a>
+				</p>
+			)}
+		</>
+	);
+};
+
+function Navbar({ link, link2, logout }) {
+	const { loginData } = useGlobalContext();
+	const profile = loginData;
+	const [toggleMenu, setToggleMenu] = useState({
+		isFalse: false,
+		width: "0px",
+	});
+	const openToggleMenu = () => {
+		setToggleMenu({
+			isFalse: true,
+			width: "200px",
+		});
+	};
+	const closeToggleMenu = () => {
+		setToggleMenu({
+			isFalse: false,
+			width: "0px",
+		});
+	};
+	return (
+		<>
+			<Navtop />
 			<nav className="navbar section__padding">
 				<div className="innerNav">
 					<div className="logo">
@@ -51,77 +95,56 @@ function Navbar() {
 					</div>
 					<div className="link_container">
 						<div className="links">
-							<Links />
+							<Links link={link} link2={link2} logout={logout} />
 						</div>
 					</div>
 
-					<div className="searchAndOther">
-						<div className="carts">
-							<HiShoppingCart />
-							<div className="cart-quantity">2</div>
-						</div>
-						<div
-							className="search"
-							onClick={() => {
-								if (!isInput) {
-									setIsInput(true);
-									setStyleObject({
-										width: "200px",
-										display: "visible",
-									});
-								} else {
-									setIsInput(false);
-									setStyleObject({
-										width: "0px",
-										display: "hidden",
-									});
-								}
-							}}
-						>
-							<FaSearch />
-						</div>
-						<div
-							className="search-input-field"
-							style={{ width: styleObject.width }}
-						>
-							<input
-								type="text"
-								style={{ visibility: styleObject.display }}
-								value={searchVal}
-								onChange={(e) => setSearchVal(e.target.value)}
-							/>
-							<button
-								type="button"
-								style={{ visibility: styleObject.display }}
-								onClick={() => {
-									setSearch(searchVal);
-								}}
-							>
-								Search
-							</button>
-						</div>
-
-						<div className="menuBar">
-							{isFalse ? (
-								<span onClick={toggleClose}>
+					<div className="search-and-other">
+						<Link to={"/cart"}>
+							<div className="carts">
+								<HiShoppingCart />
+								<div className="cart-quantity">{""}</div>
+							</div>
+						</Link>
+						{profile && (
+							<>
+								<div className="profile" title="Profile">
+									<Link to={"/profile"}>
+										<img
+											src={
+												profile.img
+													? profile.img
+													: "https://springer-hagen.de/wp-content/uploads/2017/03/testy3-1-1.png"
+											}
+											alt="#"
+										/>
+									</Link>
+									{/* <div className="profile-hover"> */}
+									{/* </div> */}
+								</div>
+							</>
+						)}
+						<div className="menu-bar">
+							{toggleMenu.isFalse ? (
+								<span onClick={closeToggleMenu}>
 									<VscClose />
 								</span>
 							) : (
-								<span onClick={handleToggle}>
+								<span onClick={openToggleMenu}>
 									<VscThreeBars />
 								</span>
 							)}
 						</div>
-
-						<div
-							className="links toggleMenu slide-fwd-center"
-							style={height}
-						>
-							<Links styles={"menuItem"} />
-						</div>
 					</div>
 				</div>
 			</nav>
+			<NavBottom
+				link={link}
+				link2={link2}
+				width={toggleMenu.width}
+				logout={logout}
+			/>
+			
 		</>
 	);
 }

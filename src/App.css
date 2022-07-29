@@ -5,15 +5,20 @@
 	scroll-behavior: smooth;
   font-family: roboto;
 }
+.App{
+  overflow-x: hidden;
+}
 body{
   position: relative;
+  /* overflow-x: hidden; */
 }
 a {
 	text-decoration: none;
 	color: unset;
 }
 .section__padding {
-	padding: 2rem 6rem;
+	padding-left: 6rem;
+	padding-right: 6rem;
 }
 .section__margin {
 	margin: 4rem;

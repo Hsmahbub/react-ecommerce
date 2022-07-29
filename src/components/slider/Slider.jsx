@@ -1,54 +1,47 @@
 import React from "react";
-import "./slider.css";
-import { AiOutlineArrowRight, AiOutlineArrowLeft } from "react-icons/ai";
-import { useGlobalContext } from "../../context";
-
-const data = [
-	{
-		img: `https://img.freepik.com/free-psd/horizontal-banner-template-big-sale-with-woman-shopping-bags_23-2148786755.jpg?w=2000`,
-	},
-	{
-		img: "https://img.freepik.com/free-psd/horizontal-banner-template-online-fashion-sale_23-2148585405.jpg?w=2000",
-	},
-	{
-		img: "https://img.freepik.com/free-psd/horizontal-banner-online-fashion-sale_23-2148585404.jpg?w=2000",
-	},
-];
-
-function Slider() {
-	const { slideIndex, handleClick, toggle } = useGlobalContext();
-	const { index } = toggle;
+import Slider from "react-slick";
+import "./slider.scss";
+function Sliders() {
+	const settings = {
+		dots: true,
+		infinite: true,
+		speed: 500,
+		slidesToShow: 1,
+		slidesToScroll: 1,
+		dotsClass: "slick-dots",
+		autoplay: true,
+	};
 	return (
 		<div className="slider_container">
-			<div
-				className="arrow"
-				style={{ left: "20px" }}
-				onClick={() => handleClick("left")}
-			>
-				<AiOutlineArrowLeft />
-			</div>
+			<Slider {...settings}>
+				<div className="slide">
+					<img
 
-			<div
-				className="wrapper"
-				style={{ transform: `translateX(${slideIndex * -100}vw)` }}
-			>
-				{data.map((item, index) => (
-					<div className="slide" key={index}>
-						<div className="imgContainer">
-							<img src={item.img} alt={`item ${index}`} />
-						</div>
-					</div>
-				))}
-			</div>
-			<div
-				className="arrow"
-				style={{ right: "20px" }}
-				onClick={() => handleClick("right")}
-			>
-				<AiOutlineArrowRight />
-			</div>
+						src={
+							"https://img.freepik.com/free-psd/horizontal-banner-template-big-sale-with-woman-shopping-bags_23-2148786755.jpg?w=2000"
+						}
+						alt="slider-1"
+					/>
+				</div>
+				<div className="slide">
+					<img
+						src={
+							"https://img.freepik.com/free-psd/horizontal-banner-template-online-fashion-sale_23-2148585405.jpg?w=2000"
+						}
+						alt="slider-2"
+					/>
+				</div>
+				<div className="slide">
+					<img
+						src={
+							"https://img.freepik.com/free-psd/horizontal-banner-online-fashion-sale_23-2148585404.jpg?w=2000"
+						}
+						alt="slider-3"
+					/>
+				</div>
+			</Slider>
 		</div>
 	);
 }
 
-export default Slider;
+export default Sliders;

@@ -1,0 +1,67 @@
+﻿auth-post:{
+	https://mahbub-commerce.herokuapp.com/api/auth/register
+	https://mahbub-commerce.herokuapp.com/api/auth/login
+}
+
+users{
+	user-update:{
+		https://mahbub-commerce.herokuapp.com/api/users:id
+	}
+	user-delete:{
+		https://mahbub-commerce.herokuapp.com/api/users/:id
+	}
+	user-get:{
+		https://mahbub-commerce.herokuapp.com/api/users/find/:id
+		https://mahbub-commerce.herokuapp.com/api/users/
+	}
+}
+
+carts{
+	cart-get:{
+		https://mahbub-commerce.herokuapp.com/api/carts/find/userId/
+		https://mahbub-commerce.herokuapp.com/api/carts/
+	}
+	cart-post:{
+		https://mahbub-commerce.herokuapp.com/api/carts/
+	}
+	cart-update:{
+		https://mahbub-commerce.herokuapp.com/api/carts/:id
+	}
+	cart-delete:{
+		https://mahbub-commerce.herokuapp.com/api/carts/:id
+	}
+}
+
+orders{
+	order-post:{
+		https://mahbub-commerce.herokuapp.com/api/orders/
+	}
+	order-update:{
+		https://mahbub-commerce.herokuapp.com/api/orders/:id
+	}
+	order-delete:{
+		https://mahbub-commerce.herokuapp.com/api/orders/:id
+	}
+	order-get:{
+		https://mahbub-commerce.herokuapp.com/api/orders/find/:userId
+		https://mahbub-commerce.herokuapp.com/api/orders/
+	}
+}
+
+products{
+	product-post:{
+		https://mahbub-commerce.herokuapp.com/api/products/
+	}
+	product-update:{
+		https://mahbub-commerce.herokuapp.com/api/products/:id
+	}
+	product-delete:{
+		https://mahbub-commerce.herokuapp.com/api/products/:id
+	}
+	product-get:{
+		https://mahbub-commerce.herokuapp.com/api/products/find/:id
+	}
+	product-get:{
+		https://mahbub-commerce.herokuapp.com/api/products/
+	}
+}

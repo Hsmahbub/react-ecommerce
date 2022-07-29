@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Footer, Navbar, Topheader } from "../../components";
+import { Footer, Navbar, Topheader } from "../../Components/index";
 import "./checkout.css";
 
 const Inputdata = ({ labelValue, type, name }) => {

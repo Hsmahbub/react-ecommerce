@@ -1,0 +1,64 @@
+@import "../../responsive-breakpoint.scss";
+@import "../../mixin.scss";
+.footer {
+	@include small-up{
+		margin-top: 2rem;
+	}
+	.footer-links {
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+		@include medium-down {
+		}
+	}
+	.footer__common {
+		min-width: 300px;
+		width: 100%;
+		@include medium-down {
+			margin-top: 1rem;
+			min-width: 25% !important;
+		}
+		@include large-down {
+			min-width: unset;
+		}
+		h3 {
+			@include medium-down {
+				font-size: 13px;
+			}
+			@include small-down {
+				font-size: 10px;
+			}
+			width: fit-content;
+			border-bottom: 1px solid gainsboro;
+			margin-bottom: 1rem;
+		}
+		p {
+			margin-bottom: 0.5rem;
+			@include small-down {
+				font-size: 10px;
+			}
+			a {
+				&:hover {
+					text-decoration: underline;
+					color: rgb(247, 26, 26);
+					font-weight: bold;
+				}
+			}
+		}
+	}
+	.copyright {
+		@include small-up{
+			margin-top: 2rem;
+		}
+		color: white;
+		height: 50px;
+		line-height: 50px;
+		text-align: center;
+		background-color: #333333;
+		p {
+			@include medium-down {
+				font-size: 10px;
+			}
+		}
+	}
+}

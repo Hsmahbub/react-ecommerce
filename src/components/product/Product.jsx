@@ -1,44 +1,39 @@
-import { useState } from "react";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-// import { FaShoppingCart } from "react-icons/fa";
-// import { ImLoop } from "react-icons/im";
-// import { MdFavorite, MdOutlineFavoriteBorder } from "react-icons/md";
-import "./product.css";
-
-function Product({ name, price, img }) {
-	// const [love, setLove] = useState(false);
+import { FaShoppingCart } from "react-icons/fa";
+import { useGlobalContext } from "../../context";
+import "./product.scss";
+function Product({ item }) {
+	const { title, img, desc,price } = item;
+	const { addToCart } = useGlobalContext();
 	return (
-		<div className="productBox">
-			<div className="productImage">
-				<img src={img} alt='img' width='100%' height={'100%'} />
+		<div className="product-box">
+			<div className="product-image">
+				<img src={img} alt="img" width="100%" height={"100%"} />
 			</div>
-			<div className="productIconsAndDesc">
-				{/* <div className="product-icon">
-					<div className="cartIcon iconBox">
-						<FaShoppingCart />
-					</div>
-					<div className="loveICon iconBox">
-						{love ? (
-							<MdFavorite onClick={() => setLove(false)} />
-						) : (
-							<MdOutlineFavoriteBorder
-								onClick={() => setLove(true)}
-							/>
-						)}
-					</div>
-					<div className="loopIcon iconBox">
-						<ImLoop />
-					</div>
-				</div> */}
-				<div className="productDesc">
-					<div className="productName">{name}</div>
-					<div className="price">{price}</div>
-					<div className="star">
-						<AiFillStar />
-						<AiFillStar />
-						<AiFillStar />
-						<AiFillStar />
-						<AiOutlineStar />
+			<div className="product-icons-and-desc">
+				<div className="product-desc">
+					<p className="productn-name">{title}</p>
+					<div className="price-star-carticon">
+						<div className="price-and-star">
+							<div className="price">{price}</div>
+							<div className="star">
+								<AiFillStar />
+								<AiFillStar />
+								<AiFillStar />
+								<AiFillStar />
+								<AiOutlineStar />
+							</div>
+						</div>
+						<button
+							className="cart-icon"
+							onClick={() => {
+								addToCart(item)
+							console.log(item);
+							}}
+						>
+							Add
+							<FaShoppingCart />
+						</button>
 					</div>
 				</div>
 			</div>

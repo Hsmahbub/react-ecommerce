@@ -1,0 +1,46 @@
+@import "../../responsive-breakpoint.scss";
+.slider_container{
+
+	background: gainsboro;
+	@include medium-up{
+		padding: 0 6rem;
+	}
+	@include small-down{
+		padding: 0 0rem;
+	}
+	
+}
+.slide {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	img {
+		height: 700px;
+	}
+}
+.slick-slide {
+	img {
+		@include large-down {
+			height: unset;
+		}
+		width: 100%;
+	}
+}
+.slick-dots li button:before {
+	font-size: 10px;
+}
+.slick-list {
+	button {
+		display: none;
+	}
+}
+.slick-dots, .slick-next, .slick-prev{
+position: relative;
+top: -2px !important;
+}
+.slick-slider{
+	.slick-arrow{
+		
+		display: none !important;
+	}
+}

@@ -1,0 +1,85 @@
+﻿.login-form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	/* background-color: aquamarine; */
+	height: 100%;
+	margin: auto;
+	
+}
+.login-form h1 {
+    font-size: 2.5rem;
+    font-weight: 500;
+    line-height: 2;
+}
+.create-accoutn-btn ,.google-signup{
+	margin: 1rem  0 0 0 ;
+    width: 400px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 18px;
+	background-color: #4F3EE1;
+}
+.google-signup{
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 0;
+    background-color: white;
+    border: 1px solid #E4E5E9;
+}
+.google-signup:hover{
+	background-color: rgb(243, 235, 231);
+}
+.create-accoutn-btn:hover{
+	background-color: white;
+	border: 1px solid #E4E5E9;
+}
+.create-accoutn-btn:hover button{
+	color: black;
+}
+.create-accoutn-btn button   {
+    display: block;
+    width: 100%;
+	color: #fff;
+    line-height: 40px;
+    border: none;
+    background-color: transparent;
+    background-color: initial;
+    font-size: 16px;
+	cursor: pointer;
+}
+.google-signup a{
+    color: black;
+	text-align: center;
+}
+.google-icon{
+	font-size: 30px;
+	margin-right: 10px;
+}
+.have-an-account{
+	margin-top: 2rem;
+	color: #7E828A;
+	font-weight: 500;
+}
+.have-an-account a{
+	color: #4F3EE1;
+}
+/* responsive  */
+@media screen and (max-width:500px){
+	.login-form{
+		height: 100vh;
+	}
+	.create-accoutn-btn ,.google-signup{
+		width: 300px;
+		height: 40px;
+
+	}
+	.create-accoutn-btn button{
+		padding:.5rem 0
+	}
+	.google-icon{
+		font-size: 25px;
+	}
+}

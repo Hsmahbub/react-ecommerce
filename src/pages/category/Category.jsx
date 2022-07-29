@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { FaSearch } from "react-icons/fa";
-import { Footer, Navbar, Product, Topheader } from "../../components";
+import { Footer, Navbar, Product, Topheader } from "../../Components/index";
 import { useGlobalContext } from "../../context";
 import Size from "./Size";
 import Color from "./Color";
