@@ -2,8 +2,7 @@
 import "./top-product.scss";
 import { useGlobalContext } from "../../context";
 import { Product } from "../index";
-function TopProduct() {
-	const { products } = useGlobalContext();
+function TopProduct({ products }) {
 	return (
 		<div className="top-product">
 			<h1>TOP PRODUCTS</h1>
@@ -11,7 +10,10 @@ function TopProduct() {
 			<div className="top-products-list">
 				<div className="wrapper">
 					{!products ? (
-						<img src="https://jb-power.in/uploads/images/loader_image/1723729837075479.gif" alt="loading"/>
+						<img
+							src="https://jb-power.in/uploads/images/loader_image/1723729837075479.gif"
+							alt="loading"
+						/>
 					) : (
 						products.map((item) => (
 							<div key={item._id}>

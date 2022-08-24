@@ -1,0 +1,17 @@
+@import "../../../responsive-breakpoint.scss";
+@import "../../../mixin.scss";
+.order {
+	@include cart-item;
+	.items {
+		p {
+			font-style: italic;
+            max-width: unset;
+            @include small-down{
+                font-size: 12px;
+            }
+		}
+        .track{
+            cursor: pointer;
+        }
+	}
+}

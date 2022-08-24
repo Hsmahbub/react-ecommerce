@@ -1,0 +1,193 @@
+.checkout {
+	max-width: 1200px;
+	position: relative;
+	margin: 0 auto;
+	.billings {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+
+		// for billing product details
+		.bill-product-details {
+			width: 65%;
+
+			border: 1px solid;
+			.product-item {
+				padding: 2rem;
+				display: flex;
+				.img {
+					margin-right: 1rem;
+				}
+				.item {
+					font-style: italic;
+					font-size: 15px;
+					color: #a3a2a3;
+					p {
+						margin-bottom: 0.3rem;
+						span{
+							padding-right: 5px;
+						}
+					}
+				}
+			}
+		}
+
+		/* for billing  details  */
+		.billing-details {
+			width: 30%;
+			.bill {
+				padding-left: 1.5rem;
+				padding-top: 1.5rem;
+				border: 1px solid #a3a2a3;
+				h2 {
+					font-size: 14px;
+					letter-spacing: 1px;
+					margin-bottom: 1rem;
+					color: #242628;
+					font-weight: bold;
+					font-family: "Poppins";
+				}
+				.subtotal {
+					margin-top: 1rem;
+					padding-bottom: 1rem;
+					border-bottom: 1px solid #e3e3e3;
+				}
+				.address {
+					background-color: bisque;
+					border-radius: 20px 0px 0px 0px;
+					margin-bottom: 1rem;
+					padding-right: 0.5rem;
+					padding-left: 0.5rem;
+					padding-top: 0.5rem;
+					.location-edit {
+						span {
+							margin-right: 0.5rem;
+						}
+						display: flex;
+						align-items: center;
+						justify-content: space-between;
+						button {
+							background: none;
+							border: none;
+							color: rgb(5, 65, 117);
+							cursor: pointer;
+						}
+					}
+					.shipping {
+						display: flex;
+						justify-content: space-between;
+						align-items: center;
+						width: 100%;
+						display: flex;
+						padding: 0.5rem;
+						border-radius: 5px;
+					}
+				}
+				.single-item {
+					margin-bottom: 0.5rem;
+				}
+				.single-item2 {
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					padding-right: 0.5rem;
+					p {
+						span {
+							display: block;
+							margin-right: 0.5rem;
+							margin-bottom: 0.5rem;
+						}
+						.icon {
+							color: #cfa5a5;
+						}
+						display: flex;
+					}
+					button {
+						background: none;
+						border: none;
+						color: #a3a2a3;
+						cursor: pointer;
+					}
+				}
+				.payment {
+					display: flex;
+					align-items: center;
+					margin-top: 1rem;
+					.title {
+						margin-right: 1rem;
+					}
+					.option {
+						cursor: pointer;
+						margin-right: 0.5rem;
+						width: 20px;
+						&::before {
+							content: "";
+							width: 10px;
+							height: 10px;
+							border-radius: 50%;
+							display: inline-block;
+							background-color: #232323;
+						}
+					}
+				}
+				.total p {
+					padding: 1rem 0;
+					font-size: 18px;
+					line-height: 20px;
+					color: #232323;
+					font-weight: 500;
+					font-family: "Roboto";
+				}
+				.single-item,
+				.subTotal,
+				.shipping,
+				.total {
+					display: flex;
+					justify-content: space-between;
+					padding-right: 1rem;
+					font-size: 14px;
+					line-height: 20px;
+					color: #232323;
+					font-family: "Roboto";
+				}
+			}
+		}
+		/* responsive */
+	}
+}
+.order-btn {
+	display: flex;
+	width: 100%;
+	justify-content: flex-end;
+	button {
+		background-color: #232323;
+		border: none;
+		color: white;
+		height: 50px;
+		cursor: pointer;
+		width: 30%;
+	}
+}
+
+@media screen and (max-width: 1220px) {
+	.checkout {
+		width: unset;
+		.billings {
+			flex-direction: column;
+			.billing-input {
+				width: 100%;
+			}
+			.billing-details {
+				width: 100%;
+				.bill {
+					padding-left: 1rem;
+					padding-top: 1rem;
+				}
+			}
+			.bill-product-details {
+				width: 100%;
+				margin-bottom: 1rem;
+			}
+		}
+	}
+}

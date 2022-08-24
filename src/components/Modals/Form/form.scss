@@ -1,0 +1,38 @@
+﻿@import "../../../utils//mixin.scss";
+#edit-form {
+	@include modals;
+	.wrapper {
+		z-index: 1;
+		margin: auto;
+		max-width: 500px;
+		position: relative;
+		background-color: aliceblue;
+		.cross {
+			@include cross;
+		}
+		.shipping-input {
+			display: flex;
+			form {
+				width: 100%;
+				padding: 2rem;
+				label {
+					font-size: 14px;
+					line-height: 20px;
+					color: #232323;
+					font-family: "Roboto";
+				}
+				input,
+				select {
+					width: 100%;
+					height: 30px;
+					outline: none;
+					padding: 0 1rem;
+					border: 1px solid #a3a2a3;
+				}
+				button {
+					@include submit-btn;
+				}
+			}
+		}
+	}
+}

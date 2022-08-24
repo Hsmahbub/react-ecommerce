@@ -1,0 +1,38 @@
+﻿@import "../../../utils/responsive-breakpoint.scss";
+.search-input-field {
+	padding-top: 0.5rem !important;
+	padding-bottom: 0.5rem !important;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	input {
+		display: block;
+		width: 100%;
+		max-width: 70%;
+		height: 30px;
+		border-radius: 5px 0 0 5px;
+		border: 1px solid #507a5185;
+		outline: none;
+		padding-left: 10px;
+	}
+	button {
+		background-color: rgb(157, 194, 108);
+		border: none;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: white;
+		text-transform: capitalize;
+		padding: 0 1rem;
+		cursor: pointer;
+		font-size: 16;
+		transition: transform .2s;
+		border-radius: 0px 5px 5px 0;
+		span{
+			font-size: 16px;
+		}
+        &:active{
+            transform: scale(.9);
+        }
+	}
+}

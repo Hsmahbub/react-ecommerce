@@ -1,0 +1,13 @@
+@import "../../utils/responsive-breakpoint.scss";
+@import "../../utils/mixin.scss";
+.cart-item {
+	.update-and-clear{
+		button{
+			background: rgba(137, 228, 201, 0.178);
+			padding: .5rem 1rem;
+			border: 1px solid;
+			margin-left: .5rem;
+			cursor: pointer;
+		}
+	}
+}

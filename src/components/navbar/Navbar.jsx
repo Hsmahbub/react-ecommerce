@@ -1,71 +1,17 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable jsx-a11y/anchor-has-content */
 import React from "react";
 import "./navbar.scss";
-import { NavBottom, } from "./NavBottom";
-import Navtop from "./Navtop";
+import { NavBottom } from "./Bottom/NavBottom";
+import Navtop from "./Top/Navtop";
+import Links from "./Links";
 import { Link } from "react-router-dom";
 import { HiShoppingCart } from "react-icons/hi";
-import { LogoutApi } from "../../Database Managment/auth";
 import { VscThreeBars, VscClose } from "react-icons/vsc";
 import { useGlobalContext } from "../../context";
 import { useState } from "react";
 
-export const Links = ({ styles, link, link2, logout }) => {
-	const { loginData, setLoginData } = useGlobalContext();
-	const profile = loginData;
-	return (
-		<>
-			<Link to="/">
-				<p className={styles}>
-					<a href="#">home</a>
-				</p>
-			</Link>
-			<p className={styles}>
-				<a href="#">women</a>
-			</p>
-			<p className={styles}>
-				<a href="#">men</a>
-			</p>
-			<p className={styles}>
-				<a href="#">kids</a>
-			</p>
-			<p className={styles}>
-				<a href="#">jewellery</a>
-			</p>
-			<Link to={`/${link}`}>
-				{!profile && (
-					<p className={styles}>
-						<a href="#">{link}</a>
-					</p>
-				)}
-			</Link>
-			<Link to={`/${link2}`}>
-				{!profile && (
-					<p className={styles}>
-						<a href="#">{link2}</a>
-					</p>
-				)}
-			</Link>
+function Navbar({ signup, login, logout }) {
+	const { user, cartItem,handleModals } = useGlobalContext();
 
-			{profile && (
-				<p
-					className={styles}
-					onClick={() => {
-						LogoutApi();
-						setLoginData("");
-					}}
-				>
-					<a href="#">{logout}</a>
-				</p>
-			)}
-		</>
-	);
-};
-
-function Navbar({ link, link2, logout }) {
-	const { loginData } = useGlobalContext();
-	const profile = loginData;
 	const [toggleMenu, setToggleMenu] = useState({
 		isFalse: false,
 		width: "0px",
@@ -93,34 +39,37 @@ function Navbar({ link, link2, logout }) {
 							<span>BEE</span>
 						</p>
 					</div>
+					{/* nav links */}
 					<div className="link_container">
 						<div className="links">
-							<Links link={link} link2={link2} logout={logout} />
+							<Links
+								signup={signup}
+								login={login}
+								logout={logout}
+								handleModals={handleModals}
+							/>
 						</div>
 					</div>
-
+					{/* search  */}
 					<div className="search-and-other">
-						<Link to={"/cart"}>
+						<Link to={"/carts"}>
 							<div className="carts">
 								<HiShoppingCart />
-								<div className="cart-quantity">{""}</div>
+								<div className="cart-quantity">
+									{cartItem.length}
+								</div>
 							</div>
 						</Link>
-						{profile && (
+						{user && (
 							<>
-								<div className="profile" title="Profile">
-									<Link to={"/profile"}>
+								<div className="profile">
+									<Link to={"/dashboard"}>
 										<img
-											src={
-												profile.img
-													? profile.img
-													: "https://springer-hagen.de/wp-content/uploads/2017/03/testy3-1-1.png"
-											}
-											alt="#"
+											src={user.img}
+											alt="user"
+											title="user"
 										/>
 									</Link>
-									{/* <div className="profile-hover"> */}
-									{/* </div> */}
 								</div>
 							</>
 						)}
@@ -139,12 +88,11 @@ function Navbar({ link, link2, logout }) {
 				</div>
 			</nav>
 			<NavBottom
-				link={link}
-				link2={link2}
-				width={toggleMenu.width}
+				signup={signup}
+				login={login}
 				logout={logout}
+				width={toggleMenu.width}
 			/>
-			
 		</>
 	);
 }

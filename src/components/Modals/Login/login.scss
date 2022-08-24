@@ -1,0 +1,29 @@
+﻿@import "../../../utils/mixin.scss";
+#login {
+	@include modals;
+	.wrapper {
+		max-width: 500px;
+		position: relative;
+		margin: auto;
+		border-radius: 10px;
+		padding: 2rem 4rem;
+		background-color: #3d3d3d;
+		.cross {
+			@include cross;
+		}
+		h1 {
+			width: fit-content;
+			margin: auto;
+			color: white;
+		}
+		p {
+			max-width: 400px;
+			height: fit-content;
+			margin: auto;
+			color: white;
+		}
+		.submit-btn {
+			@include submit-btn;
+		}
+	}
+}

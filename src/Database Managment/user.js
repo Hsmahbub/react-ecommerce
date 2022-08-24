@@ -1,8 +1,5 @@
 ﻿import { userRequest } from "../requestMethod";
-export const getUserById = async (id, callback) => {
-	const data = await userRequest.get(`/users/find/${id}`);
-    callback(data.data);
-};
+
 export const updateUserById = async (id, updateData, callback) => {
 	const { data } = await userRequest.put(`/users/${id}`, {
 		update: updateData,
@@ -20,3 +17,4 @@ export const getAllUser = async (callback) => {
     const { data } = await userRequest.get(`/users`);
     callback(data)
 };
+

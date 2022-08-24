@@ -1,20 +1,35 @@
 ﻿import React from "react";
-import "./Inputfield.css";
-function InputField({ fieldName, placeholder, passwordtype, type, margin,onChange }) {
+import PropTypes from "prop-types";
+import "./Inputfield.scss";
+function InputField({
+	fieldName,
+	placeholder,
+	type,
+	value,
+	onChange,
+	isRequired,
+}) {
 	return (
 		<div className="input-field">
-			<label htmlFor="name">{fieldName}*</label>
 			<input
 				type={type}
+				value={value}
 				id={fieldName}
 				placeholder={placeholder}
 				name={fieldName}
-				required
+				required={isRequired}
 				onChange={onChange}
 			/>
-			<p style={{ marginBottom: margin }}>{passwordtype}</p>
 		</div>
 	);
 }
 
+InputField.propTypes = {
+	placeholder: PropTypes.string,
+	type: PropTypes.string,
+	fieldName: PropTypes.string,
+	isRequired: PropTypes.bool,
+	onChange: PropTypes.func,
+	value: PropTypes.string,
+};
 export default InputField;

@@ -11,8 +11,8 @@ function Feature({ products }) {
 				</div>
 				<div className="product-list">
 					<div className="wrapper">
-						{products.map((item, index) => (
-							<div key={item.id}>
+						{products.map((item) => (
+							<div key={item._id}>
 								<Product item={item} />
 							</div>
 						))}

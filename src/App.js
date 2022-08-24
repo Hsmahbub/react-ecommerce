@@ -1,26 +1,43 @@
-import {
-	Home,
-	Cart,
-	Checkout,
-	Category,
-	SignupForm,
-	LoginForm,
-	Profile
-} from "./pages/index";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
+import { Shipping, Login, Signup, Form,Loading } from "./Components/Modals/index";
+import {
+	Address,
+	Carts,
+	Category,
+	Checkout,
+	Details,
+	Home,
+} from "./pages/index";
 function App() {
 	return (
 		<div className="App">
+			<ToastContainer
+				position="top-right"
+				autoClose={5000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+			/>
+			<Shipping />
+			<Form />
+			<Login />
+			<Signup />
+			<Loading />
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<Home />} />
-					<Route path="/cart" element={<Cart />} />
-					<Route path="/checkout" element={<Checkout />} />
+					<Route path="/product/:id" element={<Details />} />
+					<Route path="/address" element={<Address />} />
+					<Route path="/carts" element={<Carts />} />
+					<Route path="/checkout/:id" element={<Checkout />} />
 					<Route path="/category" element={<Category />} />
-					<Route path="/signup" element={<SignupForm />} />
-					<Route path="/login" element={<LoginForm />} />
-					<Route path="/profile" element={<Profile />} />
 				</Routes>
 			</BrowserRouter>
 		</div>

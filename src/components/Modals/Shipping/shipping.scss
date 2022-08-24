@@ -1,0 +1,76 @@
+﻿@import "../../../utils//mixin.scss";
+#shipping {
+	@include modals;
+	.wrapper {
+		position: relative;
+		max-width: 1200px;
+		z-index: 1;
+		margin: auto;
+		padding: 2rem;
+		background-color: aliceblue;
+		button {
+			border: none;
+			outline: none;
+			background: none;
+			color: #242628;
+			cursor: pointer;
+		}
+		.cross {
+			@include cross;
+		}
+
+		h1 {
+			font-size: 14px;
+			letter-spacing: 1px;
+			line-height: 60px;
+			color: #242628;
+			font-weight: bold;
+			font-family: "Poppins";
+		}
+		.btn {
+			background-color: rgb(126, 145, 138);
+			width: fit-content;
+			padding: 0.5rem;
+			border-radius: 3px;
+			button {
+				color: white;
+				background: none;
+			}
+		}
+		.shipping-data {
+			.address {
+				position: relative;
+				margin: 1rem 0;
+				padding: 0.5rem;
+				width: 100%;
+				display: flex;
+				align-items: center;
+				background-color: rgb(100, 91, 78);
+				color: #f9f5f9;
+				input {
+					margin-right: 1rem;
+				}
+				button {
+					position: absolute;
+					right: 0.5rem;
+					color: white;
+				}
+				.btn-romove {
+					right: 3rem !important;
+				}
+				label{
+					font-size: 15px;
+					line-height: 18px;
+					font-style: italic;
+					font-weight: 300;
+				}
+			}
+		}
+		.billing-continue {
+			background: #242628;
+			padding: 0.5rem 1rem;
+			margin: 0.5rem 0;
+			color: white;
+		}
+	}
+}

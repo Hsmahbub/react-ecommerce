@@ -1,6 +1,7 @@
 import React from "react";
 import "./home.scss";
 import { useGlobalContext } from "../../context";
+import { Loading } from "../../Components/Modals/index";
 import {
 	Navbar,
 	Topheader,
@@ -12,13 +13,20 @@ import {
 } from "../../Components/index";
 
 function Home() {
-	const { products } = useGlobalContext();
+	const { products, user } = useGlobalContext();
+	const topProduct = products.slice(0, 16);
+	const featureProduct = products.slice(20, 50);
 	return (
 		<div className="home">
 			<Topheader />
-			<Navbar link={"signup"} link2={"login"} logout={"logout"} />
+			<Navbar
+				signup={!user ? "signup" : null}
+				login={!user ? "login" : null}
+				logout={user ? "logout" : null}
+			/>
 			<Sliders />
-			<TopProduct />
+			<TopProduct products={topProduct} />
+			{/* banner */}
 			<div className="homepage-banner section__padding">
 				<div className="img">
 					<img
@@ -30,16 +38,8 @@ function Home() {
 				</div>
 			</div>
 
-			{!products ? (
-				<img
-					style={{ display: "block", width: "500px", margin: "auto" }}
-					src="https://jb-power.in/uploads/images/loader_image/1723729837075479.gif"
-					alt="loading"
-				/>
-			) : (
-				<Feature products={products} />
-			)}
-
+			{/* product */}
+			{!products ? <Loading /> : <Feature products={featureProduct} />}
 			<Subscription />
 			<Footer />
 		</div>

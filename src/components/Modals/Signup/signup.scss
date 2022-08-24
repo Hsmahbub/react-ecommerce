@@ -1,0 +1,30 @@
+﻿@import "../../../utils/mixin.scss";
+#signup {
+	@include modals;
+	.wrapper {
+		box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.301);
+		max-width: 500px;
+		margin: auto;
+		border-radius: 10px;
+		padding: 2rem 4rem;
+		position: relative;
+		background-color: #3d3d3d;
+		.cross {
+			@include cross;
+		}
+		h1 {
+			width: fit-content;
+			margin: auto;
+			color: white;
+		}
+		p {
+			max-width: 400px;
+			height: fit-content;
+			margin: auto;
+			color: white;
+		}
+		.submit-btn {
+			@include submit-btn;
+		}
+	}
+}
