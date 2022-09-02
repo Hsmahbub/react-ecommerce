@@ -17,7 +17,7 @@ export const SingelItem2 = ({ icon, text, handleClick }) => {
 		</div>
 	);
 };
-export const Payment = ({ handlePaymentMethod, option }) => {
+export const Payment = ({ handlePaymentMethod, option, }) => {
 	return (
 		<div className="payment">
 			<span className="title">Payment Method:</span>
@@ -50,22 +50,12 @@ export const ProuductItem = ({ product }) => {
 				<p>{product.title}</p>
 				<p>{product.desc}</p>
 				<p>
-					<span>price:</span>${product.price}
+					<span>price:${product.price},</span>
+					<span>quantity:{product.quantity},</span>
+					{product.color && <span>color:{product.color},</span>}
+					{product.size && <span>size:{product.size},</span>}
+					<span>total_price:${product.total_price}</span>
 				</p>
-				<p>
-					<span>color:</span>
-					{product.color}
-				</p>
-				<p>
-					<span>quantity:</span>
-					{product.quantity}
-				</p>
-				{product.size && (
-					<p>
-						<span>size:</span>
-						{product.size}
-					</p>
-				)}
 			</div>
 		</div>
 	);

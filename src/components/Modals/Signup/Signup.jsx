@@ -1,111 +1,136 @@
 ﻿import InputField from "../../Form/InputField";
 import { RiDeleteBack2Fill } from "react-icons/ri";
-import { SignupApi } from "../../../Database Managment/auth";
-import { useFormik } from "formik";
-import { validate } from "./validator";
+import { SignupApi } from "../../../Api Method/auth";
+
+import {
+	signupFormValidator,
+	buttonValidator,
+} from "../../../utils/formValidation";
 import { toast } from "react-toastify";
 import { toastObj } from "../../../utils/toastObj";
 import "react-toastify/dist/ReactToastify.css";
 import "./signup.scss";
 import { useGlobalContext } from "../../../context";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 function Signup() {
 	const { handleModals } = useGlobalContext();
-	const [isLoading, setIsLoading] = useState(false);
+	let initial = {
+		name: "",
+		email: "",
+		phone: "",
+		password: "",
+		cPassword: "",
+	};
+	const [inputValue, setInputValue] = useState(initial);
+	const [errors, setErrors] = useState({});
+	const { isDisabled, css } = buttonValidator(errors);
 	// handler
-	const formik = useFormik({
-		initialValues: {
-			name: "",
-			email: "",
-			phone: "",
-			password: "",
-			cPassword: "",
-		},
-		validate,
-		onSubmit: (values) => {
-			setIsLoading(true);
-			SignupApi(values, (res) => {
-				if (res.data) {
-					if (res.data.error) {
-						res.data.error.email &&
-							(formik.errors.email = res.data.error.email);
-						res.data.error.phone &&
-							(formik.errors.phone = res.data.error.phone);
-						setIsLoading(false);
-					} else {
-						handleModals("signup", false);
-						handleModals("login", true);
-						toast.success(res.data.success.msg, toastObj);
-						setIsLoading(false);
-					}
+	const changeHandler = (e) => {
+		setInputValue({ ...inputValue, [e.target.name]: e.target.value });
+		setErrors(signupFormValidator({ ...inputValue, [e.target.name]: e.target.value }));
+	};
+	const formSubmitHandler = (e) => {
+		e.preventDefault();
+		handleModals("loading", true);
+
+		// res from server
+		SignupApi(inputValue, (res) => {
+			// condition
+			if (res.data) {
+				if (res.data.error) {
+					setErrors(res.data.error);
+				} else {
+					handleModals("signup", false);
+					handleModals("login", true);
+					toast.success(res.data.success.msg, toastObj);
 				}
-			});
-		},
-	});
+			} else {
+				toast.error(res.error.errorMsg, toastObj);
+			}
+			handleModals("loading", false);
+		});
+	};
+
+	// use effect for error handling
+	useEffect(() => {
+		setErrors({})
+	}, []);
+
 	return (
 		<div id="signup">
 			<div className="wrapper">
 				<RiDeleteBack2Fill
 					className="cross"
-					onClick={() => handleModals("signup", false)}
+					onClick={() => {
+						handleModals("signup", false);
+						setInputValue(initial);
+					}}
 				/>
-				<form onSubmit={formik.handleSubmit}>
+				<form onSubmit={formSubmitHandler}>
 					<h1>Signup</h1>
 					<InputField
 						fieldName="name"
 						placeholder="Name"
 						type="text"
-						value={formik.values.name}
+						value={inputValue.name}
 						isRequired={true}
-						onChange={formik.handleChange}
+						onChange={changeHandler}
 					/>
-					<p>{formik.errors.name ? formik.errors.name : null}</p>
+					<p>{errors.name ? errors.name : null}</p>
 					<InputField
 						fieldName="email"
 						placeholder="Email"
-						value={formik.values.email}
+						value={inputValue.email}
 						type="email"
 						isRequired={true}
-						onChange={formik.handleChange}
+						onChange={changeHandler}
 					/>
-					<p>{formik.errors.email ? formik.errors.email : null}</p>
+					<p>{errors.email ? errors.email : null}</p>
 					<InputField
 						fieldName="phone"
-						value={formik.values.phone}
+						value={inputValue.phone}
 						placeholder="Phone"
 						type="text"
 						isRequired={true}
-						onChange={formik.handleChange}
+						onChange={changeHandler}
 					/>
-					<p>{formik.errors.phone ? formik.errors.phone : null}</p>
+					<p>{errors.phone ? errors.phone : null}</p>
 					<InputField
 						fieldName="password"
 						placeholder="Password"
 						type="password"
-						value={formik.values.password}
+						value={inputValue.password}
 						isRequired={true}
-						onChange={formik.handleChange}
+						onChange={changeHandler}
 					/>
-					<p>
-						{formik.errors.password ? formik.errors.password : null}
-					</p>
+					<p>{errors.password ? errors.password : null}</p>
 					<InputField
 						fieldName="cPassword"
 						placeholder="Confirm Password"
-						value={formik.values.cPassword}
+						value={inputValue.cPassword}
 						type="password"
 						isRequired={true}
-						onChange={formik.handleChange}
+						onChange={changeHandler}
 					/>
-					<p>
-						{formik.errors.cPassword
-							? formik.errors.cPassword
-							: null}
-					</p>
-					<button className="submit-btn" type="submit">
+					<p>{errors.cPassword ? errors.cPassword : null}</p>
+					<button
+						className="submit-btn"
+						type="submit"
+						style={css}
+						disabled={!isDisabled}
+					>
 						Submit
 					</button>
 				</form>
+				<button
+					className=" have-an-account"
+					onClick={() => {
+						handleModals("signup", false);
+						handleModals("login", true);
+					}}
+				>
+					already hava an account?
+				</button>
 			</div>
 		</div>
 	);

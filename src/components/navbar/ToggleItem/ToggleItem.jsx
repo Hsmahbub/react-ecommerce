@@ -1,7 +1,7 @@
 ﻿import { useGlobalContext } from "../../../context";
-import { LogoutApi } from "../../../Database Managment/auth";
+import { LogoutApi } from "../../../Api Method/auth";
 import { Links } from "../Links";
-import "./navbottom.scss";
+import "./toggleItem.scss";
 export const Profile = ({ styleClass }) => {
 	const { loginData, setLoginData } = useGlobalContext();
 	const profile = loginData;
@@ -31,16 +31,11 @@ export const Profile = ({ styleClass }) => {
 		</>
 	);
 };
-export const NavBottom = ({ width, singup, login, logout }) => {
+export const ToggleItem = ({ width }) => {
 	return (
 		<div className="nav-bottom">
 			<div className="links toggleMenu" style={{ width: width }}>
-				<Links
-					styles={"menu-item"}
-					singup={singup}
-					link2={login}
-					logout={logout}
-				/>
+				<Links className="menu-item" />
 			</div>
 		</div>
 	);

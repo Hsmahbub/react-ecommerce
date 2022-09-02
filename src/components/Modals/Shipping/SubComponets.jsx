@@ -1,4 +1,4 @@
-﻿import { DeleteBilling } from "../../../Database Managment/billing";
+﻿import { DeleteBillingApi } from "../../../Api Method/billing";
 import { useGlobalContext } from "../../../context";
 import { toast } from "react-toastify";
 import { toastObj } from "../../../utils/toastObj";
@@ -7,20 +7,22 @@ export const Address = ({ item, handleModals }) => {
 		billings,
 		setBillings,
 		setBillingEdit,
-		currentBilling,
 		setCurrentBilling,
 	} = useGlobalContext();
 
 	// handle billing delete
-	const BillingHandler = (id) => {
+	const BillingHandler = () => {
 		handleModals("loading", true);
-		DeleteBilling(item._id, (res) => {
-			setBillings(billings.filter((i) => i._id !== id));
-			res.data.success
-				? toast.success(`Billing Deleted`, toastObj)
-				: toast.error("Deleting failed");
+		DeleteBillingApi(item._id, (res) => {
+			if (res.data) {
+				setBillings(billings.filter((i) => i._id !== item._id));
+				res.data.success && toast.success(`Billing Deleted`, toastObj);
+				res.data.error && toast.error("Deleting failed");
+			} else {
+				res.error && toast.error("Connection failed", toastObj);
+			}
+			handleModals("loading", false);
 		});
-		handleModals("loading", false);
 	};
 	const selectHandler = (e) => {
 		const filterBilling = billings.filter(
@@ -48,10 +50,7 @@ export const Address = ({ item, handleModals }) => {
 				<p>Phone: {item.phone}</p>
 				<p>Postcode: {item.postcode}</p>
 			</label>
-			<button
-				className="btn-romove"
-				onClick={() => BillingHandler(item._id)}
-			>
+			<button className="btn-romove" onClick={BillingHandler}>
 				Delete
 			</button>
 			<button

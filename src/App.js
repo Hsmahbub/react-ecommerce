@@ -2,13 +2,20 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
-import { Shipping, Login, Signup, Form,Loading } from "./Components/Modals/index";
+import {
+	Shipping,
+	Login,
+	Signup,
+	BillingForm,
+	Loading,
+} from "./Components/Modals/index";
 import {
 	Address,
 	Carts,
 	Category,
 	Checkout,
 	Details,
+	OrederPage,
 	Home,
 } from "./pages/index";
 function App() {
@@ -26,7 +33,7 @@ function App() {
 				pauseOnHover
 			/>
 			<Shipping />
-			<Form />
+			<BillingForm />
 			<Login />
 			<Signup />
 			<Loading />
@@ -36,8 +43,9 @@ function App() {
 					<Route path="/product/:id" element={<Details />} />
 					<Route path="/address" element={<Address />} />
 					<Route path="/carts" element={<Carts />} />
-					<Route path="/checkout/:id" element={<Checkout />} />
+					<Route path="/checkout/" element={<Checkout />} />
 					<Route path="/category" element={<Category />} />
+					<Route path="/order" element={<OrederPage />} />
 				</Routes>
 			</BrowserRouter>
 		</div>

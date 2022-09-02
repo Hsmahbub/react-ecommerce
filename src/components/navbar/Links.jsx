@@ -2,21 +2,24 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 import React from "react";
 // import { useGlobalContext } from "../../context";
-import { LogoutApi } from "../../Database Managment/auth";
+import { LogoutApi } from "../../Api Method/auth";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useGlobalContext } from "../../context";
 import { toastObj } from "../../utils/toastObj";
-export const Links = ({ styles, signup, login, logout, handleModals }) => {
-	// const { setUser, setCartItem } = useGlobalContext();
+export const Links = ({ className }) => {
+	const { user, handleModals } = useGlobalContext();
+	const signup = !user ? "signup" : null;
+	const login = !user ? "login" : null;
+	const logout = user ? "logout" : null;
 	// logout link
 	const logoutC = (
 		<>
 			{logout && (
 				<p
-					className={styles}
+					className={className}
 					onClick={() => {
 						LogoutApi();
-						toast.success("Logout Successful", toastObj);
 						window.location.reload();
 					}}
 				>
@@ -31,7 +34,7 @@ export const Links = ({ styles, signup, login, logout, handleModals }) => {
 		<>
 			{signup && (
 				<p
-					className={styles}
+					className={className}
 					onClick={() => handleModals("signup", true)}
 				>
 					<span>{signup}</span>
@@ -45,8 +48,8 @@ export const Links = ({ styles, signup, login, logout, handleModals }) => {
 		<>
 			{login && (
 				<p
-					className={styles}
-					onClick={() => handleModals('login',true)}
+					className={className}
+					onClick={() => handleModals("login", true)}
 				>
 					<span>{login}</span>
 				</p>
@@ -56,21 +59,23 @@ export const Links = ({ styles, signup, login, logout, handleModals }) => {
 	return (
 		<>
 			<Link to="/">
-				<p className={styles}>
+				<p className={className}>
 					<span>home</span>
 				</p>
 			</Link>
-			<p className={styles}>
+			<p className={className}>
 				<span>women</span>
 			</p>
-			<p className={styles}>
+			<p className={className}>
 				<span>men</span>
 			</p>
-			<p className={styles}>
+			<p className={className}>
 				<span>kids</span>
 			</p>
-			<p className={styles}>
-				<span>jewellery</span>
+			<p className={className}>
+				<Link to={"/order"}>
+					<span>Order</span>
+				</Link>
 			</p>
 			{signupC}
 			{loginC}

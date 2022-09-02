@@ -4,10 +4,7 @@ import { useGlobalContext } from "../../../context";
 import { Address } from "./SubComponets";
 import "./shipping.scss";
 function Shipping() {
-	const { handleModals, billings, setBillings } = useGlobalContext();
-	
-	let billing = billings;
-
+	const { handleModals, billings } = useGlobalContext();
 	return (
 		<div id="shipping">
 			<div className="wrapper">
@@ -23,13 +20,14 @@ function Shipping() {
 					</button>
 				</div>
 				<div className="shipping-data">
-					{billing.map((item) => (
-						<Address
-							key={item._id}
-							handleModals={handleModals}
-							item={item}
-						/>
-					))}
+					{billings.length > 0 &&
+						billings.map((item) => (
+							<Address
+								key={item._id}
+								handleModals={handleModals}
+								item={item}
+							/>
+						))}
 				</div>
 			</div>
 		</div>

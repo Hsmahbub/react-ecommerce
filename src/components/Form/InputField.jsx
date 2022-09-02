@@ -11,6 +11,9 @@ function InputField({
 }) {
 	return (
 		<div className="input-field">
+			<label htmlFor={fieldName}>
+				{fieldName === "cPassword" ? "Confirm Password" : fieldName}
+			</label>
 			<input
 				type={type}
 				value={value}

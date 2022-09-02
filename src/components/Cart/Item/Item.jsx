@@ -5,16 +5,20 @@
 } from "react-icons/ri";
 import { useState } from "react";
 import { useGlobalContext } from "../../../context";
-import { addToCart, deleteOneCart } from "../../../Database Managment/cart";
+import { Link } from "react-router-dom";
+import {
+	AddToCartApi,
+	DeleteCartItemApi,
+	GetCartApi,
+} from "../../../Api Method/cart";
 import "./item.scss";
 import { useEffect } from "react";
 const Items = ({ item }) => {
-	const {cartItem, setCartItem } = useGlobalContext();
-	const { img, color, title, price, total_price, productId } = item;
+	const { cartItem, setCartItem } = useGlobalContext();
+	const { img, color, title, price, total_price, size } = item;
+	const productId = item._id;
 	const [totalPrice, setTotalPrice] = useState(total_price);
-	const userId = localStorage.getItem("userId");
-	const serverQuantity = item.quantity;
-	const [quantity, setQuantity] = useState(serverQuantity);
+	const [quantity, setQuantity] = useState(item.quantity);
 	const handleQuantity = (direction) => {
 		if (quantity > 0) {
 			if (direction === "up") {
@@ -28,21 +32,28 @@ const Items = ({ item }) => {
 			// direction === "down" && setPrice(quantity * price);
 		}
 	};
+
+	// delete handle
 	const handleDelete = () => {
-		deleteOneCart(userId, productId,);
-		const filterItem = cartItem.filter(i => i.productId !== productId)
-		setCartItem(filterItem)
+		DeleteCartItemApi(productId);
+		const filterItem = cartItem.filter((i) => i._id !== productId);
+		setCartItem(filterItem);
 	};
+
 	useEffect(() => {
-		addToCart({item}, (d) => {});
 		setTotalPrice(price * quantity);
-	}, [quantity, item, userId, price]);
+		AddToCartApi({ productId, quantity, color, size }, (res) => {});
+	}, [quantity, productId, price, size, color]);
 	return (
 		<div className="items">
 			<p>
-				<img src={img} alt="img" width={"50px"} />
+				<Link to={`/product/${item._id}`}>
+					<img src={img} alt="img" width={"50px"} />
+				</Link>
 			</p>
-			<p>{title}</p>
+			<p>
+				<Link to={`/product/${item._id}`}>{title}</Link>
+			</p>
 			<p>{color}</p>
 			<p className="quantity">
 				<RiArrowUpSFill
@@ -55,7 +66,7 @@ const Items = ({ item }) => {
 					onClick={() => handleQuantity("down")}
 				/>
 			</p>
-			<p>{totalPrice}</p>
+			<p>${totalPrice}</p>
 			<RiDeleteBin2Fill onClick={handleDelete} className="btn" />
 		</div>
 	);

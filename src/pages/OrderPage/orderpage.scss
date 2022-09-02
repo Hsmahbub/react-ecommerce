@@ -1,0 +1,40 @@
+﻿.order {
+	max-width: 1200px;
+	height: 100%;
+	background: rgb(218, 224, 222);
+	padding: 1rem;
+	margin: 0 auto;
+	min-height: 50vh;
+	h1 {
+		margin-bottom: 0.5rem;
+	}
+	.order-list {
+		.order-item {
+			margin-bottom: 0.5rem;
+			position: relative;
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			border: 1px solid gray;
+			padding: 1rem;
+			.img {
+				width: 120px;
+				margin-right: 1rem;
+				img {
+					width: 100%;
+				}
+			}
+			p {
+				max-width: 500px;
+				margin: 0.2rem 0;
+				span {
+					margin-right: 0.3rem;
+				}
+			}
+			.status {
+				position: absolute;
+				right: 1rem;
+			}
+		}
+	}
+}

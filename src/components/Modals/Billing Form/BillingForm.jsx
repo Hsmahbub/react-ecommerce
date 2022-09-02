@@ -5,14 +5,18 @@ import { Input } from "./SubComponents";
 import { RiDeleteBack2Fill } from "react-icons/ri";
 import { useGlobalContext } from "../../../context";
 import {
-	CreateBilling,
-	UpdateBilling,
-} from "../../../Database Managment/billing";
+	CreateBillingApi,
+	UpdateBillingApi,
+} from "../../../Api Method/billing";
 import { toast } from "react-toastify";
 import { toastObj } from "../../../utils/toastObj";
 import { useEffect } from "react";
+import {
+	billingFormValidator,
+	buttonValidator,
+} from "../../../utils/formValidation";
 
-function Form() {
+function BillingForm() {
 	const { handleModals, BillingEdit, setBillingEdit, billings, setBillings } =
 		useGlobalContext();
 
@@ -28,6 +32,8 @@ function Form() {
 		postcode: "",
 	};
 	const [inputData, setInputData] = useState(intialInput);
+	const [errors, setErrors] = useState({});
+	const { isDisabled, css } = buttonValidator(errors);
 	useEffect(() => {
 		let billing;
 		editBillingData.length < 1
@@ -43,35 +49,45 @@ function Form() {
 		e.preventDefault();
 		handleModals("loading", true);
 		if (BillingEdit.isEdit) {
-			UpdateBilling(inputData, (res) => {
-				if (res.data.success) {
-					toast.success("Billing Updated", toastObj);
-					setBillings(res.data.success.billings);
+			UpdateBillingApi(inputData, BillingEdit.id, (res) => {
+				if (res.data) {
+					if (res.data.success) {
+						setBillings(res.data.success.address);
+						setInputData(intialInput);
+						handleModals("edit-form", false);
+						toast.success("Billing Updated", toastObj);
+					} else {
+						res.data.error &&
+							toast.error(res.data.error.server, toastObj);
+					}
 				} else {
-					toast.error("not found", toastObj);
+					toast.error(res.error.errorMsg, toastObj);
 				}
-				
-				setInputData(intialInput);
-				handleModals("edit-form", false);
 				handleModals("loading", false);
 			});
 		} else {
-			CreateBilling(inputData, (res) => {
+			CreateBillingApi(inputData, (res) => {
 				if (res.data) {
 					if (res.data.error) {
 						toast.warning(res.data.error.msg, toastObj);
 					} else {
 						toast.success("Billing Added", toastObj);
-						setBillings(res.data.success.billings);
+						setBillings(res.data.success.address);
 						handleModals("edit-form", false);
-						e.target.reset();
+						setInputData(intialInput);
 					}
-					console.log(res)
-					handleModals("loading", false);
+				} else {
+					toast.error(res.error.errorMsg, toastObj);
 				}
+				handleModals("loading", false);
 			});
 		}
 	};
+
+	// use effect for errors
+	useEffect(() => {
+		setErrors(billingFormValidator(inputData));
+	}, [inputData]);
 
 	return (
 		<div id="edit-form">
@@ -132,7 +148,11 @@ function Form() {
 							handleChange={handleChange}
 						/>
 						<br />
-						<button type="submit">
+						<button
+							type="submit"
+							disabled={!isDisabled}
+							style={css}
+						>
 							{BillingEdit.isEdit ? "Update" : "Submit"}
 						</button>
 					</form>
@@ -142,4 +162,4 @@ function Form() {
 	);
 }
 
-export default Form;
+export default BillingForm;

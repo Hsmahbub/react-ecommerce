@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import Login from "../../Components/Modals/Login/Login";
 import { useGlobalContext } from "../../context";
-import { addToCart } from "../../Database Managment/cart";
-import { singleProduct } from "../../Database Managment/product";
+import { AddToCartApi } from "../../Api Method/cart";
+import { GetSingleProductApi } from "../../Api Method/product";
 import { toastObj } from "../../utils/toastObj";
 import "./details.scss";
+import { Navbar, Footer } from "../../Components/index";
 import { ImgContainer, Quantity, Select } from "./SubComponents";
 function Details() {
+	const { user, cartItem, setCartItem, handleModals } = useGlobalContext();
 	const navigate = useNavigate();
 	const location = useLocation();
 	const id = location.pathname.split("/")[2];
@@ -16,48 +17,46 @@ function Details() {
 	const [color, setColor] = useState("");
 	const [size, setSize] = useState("");
 	const [quantity, setQuantity] = useState(1);
-	const { setIsLoading, user, handleModals } = useGlobalContext();
-	const { img, categories, title, desc, price } = product;
+	const isCartAdded = cartItem.findIndex((i) => i._id === id) > -1;
 	const item = {
 		productId: id,
+		quantity,
 		color,
 		size,
-		quantity,
-		img,
-		categories,
-		title,
-		desc,
-		price,
 	};
 	const total = product.price * quantity;
 	// destructured variable
 	useEffect(() => {
-		singleProduct(id, (res) => {
-			setProduct(res);
+		GetSingleProductApi(id, (res) => {
+			setProduct(res.data.success);
+			res.errorMsg && console.log(res.errorMsg, res.err);
 		});
 	}, [id]);
 	// funtion
-	const handleBuy = (item) => {
-		const { color, size } = item;
+	const handleBuyOrCart = (item, isBuy) => {
 		!color && toast.warning("Please select a color", toastObj);
 		!size && toast.warning("Please select a size", toastObj);
 		if (color && size) {
 			if (!user) {
 				handleModals("login", true);
 			} else {
-				const isSuccess = addToCart(item, (res) => {
-					if (res._id === id) {
-						return true;
-					} else return false;
+				AddToCartApi(item, (res) => {
+					if (res.data.success) {
+						if (isBuy) {
+							localStorage.setItem("selectedItem", [id]);
+							navigate(`/checkout/`);
+						} else {
+							toast.success("Added", toastObj);
+						}
+						setCartItem(res.data.success.products);
+					}
 				});
-				isSuccess && navigate(`/checkout/${id}`);
-				window.location.reload();
 			}
 		}
 	};
-	const handleAddCart = () => {};
 	return (
 		<>
+			<Navbar />
 			{product ? (
 				<div className="product-details">
 					{product.img && <ImgContainer img={product.img} />}
@@ -97,20 +96,25 @@ function Details() {
 						<div className="btn">
 							<button
 								className="buy-btn"
-								onClick={() => handleBuy(item)}
+								onClick={() => handleBuyOrCart(item, true)}
 							>
 								Buy Now
 							</button>
 							<button
 								className="addCart-btn"
-								onClick={handleAddCart}
+								onClick={() => {
+									isCartAdded
+										? navigate("/carts")
+										: handleBuyOrCart(item, false);
+								}}
 							>
-								Add to Cart
+								{isCartAdded ? "Go to Cart" : "Add to Cart"}
 							</button>
 						</div>
 					</div>
 				</div>
 			) : null}
+			<Footer />
 		</>
 	);
 }

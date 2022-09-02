@@ -1,7 +1,7 @@
 import React from "react";
 import "./navbar.scss";
-import { NavBottom } from "./Bottom/NavBottom";
-import Navtop from "./Top/Navtop";
+import { ToggleItem } from "./ToggleItem/ToggleItem";
+import Navtop from "./Search/Search";
 import Links from "./Links";
 import { Link } from "react-router-dom";
 import { HiShoppingCart } from "react-icons/hi";
@@ -9,19 +9,21 @@ import { VscThreeBars, VscClose } from "react-icons/vsc";
 import { useGlobalContext } from "../../context";
 import { useState } from "react";
 
-function Navbar({ signup, login, logout }) {
-	const { user, cartItem,handleModals } = useGlobalContext();
+function Navbar() {
+	const { user, cartItem, handleModals } = useGlobalContext();
 
 	const [toggleMenu, setToggleMenu] = useState({
 		isFalse: false,
 		width: "0px",
 	});
+
 	const openToggleMenu = () => {
 		setToggleMenu({
 			isFalse: true,
 			width: "200px",
 		});
 	};
+
 	const closeToggleMenu = () => {
 		setToggleMenu({
 			isFalse: false,
@@ -35,19 +37,16 @@ function Navbar({ signup, login, logout }) {
 				<div className="innerNav">
 					<div className="logo">
 						<p>
-							<span className="color">RENOSHOP</span>
-							<span>BEE</span>
+							<Link to={"/"}>
+								<span className="color">RENOSHOP</span>
+								<span>BEE</span>
+							</Link>
 						</p>
 					</div>
 					{/* nav links */}
 					<div className="link_container">
 						<div className="links">
-							<Links
-								signup={signup}
-								login={login}
-								logout={logout}
-								handleModals={handleModals}
-							/>
+							<Links className="" />
 						</div>
 					</div>
 					{/* search  */}
@@ -87,12 +86,7 @@ function Navbar({ signup, login, logout }) {
 					</div>
 				</div>
 			</nav>
-			<NavBottom
-				signup={signup}
-				login={login}
-				logout={logout}
-				width={toggleMenu.width}
-			/>
+			<ToggleItem width={toggleMenu.width} />
 		</>
 	);
 }

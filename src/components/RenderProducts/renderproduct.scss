@@ -1,4 +1,4 @@
-@import "../../utils/responsive-breakpoint.scss";
+﻿@import "../../utils/responsive-breakpoint.scss";
 @import "../../utils/mixin.scss";
 .feature-product {
 	background-color: #333333;
@@ -26,9 +26,10 @@
 			}
 		}
 		.product-list {
+            min-height: 500px;
 			border-radius: 10px;
 			margin-top: 2rem;
-			background-color: white;
+			// background-color: rgba(255, 255, 255, 0.5);
 			display: flex;
 			flex-wrap: wrap;
 			justify-content: center;

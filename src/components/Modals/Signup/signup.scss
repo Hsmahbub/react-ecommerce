@@ -3,10 +3,10 @@
 	@include modals;
 	.wrapper {
 		box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.301);
-		max-width: 500px;
+		max-width: 400px;
 		margin: auto;
 		border-radius: 10px;
-		padding: 2rem 4rem;
+		padding: 2rem;
 		position: relative;
 		background-color: #3d3d3d;
 		.cross {
@@ -27,4 +27,11 @@
 			@include submit-btn;
 		}
 	}
+}
+.have-an-account {
+	background: none;
+	border: none;
+	color: chartreuse;
+	margin-top: 1rem;
+	cursor: pointer ;
 }

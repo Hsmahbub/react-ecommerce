@@ -1,10 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { GetBilling } from "./Database Managment/billing";
+import { GetBillingApi } from "./Api Method/billing";
 import { useState, useEffect, useContext, createContext } from "react";
-import { getProduct } from "./Database Managment/product";
-import { LoginUser } from "./Database Managment/auth";
-import { getCart } from "./Database Managment/cart";
-import Items from "./Components/Cart/Item/Item";
+import { GetProductApi } from "./Api Method/product";
+import { LoggedInUserApi } from "./Api Method/user";
+import { GetCartApi } from "./Api Method/cart";
+// import Items from "./Components/Cart/Item/Item";
+
 const AppContext = createContext();
 const AppProvider = ({ children }) => {
 	const id = localStorage.getItem("userId");
@@ -13,24 +14,43 @@ const AppProvider = ({ children }) => {
 	// auth and user database method
 	const [user, setUser] = useState("");
 	useEffect(() => {
-		LoginUser(id, (res) => {
-			setUser(res.data.success.user);
+		LoggedInUserApi((res) => {
+			if (res.data) {
+				res.data.success && setUser(res.data.success);
+			} else {
+				console.log(res.error.errorMsg);
+			}
 		});
 	}, [setUser]);
 
 	// product database method
 	const [products, setProducts] = useState([]);
 	useEffect(() => {
-		getProduct((data) => setProducts(data));
+		GetProductApi((res) => {
+			if (res.data) {
+				res.data.success && setProducts(res.data.success);
+				res.data.error && console.log(res.data.error);
+			} else {
+				console.log(res.error.errorMsg);
+			}
+		});
 	}, []);
 
 	// cart Data
 	const [cartData, setCartData] = useState({});
 	const [cartItem, setCartItem] = useState([]);
 	useEffect(() => {
-		getCart((d) => {
-			setCartData(d);
-			setCartItem(d.products);
+		GetCartApi((res) => {
+			if (res.data) {
+				if (res.data.success) {
+					setCartData(res.data.success);
+					setCartItem(res.data.success.products);
+				} else {
+					res.data.error && console.log(res.data.error);
+				}
+			} else {
+				console.log(res.error.errorMsg);
+			}
 		});
 	}, [id, token]);
 
@@ -61,10 +81,13 @@ const AppProvider = ({ children }) => {
 		id: "",
 	});
 	useEffect(() => {
-		GetBilling((res) => {
-			res.data.success
-				? setBillings(res.data.success.billings)
-				: setBillings([]);
+		GetBillingApi((res) => {
+			if (res.data) {
+				res.data.success && setBillings(res.data.success.address);
+				res.data.error && console.log(res.data.error);
+			} else {
+				console.log(res.error.errorMsg);
+			}
 		});
 	}, [setBillings]);
 	return (
@@ -72,11 +95,14 @@ const AppProvider = ({ children }) => {
 			value={{
 				isLoading,
 				setIsLoading,
+
 				//auth
 				user,
 				setUser,
+
 				//product
 				products,
+
 				// cart
 				cartItem,
 				setCartItem,

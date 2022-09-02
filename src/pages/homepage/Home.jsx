@@ -6,10 +6,9 @@ import {
 	Navbar,
 	Topheader,
 	Sliders,
-	Feature,
+	RenderProducts,
 	Subscription,
 	Footer,
-	TopProduct,
 } from "../../Components/index";
 
 function Home() {
@@ -19,15 +18,15 @@ function Home() {
 	return (
 		<div className="home">
 			<Topheader />
-			<Navbar
-				signup={!user ? "signup" : null}
-				login={!user ? "login" : null}
-				logout={user ? "logout" : null}
+			<Navbar />
+			{/* <Sliders /> */}
+			<RenderProducts
+				products={topProduct}
+				sectionSubtitle={"The best products of our store"}
+				sectionTitle=" Top Product"
 			/>
-			<Sliders />
-			<TopProduct products={topProduct} />
 			{/* banner */}
-			<div className="homepage-banner section__padding">
+			{/* <div className="homepage-banner section__padding">
 				<div className="img">
 					<img
 						src={
@@ -36,10 +35,14 @@ function Home() {
 						alt="serviceImage"
 					/>
 				</div>
-			</div>
+			</div> */}
 
-			{/* product */}
-			{!products ? <Loading /> : <Feature products={featureProduct} />}
+			{/*fetured product */}
+			<RenderProducts
+				products={featureProduct}
+				sectionSubtitle={"Get your product"}
+				sectionTitle=" Featured Product"
+			/>
 			<Subscription />
 			<Footer />
 		</div>

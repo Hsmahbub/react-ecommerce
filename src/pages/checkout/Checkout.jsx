@@ -1,39 +1,40 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useEffect } from "react";
-import { getCart } from "../../Database Managment/cart";
-import { FaEnvelope, FaSearchLocation, FaPhone } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { FaEnvelope, FaPhone } from "react-icons/fa";
 import { GrMapLocation } from "react-icons/gr";
-import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { GetCartApi } from "../../Api Method/cart";
+import { CreateOrderApi } from "../../Api Method/order";
 import { Footer, Navbar, Topheader } from "../../Components/index";
+import { useGlobalContext } from "../../context";
 import bkash from "../../utils/bkash.jpg";
 import nagad from "../../utils/nagod.jpg";
+import { toastObj } from "../../utils/toastObj";
 import "./checkout.scss";
-import { useGlobalContext } from "../../context";
 import {
-	SingleItem,
-	SingelItem2,
 	Payment,
 	ProuductItem,
+	SingelItem2,
+	SingleItem,
 } from "./SubComponents";
-import { toast } from "react-toastify";
-import { toastObj } from "../../utils/toastObj";
 
 function Checkout() {
 	const { handleModals, user, currentBilling } = useGlobalContext();
+	const selectedItem = localStorage.getItem("selectedItem").split(",");
+	const navigate = useNavigate();
 	const name = currentBilling.name ? currentBilling.name : user.name;
 	const email = currentBilling.email ? currentBilling.email : user.email;
 	const phone = currentBilling.phone ? currentBilling.phone : user.phone;
 	const address = currentBilling.address ? currentBilling.address : "";
-	const location = useLocation();
-	const productId = location.pathname.split("/")[2];
+	const cod =
+		"https://png.pngtree.com/png-clipart/20210530/original/pngtree-the-cash-on-delivery-circle-design-png-image_6357123.jpg";
 	const [productQuantity, setProductQuantity] = useState({
 		totalquantity: 0,
 		totalprice: 0,
 	});
 	const [orderProduct, setOrderProduct] = useState([]);
-	console.log(productQuantity.totalquantity);
-	const [paymentMethod, setPaymentMethod] = useState("");
+	// console.log(productQuantity.totalquantity);
 
 	// total item and total price
 	let totalprice = 0;
@@ -49,37 +50,58 @@ function Checkout() {
 	}, [totalprice, totalquantity]);
 
 	// payment mehtodh
+	const [paymentMethod, setPaymentMethod] = useState("");
 	const handlePaymentMethod = (name) => {
-		const bkash = document.getElementById("bkash");
-		const nagad = document.getElementById("nagad");
+		const prev = document.getElementById(paymentMethod);
+		const current = document.getElementById(name);
 		setPaymentMethod(name);
-		if (name === "bkash") {
-			bkash.style.transform = "scale(1.1)";
-			nagad.style.transform = "scale(0.9)";
-		} else {
-			nagad.style.transform = "scale(1.1)";
-			bkash.style.transform = "scale(0.9)";
-		}
+		current.style.transform = "scale(1.1)";
+		paymentMethod && (prev.style.transform = "scale(0.9)");
 	};
 	//place order
 	const handlePlaceOrder = () => {
 		Object.keys(currentBilling).length < 1 &&
 			toast.warning("please add billing address", toastObj);
-		!paymentMethod &&
+		if (!paymentMethod) {
 			toast.warning("please select payment method", toastObj);
-		if (!Object.keys(currentBilling).length < 1 && paymentMethod) {
-			
+		} else if (paymentMethod !== "cod") {
+			toast.warning("This method is currently unavailable", toastObj);
+		} else {
+			if (!Object.keys(currentBilling).length < 1 && paymentMethod) {
+				handleModals("loading", true);
+				CreateOrderApi(
+					{
+						BillingId: currentBilling._id,
+						cartId: selectedItem,
+					},
+					(res) => {
+						handleModals("loading", false);
+						navigate("/order");
+						window.location.reload()
+					}
+				);
+			}
 		}
 	};
-
 	useEffect(() => {
-		getCart((res) => {
-			const buyable = res.products.filter(
-				(item) => item.productId === productId
-			);
-			buyable ? setOrderProduct(buyable) : setOrderProduct(res.products);
+		GetCartApi((res) => {
+			let buyable = [];
+			selectedItem.forEach((i) => {
+				const r = res.data.success.products.filter(
+					(item) => item._id === i
+				)[0];
+				buyable.push(r);
+			});
+			buyable
+				? setOrderProduct(buyable)
+				: setOrderProduct(res.data.success.products);
 		});
-	}, [productId]);
+	}, []);
+
+	// set current billing on localStorage
+	useEffect(() => {
+		localStorage.setItem("currentBillingId", currentBilling._id);
+	}, [currentBilling]);
 	return (
 		<div>
 			<Topheader />
@@ -137,6 +159,7 @@ function Checkout() {
 								option={[
 									{ img: bkash, name: "bkash" },
 									{ img: nagad, name: "nagad" },
+									{ img: cod, name: "cod" },
 								]}
 								handlePaymentMethod={handlePaymentMethod}
 							/>

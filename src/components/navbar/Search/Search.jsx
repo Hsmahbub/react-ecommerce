@@ -1,5 +1,5 @@
 ﻿import React from "react";
-import "./navtop.scss";
+import "./search.scss";
 function Navtop() {
 	return (
 		<div className="search-input-field section__padding">
