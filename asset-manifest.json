@@ -1,15 +1,16 @@
 {
   "files": {
-    "main.css": "/react-ecommerce/static/css/main.be09edc4.css",
-    "main.js": "/react-ecommerce/static/js/main.ad218414.js",
+    "main.css": "/react-ecommerce/static/css/main.b5f08a84.css",
+    "main.js": "/react-ecommerce/static/js/main.49a093b6.js",
     "static/media/Shop-Gird-leftsidebar.png": "/react-ecommerce/static/media/Shop-Gird-leftsidebar.92ac0eb4b5ea8721adb6.png",
     "static/media/p9.png": "/react-ecommerce/static/media/p9.3b5e4bcb7dcb988897cb.png",
+    "static/media/nagod.jpg": "/react-ecommerce/static/media/nagod.3a046b8afdd54c56d583.jpg",
     "index.html": "/react-ecommerce/index.html",
-    "main.be09edc4.css.map": "/react-ecommerce/static/css/main.be09edc4.css.map",
-    "main.ad218414.js.map": "/react-ecommerce/static/js/main.ad218414.js.map"
+    "main.b5f08a84.css.map": "/react-ecommerce/static/css/main.b5f08a84.css.map",
+    "main.49a093b6.js.map": "/react-ecommerce/static/js/main.49a093b6.js.map"
   },
   "entrypoints": [
-    "static/css/main.be09edc4.css",
-    "static/js/main.ad218414.js"
+    "static/css/main.b5f08a84.css",
+    "static/js/main.49a093b6.js"
   ]
 }
