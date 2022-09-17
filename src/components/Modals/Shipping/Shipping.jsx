@@ -1,8 +1,8 @@
-﻿import React from "react";
+import React from "react";
 import { RiDeleteBack2Fill } from "react-icons/ri";
 import { useGlobalContext } from "../../../context";
-import { Address } from "./SubComponets";
 import "./shipping.scss";
+import { Address } from "./SubComponets";
 function Shipping() {
 	const { handleModals, billings } = useGlobalContext();
 	return (

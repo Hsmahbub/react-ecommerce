@@ -1,13 +1,10 @@
-﻿import React, { useEffect } from "react";
-import "./adminsignup.scss";
-import { Link } from "react-router-dom";
-import { InputField } from "../../../Components/index";
-import { LoggedInAdminApi } from "../../../Api Method/admin";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { AdminSignupApi } from "../../../Api Method/auth";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { AdminSignupApi } from "../../../Api Method/auth";
+import { InputField } from "../../../Components/index";
 import { useGlobalContext } from "../../../context";
+import "./adminsignup.scss";
 
 function AdminSignup() {
 	const { handleModals, admin } = useGlobalContext();

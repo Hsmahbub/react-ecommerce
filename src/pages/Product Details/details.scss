@@ -1,7 +1,7 @@
-﻿@import "../../utils//responsive-breakpoint.scss";
+@import "../../utils//responsive-breakpoint.scss";
 .product-details {
 	@include medium-down {
-		padding: .7rem;
+		padding: 0.7rem;
 		flex-wrap: wrap;
 	}
 	max-width: 1200px;

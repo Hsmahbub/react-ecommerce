@@ -1,4 +1,4 @@
-﻿export const toastObj = {
+export const toastObj = {
     position: "top-right",
     autoClose: 5000,
     hideProgressBar: false,

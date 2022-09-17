@@ -1,4 +1,4 @@
-﻿import axios from "axios";
+import axios from "axios";
 const local__server = "http://localhost:4000/api";
 const cloud__server = "http://mahbub-commerce.herokuapp.com/api";
 const BASE_URL = local__server;

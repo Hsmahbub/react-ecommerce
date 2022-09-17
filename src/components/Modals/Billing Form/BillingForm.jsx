@@ -1,20 +1,19 @@
-﻿/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState } from "react";
-import "./form.scss";
-import { Input } from "./SubComponents";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
 import { RiDeleteBack2Fill } from "react-icons/ri";
-import { useGlobalContext } from "../../../context";
+import { toast } from "react-toastify";
 import {
 	CreateBillingApi,
-	UpdateBillingApi,
+	UpdateBillingApi
 } from "../../../Api Method/billing";
-import { toast } from "react-toastify";
-import { toastObj } from "../../../utils/toastObj";
-import { useEffect } from "react";
+import { useGlobalContext } from "../../../context";
 import {
 	billingFormValidator,
-	buttonValidator,
+	buttonValidator
 } from "../../../utils/formValidation";
+import { toastObj } from "../../../utils/toastObj";
+import "./form.scss";
+import { Input } from "./SubComponents";
 
 function BillingForm() {
 	const { handleModals, BillingEdit, setBillingEdit, billings, setBillings } =

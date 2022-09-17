@@ -1,9 +1,9 @@
-﻿$small-width: 480px;
+$small-width: 480px;
 $medium-width: 768px;
 $large-width: 1024px;
 @mixin extra-small {
 	@media (max-width: 400px) {
-    @content;
+		@content;
 	}
 }
 @mixin small-down {
@@ -41,7 +41,7 @@ $large-width: 1024px;
 	}
 }
 
-@mixin large-up{
+@mixin large-up {
 	@media (min-width: #{$large-width}) {
 		@content;
 	}

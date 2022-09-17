@@ -1,6 +1,6 @@
-﻿import { DeleteBillingApi } from "../../../Api Method/billing";
-import { useGlobalContext } from "../../../context";
 import { toast } from "react-toastify";
+import { DeleteBillingApi } from "../../../Api Method/billing";
+import { useGlobalContext } from "../../../context";
 import { toastObj } from "../../../utils/toastObj";
 export const Address = ({ item, handleModals }) => {
 	const {

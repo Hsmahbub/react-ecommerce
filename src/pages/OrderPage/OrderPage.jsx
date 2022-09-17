@@ -1,12 +1,8 @@
-﻿import React from "react";
-import "./orderpage.scss";
-import Order from "../../Components/Order/Order";
-import { Navbar, Footer, Topheader } from "../../Components/index";
-import { GetOrderApi } from "../../Api Method/order";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import { RiSafariFill } from "react-icons/ri";
+import { GetOrderApi } from "../../Api Method/order";
+import { Footer, Navbar } from "../../Components/index";
+import "./orderpage.scss";
 
 function OrderPage() {
 	const [orderdProduct, setOrderdProduct] = useState([]);

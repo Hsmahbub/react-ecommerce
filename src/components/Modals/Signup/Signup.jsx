@@ -1,17 +1,16 @@
-﻿import InputField from "../../Form/InputField";
 import { RiDeleteBack2Fill } from "react-icons/ri";
 import { SignupApi } from "../../../Api Method/auth";
+import InputField from "../../Form/InputField";
 
-import {
-	signupFormValidator,
-	buttonValidator,
-} from "../../../utils/formValidation";
-import { toast } from "react-toastify";
-import { toastObj } from "../../../utils/toastObj";
-import "react-toastify/dist/ReactToastify.css";
-import "./signup.scss";
-import { useGlobalContext } from "../../../context";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useGlobalContext } from "../../../context";
+import {
+	buttonValidator, signupFormValidator
+} from "../../../utils/formValidation";
+import { toastObj } from "../../../utils/toastObj";
+import "./signup.scss";
 function Signup() {
 	const { handleModals } = useGlobalContext();
 	let initial = {

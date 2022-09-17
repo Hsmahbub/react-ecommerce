@@ -1,5 +1,5 @@
-﻿import { useGlobalContext } from "../../../context";
 import { LogoutApi } from "../../../Api Method/auth";
+import { useGlobalContext } from "../../../context";
 import { Links } from "../Links";
 import "./toggleItem.scss";
 export const Profile = ({ styleClass }) => {

@@ -1,4 +1,4 @@
-﻿import { userRequest } from "../utils/requestMethod";
+import { userRequest } from "../utils/requestMethod";
 // get carts
 export const GetCartApi = async (cb) => {
 	try {

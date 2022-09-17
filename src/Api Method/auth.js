@@ -1,4 +1,4 @@
-﻿import { publicRequest } from "../utils/requestMethod";
+import { publicRequest } from "../utils/requestMethod";
 
 export const SignupApi = async (user, cb) => {
 	try {

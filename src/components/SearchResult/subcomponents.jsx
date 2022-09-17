@@ -1,4 +1,4 @@
-﻿export const FilterItem = ({ title, item, handleChange }) => {
+export const FilterItem = ({ title, item, handleChange }) => {
 	return (
 		<div className="item">
 			<h5>{title}:</h5>

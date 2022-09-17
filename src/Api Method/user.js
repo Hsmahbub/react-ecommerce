@@ -1,4 +1,4 @@
-﻿import { userRequest } from "../utils/requestMethod";
+import { userRequest } from "../utils/requestMethod";
 
 export const UpdateUserApi = async (updateData, cb) => {
 	try {

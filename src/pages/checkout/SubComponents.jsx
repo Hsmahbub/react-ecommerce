@@ -1,4 +1,4 @@
-﻿export const SingleItem = ({ first, second }) => {
+export const SingleItem = ({ first, second }) => {
 	return (
 		<div className="single-item">
 			<p>{first}</p>

@@ -1,4 +1,4 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 export const ImgContainer = ({ img }) => {
 	const [imgView, setImgView] = useState("");
 	const handleImg = (index) => {

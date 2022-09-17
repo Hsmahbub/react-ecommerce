@@ -1,5 +1,5 @@
-﻿/* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect, useContext, createContext } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { createContext, useContext, useState } from "react";
 const AdminContext = createContext();
 const AdminProvider = ({ children }) => {
 	//adming

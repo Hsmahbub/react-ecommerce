@@ -1,11 +1,10 @@
-﻿import React, { useEffect } from "react";
-import { useState } from "react";
-import "./searchresult.scss";
-import { RenderProducts } from "../index";
-import { FilterItem } from "./subcomponents.jsx";
-import { searchProductApi } from "../../Api Method/product";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { searchProductApi } from "../../Api Method/product";
 import { toastObj } from "../../utils/toastObj";
+import { RenderProducts } from "../index";
+import "./searchresult.scss";
+import { FilterItem } from "./subcomponents.jsx";
 
 function SearchResult() {
 	const searchKeyword = localStorage.getItem("searchTerm");

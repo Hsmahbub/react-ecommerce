@@ -1,4 +1,4 @@
-﻿import { userRequest } from "../utils/requestMethod";
+import { userRequest } from "../utils/requestMethod";
 export const CreateBillingApi = async (billing, cb) => {
 	try {
 		const res = await userRequest.post(`/billings/`, { billing });

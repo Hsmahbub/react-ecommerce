@@ -1,6 +1,6 @@
-﻿import "./renderproduct.scss";
 import React from "react";
-import { Product, Loading } from "../index";
+import { Loading, Product } from "../index";
+import "./renderproduct.scss";
 
 function RenderProducts({ products, sectionTitle, sectionSubtitle }) {
 	return (

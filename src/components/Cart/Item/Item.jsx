@@ -1,18 +1,14 @@
-﻿import {
-	RiArrowUpSFill,
-	RiArrowDownSFill,
-	RiDeleteBin2Fill,
+import { useEffect, useState } from "react";
+import {
+	RiDeleteBin2Fill
 } from "react-icons/ri";
-import { useState } from "react";
-import { useGlobalContext } from "../../../context";
 import { Link } from "react-router-dom";
 import {
 	AddToCartApi,
-	DeleteCartItemApi,
-	GetCartApi,
+	DeleteCartItemApi
 } from "../../../Api Method/cart";
+import { useGlobalContext } from "../../../context";
 import "./item.scss";
-import { useEffect } from "react";
 const Items = ({ item }) => {
 	const { cartItem, setCartItem } = useGlobalContext();
 	const { img, color, title, price, total_price, size } = item;

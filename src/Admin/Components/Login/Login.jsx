@@ -1,14 +1,11 @@
-﻿import React from "react";
+import React from "react";
 import "./adminlogin.scss";
 
-import { Link } from "react-router-dom";
-import { InputField } from "../../../Components/index";
-import { useState } from "react";
-import { LoggedInAdminApi } from "../../../Api Method/admin";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { AdminLoginApi } from "../../../Api Method/auth";
+import { InputField } from "../../../Components/index";
 import { useGlobalContext } from "../../../context";
-import { useEffect } from "react";
 function AdminLogin() {
 	const { handleModals, admin } = useGlobalContext();
 	const navigate = useNavigate();

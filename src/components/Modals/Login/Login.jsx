@@ -1,16 +1,14 @@
-﻿import InputField from "../../Form/InputField";
+import { useEffect, useState } from "react";
 import { RiDeleteBack2Fill } from "react-icons/ri";
 import { toast } from "react-toastify";
-import { useGlobalContext } from "../../../context";
 import { LoginApi } from "../../../Api Method/auth";
-import { toastObj } from "../../../utils/toastObj";
+import { useGlobalContext } from "../../../context";
 import {
-	loginFormValidator,
-	buttonValidator,
+	buttonValidator, loginFormValidator
 } from "../../../utils/formValidation";
+import { toastObj } from "../../../utils/toastObj";
+import InputField from "../../Form/InputField";
 import "./login.scss";
-import { useState } from "react";
-import { useEffect } from "react";
 
 function Login() {
 	const { handleModals } = useGlobalContext();

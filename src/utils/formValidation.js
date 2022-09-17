@@ -1,4 +1,4 @@
-﻿//button disabled
+//button disabled
 export const buttonValidator = (error) => {
 	let value = {};
 	value.isDisabled = Object.keys(error).length < 1;

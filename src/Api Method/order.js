@@ -1,4 +1,4 @@
-﻿import { userRequest } from "../utils/requestMethod";
+import { userRequest } from "../utils/requestMethod";
 
 // create order api
 export const CreateOrderApi = async ({ BillingId, cartId }, cb) => {

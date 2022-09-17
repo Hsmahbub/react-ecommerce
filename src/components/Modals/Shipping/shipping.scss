@@ -1,4 +1,4 @@
-﻿@import "../../../utils//mixin.scss";
+@import "../../../utils//mixin.scss";
 #shipping {
 	@include modals;
 	.wrapper {
@@ -58,7 +58,7 @@
 				.btn-romove {
 					right: 3rem !important;
 				}
-				label{
+				label {
 					font-size: 15px;
 					line-height: 18px;
 					font-style: italic;

@@ -1,4 +1,4 @@
-﻿@import "../../../utils/mixin.scss";
+@import "../../../utils/mixin.scss";
 #signup {
 	@include modals;
 	.wrapper {
@@ -33,5 +33,5 @@
 	border: none;
 	color: chartreuse;
 	margin-top: 1rem;
-	cursor: pointer ;
+	cursor: pointer;
 }

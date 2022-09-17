@@ -1,4 +1,4 @@
-﻿@import "./responsive-breakpoint.scss";
+@import "./responsive-breakpoint.scss";
 // for modals
 @mixin modals {
 	transform: translateY(-100vh);
@@ -93,7 +93,7 @@
 		background-color: white;
 		align-items: center;
 		margin-bottom: 1rem;
-	
+
 		justify-content: space-around;
 		p {
 			max-width: 100px;

@@ -1,5 +1,5 @@
-﻿import React from "react";
-import { Navbar, Footer, SearchResult } from "../../Components/index";
+import React from "react";
+import { Footer, Navbar, SearchResult } from "../../Components/index";
 function SearchPage() {
 	return (
 		<div className="search-page">

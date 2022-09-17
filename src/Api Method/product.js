@@ -1,4 +1,4 @@
-﻿import { publicRequest, userRequest } from "../utils/requestMethod";
+import { publicRequest } from "../utils/requestMethod";
 export const GetProductApi = async (cb) => {
 	try {
 		const res = await publicRequest.get("/products");

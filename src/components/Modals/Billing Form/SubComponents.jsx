@@ -1,4 +1,4 @@
-﻿export const Select = ({ option, name }) => {
+export const Select = ({ option, name }) => {
 	return (
 		<>
 			<label htmlFor={name}>{name}*</label>
