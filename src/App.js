@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { initializeApp } from "firebase/app";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Admin from "./Admin/Admin";
@@ -9,9 +10,8 @@ import {
 	Signup,
 	BillingForm,
 	Loading,
-} from "./Components/Modals/index";
+} from "./Components/Modals/index.js";
 import { AdminLogin, AdminSignup } from "./Admin/Components/index.js";
-import AdminProvider from "./Admin/adminContext";
 import {
 	Carts,
 	SearchPage,
