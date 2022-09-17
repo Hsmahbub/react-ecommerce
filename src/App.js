@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { initializeApp } from "firebase/app";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -20,7 +19,7 @@ import {
 	Details,
 	OrederPage,
 	Home,
-} from "./pages/index";
+} from "./Pages/index";
 function App() {
 	return (
 		<div className="App">
