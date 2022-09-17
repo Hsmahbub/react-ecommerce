@@ -87,9 +87,6 @@
 						height: 45px;
 						transition: transform 0.2s;
 						background-color: #3cb878;
-						&:hover {
-							transform: scale(1.1);
-						}
 						&:active {
 							transform: scale(0.9);
 						}

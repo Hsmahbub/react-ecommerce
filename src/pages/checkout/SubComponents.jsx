@@ -51,9 +51,9 @@ export const ProuductItem = ({ product }) => {
 				<p>{product.desc}</p>
 				<p>
 					<span>price:${product.price},</span>
-					<span>quantity:{product.quantity},</span>
+					<span>quantity:{product.quantity},</span><br />
 					{product.color && <span>color:{product.color},</span>}
-					{product.size && <span>size:{product.size},</span>}
+					{product.size && <span>size:{product.size},</span>} <br />
 					<span>total_price:${product.total_price}</span>
 				</p>
 			</div>

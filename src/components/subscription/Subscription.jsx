@@ -1,6 +1,30 @@
 import React from "react";
 import "./subscription.scss";
-function subscription() {
+import { toast } from "react-toastify";
+import { getCoupon } from "../../Api Method/coupon";
+import { toastObj } from "../../utils/toastObj";
+import { useState } from "react";
+const Subscription = () => {
+	const [inputEmail, setInputEmail] = useState("");
+	const [coupon, setCoupon] = useState("");
+	const [isLoading, setIsLoading] = useState(false);
+	const handleChange = (e) => {
+		setInputEmail(e.target.value);
+	};
+	const handleSubmit = (e) => {
+		setIsLoading(true);
+		getCoupon(inputEmail, (res) => {
+			console.log(res);
+			if (res.data) {
+				if (res.data.success) {
+					setCoupon(res.data.success.coupon.code.toUpperCase());
+				} else {
+					toast.error("Invalid email", toastObj);
+				}
+			}
+			setIsLoading(false);
+		});
+	};
 	return (
 		<div className="subscription section__padding">
 			<div className="inner-subscription">
@@ -16,17 +40,28 @@ function subscription() {
 
 					<div className="form-input">
 						<div className="input">
-							<input type="email" placeholder="Enter your email"/>
+							<input
+								type="email"
+								placeholder="Enter your email"
+								required
+								value={coupon ? coupon : inputEmail}
+								onChange={handleChange}
+							/>
 						</div>
 						<div className="btn">
-							<button type="button">GET COUPON</button>
+							<button
+								type="button"
+								disabled={isLoading}
+								onClick={handleSubmit}
+							>
+								{isLoading ? "Wait" : "GET COUPON"}
+							</button>
 						</div>
 					</div>
-
 				</div>
 			</div>
 		</div>
 	);
-}
+};
 
-export default subscription;
+export default Subscription;

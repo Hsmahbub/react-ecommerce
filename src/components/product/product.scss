@@ -1,5 +1,6 @@
 @import "../../utils/responsive-breakpoint.scss";
 .product-box {
+	background-color: white;
 	@include medium-down {
 		width: 150px;
 	}

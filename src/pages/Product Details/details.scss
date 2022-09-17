@@ -1,13 +1,26 @@
-﻿.product-details {
+﻿@import "../../utils//responsive-breakpoint.scss";
+.product-details {
+	@include medium-down {
+		padding: .7rem;
+		flex-wrap: wrap;
+	}
 	max-width: 1200px;
 	padding: 2rem;
 	margin: auto;
 	display: flex;
 	.img-container {
 		margin-right: 2rem;
+		@include medium-down {
+			margin-right: 0;
+		}
 		.product-img {
 			width: 300px;
 			height: 350px;
+			@include medium-down {
+				width: 337px;
+				margin: auto;
+				height: 300px;
+			}
 			img {
 				width: 100%;
 				height: 100%;
@@ -17,7 +30,8 @@
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			width: 300px;
+			width: 337px;
+			margin: auto;
 			height: 100px;
 			img {
 				cursor: pointer;
@@ -28,6 +42,9 @@
 	}
 	.info-container {
 		padding: 1rem;
+		@include medium-down {
+			padding: 0rem;
+		}
 		h2 {
 			margin-bottom: 1rem;
 		}
@@ -48,7 +65,6 @@
 			div {
 				margin-right: 5px;
 				margin-bottom: 1rem;
-			
 			}
 			text-transform: capitalize;
 			display: flex;
@@ -119,7 +135,7 @@
 				border: none;
 				outline: none;
 				height: 50px;
-				width: 150px;
+				width: 140px;
 				margin-right: 1rem;
 				cursor: pointer;
 			}

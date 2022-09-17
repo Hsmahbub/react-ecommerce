@@ -1,6 +1,7 @@
 ﻿@import "../../../utils/responsive-breakpoint.scss";
 .nav-bottom {
 	position: relative;
+
 	.toggleMenu {
 		@include large-down {
 			display: flex;

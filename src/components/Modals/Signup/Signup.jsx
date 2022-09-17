@@ -27,7 +27,12 @@ function Signup() {
 	// handler
 	const changeHandler = (e) => {
 		setInputValue({ ...inputValue, [e.target.name]: e.target.value });
-		setErrors(signupFormValidator({ ...inputValue, [e.target.name]: e.target.value }));
+		setErrors(
+			signupFormValidator({
+				...inputValue,
+				[e.target.name]: e.target.value,
+			})
+		);
 	};
 	const formSubmitHandler = (e) => {
 		e.preventDefault();
@@ -53,7 +58,7 @@ function Signup() {
 
 	// use effect for error handling
 	useEffect(() => {
-		setErrors({})
+		setErrors({});
 	}, []);
 
 	return (

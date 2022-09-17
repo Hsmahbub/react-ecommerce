@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { FaEnvelope, FaPhone } from "react-icons/fa";
 import { GrMapLocation } from "react-icons/gr";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { GetCartApi } from "../../Api Method/cart";
 import { CreateOrderApi } from "../../Api Method/order";
@@ -61,9 +61,9 @@ function Checkout() {
 	//place order
 	const handlePlaceOrder = () => {
 		Object.keys(currentBilling).length < 1 &&
-			toast.warning("please add billing address", toastObj);
+			toast.warning("Please add billing address", toastObj);
 		if (!paymentMethod) {
-			toast.warning("please select payment method", toastObj);
+			toast.warning("Please select payment method", toastObj);
 		} else if (paymentMethod !== "cod") {
 			toast.warning("This method is currently unavailable", toastObj);
 		} else {
@@ -77,7 +77,8 @@ function Checkout() {
 					(res) => {
 						handleModals("loading", false);
 						navigate("/order");
-						window.location.reload()
+						window.location.reload();
+						toast.warning("Thanks for Shopping with us", toastObj);
 					}
 				);
 			}
@@ -118,7 +119,6 @@ function Checkout() {
 							orderProduct.map((item) => (
 								<ProuductItem product={item} key={item._id} />
 							))}
-						<hr />
 					</div>
 					<div className="billing-details">
 						{/* billing details  */}
@@ -168,13 +168,14 @@ function Checkout() {
 								<p>{`$${productQuantity.totalprice}`}</p>
 							</div>
 						</div>
-					</div>
-				</div>
-				<div className="order-btn ">
+						<div className="order-btn ">
 					<button className="place-order" onClick={handlePlaceOrder}>
 						PLACE ORDER
 					</button>
 				</div>
+					</div>
+				</div>
+
 			</div>
 			<Footer />
 		</div>

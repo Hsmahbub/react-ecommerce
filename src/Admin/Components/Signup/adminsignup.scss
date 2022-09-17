@@ -1,0 +1,27 @@
+﻿.admin-signup {
+	min-width: 350px;
+	height: fit-content;
+	padding: 2rem;
+	margin: auto;
+	background: green;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	h2 {
+		color: white;
+		text-align: center;
+	}
+	.admin-signup-btn {
+		width: 100px;
+		margin-top: 1rem;
+		padding: 0.5rem 1rem;
+		cursor: pointer;
+	}
+	.link {
+		float: right;
+		margin-top: 2rem;
+		color: blue;
+		cursor: pointer;
+	}
+}

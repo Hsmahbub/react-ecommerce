@@ -1,0 +1,24 @@
+﻿.add-product {
+	max-width: 350px;
+	margin: auto;
+	color: black;
+	background-color: green;
+	padding: 2rem;
+	.df {
+		display: flex;
+		.divider {
+			width: 2rem;
+		}
+	}
+	.add-btn {
+		// width: 50px;
+		margin-top: 1rem;
+        width: 100%;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        color: white;
+        background-color: black;
+		padding: 0.5rem 1rem;
+	}
+}

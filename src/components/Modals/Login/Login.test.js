@@ -1,8 +1,13 @@
-﻿import Login from "./Login";
 import "@testing-library/jest-dom";
 import AppProvider from "../../../context";
-import { screen, render } from "@testing-library/react";
+import Login from "./Login";
 
+import { fireEvent, render, screen } from "@testing-library/react";
+
+jest.mock('axios', () => ({
+	userRequest:{}
+}));
+//test for username input field
 test("label text should be username and input should be  rendered", () => {
 	render(
 		<AppProvider>
@@ -12,35 +17,7 @@ test("label text should be username and input should be  rendered", () => {
 	expect(screen.getByLabelText(/Username/i)).toBeInTheDocument();
 	expect(screen.getByPlaceholderText(/Email or Phone/i)).toBeInTheDocument();
 });
-
-test("label text should be password and input should be rendered", () => {
-	render(
-		<AppProvider>
-			<Login />
-		</AppProvider>
-	);
-	expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
-	expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
-});
-
-test("button  should be rendered", () => {
-	render(
-		<AppProvider>
-			<Login />
-		</AppProvider>
-	);
-	expect(screen.getAllByRole("button")).toBeInTheDocument();
-});
-
-test("don't have an account should be rendered", () => {
-	render(
-		<AppProvider>
-			<Login />
-		</AppProvider>
-	);
-	expect(screen.getByText("don't have an account?")).toBeInTheDocument();
-});
-test("input value should be empty", () => {
+test("username input value should be empty", () => {
 	render(
 		<AppProvider>
 			<Login />
@@ -48,5 +25,66 @@ test("input value should be empty", () => {
 	);
 	const inputEl = screen.getByPlaceholderText(/Email or Phone/i);
 	expect(inputEl.value).toBe("");
-	
+});
+test("username input value should not be empty after onChange", () => {
+	render(
+		<AppProvider>
+			<Login />
+		</AppProvider>
+	);
+	const testInput = "test";
+	const userNameInputEl = screen.getByPlaceholderText(/Email or Phone/i);
+	fireEvent.change(userNameInputEl, { target: { value: testInput } });
+	expect(userNameInputEl.value).toBe(testInput);
+});
+
+// test for password input field
+test("label text should be password and input should be rendered", () => {
+	render(
+		<AppProvider>
+			<Login />
+		</AppProvider>
+	);
+	expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
+});
+test("password input value should be empty", () => {
+	render(
+		<AppProvider>
+			<Login />
+		</AppProvider>
+	);
+	const passwordInputEl = screen.getByPlaceholderText(/Password/i);
+	expect(passwordInputEl.value).toBe("");
+});
+test("password input value should not be empty after onChange", () => {
+	render(
+		<AppProvider>
+			<Login />
+		</AppProvider>
+	);
+	const testInput = "test";
+	const passwordInputEl = screen.getByPlaceholderText(/Password/i);
+	fireEvent.change(passwordInputEl, { target: { value: testInput } });
+	expect(passwordInputEl.value).toBe(testInput);
+});
+
+//test for submit button
+test("submit button  should be rendered", () => {
+	render(
+		<AppProvider>
+			<Login />
+		</AppProvider>
+	);
+	const buttonEl = screen.getByText(/submit/i);
+	expect(buttonEl).toBeInTheDocument();
+});
+
+// test for dont have an account button
+test("don't have an account should be rendered", () => {
+	render(
+		<AppProvider>
+			<Login />
+		</AppProvider>
+	);
+	expect(screen.getByText("don't have an account?")).toBeInTheDocument();
 });

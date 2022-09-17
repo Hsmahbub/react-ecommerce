@@ -1,4 +1,6 @@
-﻿.order {
+﻿@import '../../utils/mixin.scss';
+@import '../../utils/responsive-breakpoint.scss';
+.order {
 	max-width: 1200px;
 	height: 100%;
 	background: rgb(218, 224, 222);
@@ -30,10 +32,17 @@
 				span {
 					margin-right: 0.3rem;
 				}
+				@include medium-down{
+					font-size: 11px;
+				}
 			}
 			.status {
 				position: absolute;
 				right: 1rem;
+				@include medium-down{
+					position: initial;
+					right: none;
+				}
 			}
 		}
 	}

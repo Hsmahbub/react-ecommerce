@@ -1,5 +1,6 @@
 ﻿import InputField from "./InputField";
 import { screen, render } from "@testing-library/react";
+import "@testing-library/jest-dom";
 
 test("should first empty", () => {
 	render(
@@ -12,4 +13,6 @@ test("should first empty", () => {
 			isRequired={true}
 		/>
 	);
+	const inputEl = screen.getAllByPlaceholderText(/name/i);
+	expect(inputEl).toBeInTheDocument();
 });

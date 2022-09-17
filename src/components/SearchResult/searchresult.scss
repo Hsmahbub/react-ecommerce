@@ -1,0 +1,25 @@
+﻿.search-result {
+	max-width: 1200px;
+	margin: auto;
+	p {
+		margin: 1rem 0;
+		font-size: 20px;
+		font-style: italic;
+	}
+	.filterBox {
+		.wrapper {
+			display: flex;
+			flex-wrap: wrap;
+			.item {
+				display: flex;
+				margin-right: 1rem;
+				h5 {
+					text-transform: capitalize;
+				}
+			}
+		}
+	}
+	.result {
+		margin: 1rem 0;
+	}
+}

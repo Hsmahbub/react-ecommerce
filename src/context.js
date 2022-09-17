@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { GetBillingApi } from "./Api Method/billing";
+import { LoggedInAdminApi } from "./Api Method/admin";
 import { useState, useEffect, useContext, createContext } from "react";
 import { GetProductApi } from "./Api Method/product";
 import { LoggedInUserApi } from "./Api Method/user";
@@ -90,6 +91,23 @@ const AppProvider = ({ children }) => {
 			}
 		});
 	}, [setBillings]);
+
+	//adming
+	const [admin, setAdmin] = useState({});
+
+	useEffect(() => {
+		LoggedInAdminApi((res) => {
+			if (res.data) {
+				if (res.data.error) {
+					console.log(res.data);
+				} else {
+					setAdmin(res.data.success);
+				}
+			} else {
+				console.log(res);
+			}
+		});
+	}, []);
 	return (
 		<AppContext.Provider
 			value={{
@@ -121,6 +139,10 @@ const AppProvider = ({ children }) => {
 				setBillingEdit,
 				currentBilling,
 				setCurrentBilling,
+
+				//admin
+				admin,
+				setAdmin
 			}}
 		>
 			{children}

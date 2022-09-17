@@ -1,13 +1,15 @@
 ﻿/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/anchor-has-content */
 import React from "react";
+import { useNavigate } from "react-router-dom";
 // import { useGlobalContext } from "../../context";
 import { LogoutApi } from "../../Api Method/auth";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useGlobalContext } from "../../context";
 import { toastObj } from "../../utils/toastObj";
 export const Links = ({ className }) => {
+	const navigate = useNavigate();
 	const { user, handleModals } = useGlobalContext();
 	const signup = !user ? "signup" : null;
 	const login = !user ? "login" : null;
@@ -20,6 +22,7 @@ export const Links = ({ className }) => {
 					className={className}
 					onClick={() => {
 						LogoutApi();
+						navigate("/");
 						window.location.reload();
 					}}
 				>
@@ -63,15 +66,6 @@ export const Links = ({ className }) => {
 					<span>home</span>
 				</p>
 			</Link>
-			<p className={className}>
-				<span>women</span>
-			</p>
-			<p className={className}>
-				<span>men</span>
-			</p>
-			<p className={className}>
-				<span>kids</span>
-			</p>
 			<p className={className}>
 				<Link to={"/order"}>
 					<span>Order</span>

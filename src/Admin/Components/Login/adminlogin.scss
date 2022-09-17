@@ -1,0 +1,32 @@
+﻿.container {
+	background-color: cornflowerblue;
+	position: relative;
+	height: 100vh;
+}
+.admin-login {
+	min-width: 350px;
+	height: fit-content;
+	padding: 2rem;
+	margin: auto;
+	background: green;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	h2 {
+		text-align: center;
+		color: white;
+	}
+	.admin-login-btn {
+		cursor: pointer;
+		width: 100px;
+		margin-top: 1rem;
+		padding: 0.5rem 1rem;
+	}
+	.link {
+		float: right;
+		margin-top: 2rem;
+		color: blue;
+		cursor: pointer;
+	}
+}

@@ -1,6 +1,6 @@
+@import "../../utils//responsive-breakpoint.scss";
 .checkout {
 	max-width: 1200px;
-	position: relative;
 	margin: 0 auto;
 	.billings {
 		width: 100%;
@@ -10,9 +10,12 @@
 		// for billing product details
 		.bill-product-details {
 			width: 65%;
-
 			border: 1px solid;
 			.product-item {
+				@include medium-down {
+					padding: 1rem;
+					flex-wrap: wrap;
+				}
 				padding: 2rem;
 				display: flex;
 				.img {
@@ -24,7 +27,7 @@
 					color: #a3a2a3;
 					p {
 						margin-bottom: 0.3rem;
-						span{
+						span {
 							padding-right: 5px;
 						}
 					}
@@ -165,7 +168,11 @@
 		color: white;
 		height: 50px;
 		cursor: pointer;
-		width: 30%;
+		width: 100%;
+		@include medium-down {
+			padding: 1rem;
+			flex-wrap: wrap;
+		}
 	}
 }
 

@@ -54,17 +54,8 @@ const Items = ({ item }) => {
 			<p>
 				<Link to={`/product/${item._id}`}>{title}</Link>
 			</p>
-			<p>{color}</p>
 			<p className="quantity">
-				<RiArrowUpSFill
-					className="up"
-					onClick={() => handleQuantity("up")}
-				/>
 				{`${quantity}x`}
-				<RiArrowDownSFill
-					className="down"
-					onClick={() => handleQuantity("down")}
-				/>
 			</p>
 			<p>${totalPrice}</p>
 			<RiDeleteBin2Fill onClick={handleDelete} className="btn" />

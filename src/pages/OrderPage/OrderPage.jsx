@@ -37,11 +37,11 @@ function OrderPage() {
 										{item.title}
 									</Link>
 								</p>
-								<p>
+								{/* <p>
 									<Link to={`/product/${item.productId}`}>
 										{item.desc}
 									</Link>
-								</p>
+								</p> */}
 								<p>
 									<span>price:${item.price},</span>
 									<span>quantity:{item.quantity},</span>
@@ -62,7 +62,7 @@ function OrderPage() {
 									shipping:{item.address.address},
 									{item.address.postcode}
 								</p>
-								<p>placed order at : {item.createdAt}</p>
+								<p>placed on : {item.createdAt}</p>
 							</div>
 						</div>
 					))}
