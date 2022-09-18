@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+
 import { useGlobalContext } from "../../context";
 import Items from "./Item/Item";
 import "./cart.scss";
