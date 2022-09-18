@@ -19,6 +19,7 @@ import {
 	Details,
 	OrederPage,
 	Home,
+	UserDetails
 } from "./Pages/index";
 function App() {
 	return (
@@ -47,6 +48,7 @@ function App() {
 					<Route path="/search" element={<SearchPage />} />
 					<Route path="/checkout/" element={<Checkout />} />
 					<Route path="/order" element={<OrederPage />} />
+					<Route path="/user" element={<UserDetails />} />
 					<Route path="/admin" element={<Admin />} />
 					<Route path="/admin/login" element={<AdminLogin />} />
 					<Route path="/admin/signup" element={<AdminSignup />} />

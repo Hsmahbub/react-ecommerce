@@ -5,31 +5,10 @@ import Navtop from "./Search/Search";
 import Links from "./Links";
 import { Link } from "react-router-dom";
 import { HiShoppingCart } from "react-icons/hi";
-import { VscThreeBars, VscClose } from "react-icons/vsc";
 import { useGlobalContext } from "../../context";
-import { useState } from "react";
 
 function Navbar() {
-	const { user, cartItem, handleModals } = useGlobalContext();
-
-	const [toggleMenu, setToggleMenu] = useState({
-		isFalse: false,
-		width: "0px",
-	});
-
-	const openToggleMenu = () => {
-		setToggleMenu({
-			isFalse: true,
-			width: "200px",
-		});
-	};
-
-	const closeToggleMenu = () => {
-		setToggleMenu({
-			isFalse: false,
-			width: "0px",
-		});
-	};
+	const { user, cartItem,} = useGlobalContext();
 	return (
 		<>
 			<Navtop />
@@ -62,7 +41,7 @@ function Navbar() {
 						{user && (
 							<>
 								<div className="profile">
-									<Link to={"/dashboard"}>
+									<Link to={"/user"}>
 										<img
 											src={user.img}
 											alt="user"
@@ -72,21 +51,11 @@ function Navbar() {
 								</div>
 							</>
 						)}
-						<div className="menu-bar">
-							{toggleMenu.isFalse ? (
-								<span onClick={closeToggleMenu}>
-									<VscClose />
-								</span>
-							) : (
-								<span onClick={openToggleMenu}>
-									<VscThreeBars />
-								</span>
-							)}
-						</div>
+						<div className="menu-bar"></div>
 					</div>
 				</div>
 			</nav>
-			<ToggleItem width={toggleMenu.width} />
+			<ToggleItem />
 		</>
 	);
 }

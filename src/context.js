@@ -64,6 +64,7 @@ const AppProvider = ({ children }) => {
 			app.style.overflowY = "hidden";
 			elementId.style.transform = "translateY(0px)";
 			elementId.style.opacity = "1";
+			elementId.style.position = "fixed";
 			return true;
 		} else {
 			app.style.height = "unset";
@@ -142,7 +143,7 @@ const AppProvider = ({ children }) => {
 
 				//admin
 				admin,
-				setAdmin
+				setAdmin,
 			}}
 		>
 			{children}

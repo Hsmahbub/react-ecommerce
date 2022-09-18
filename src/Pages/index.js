@@ -5,3 +5,4 @@ export { default as Category } from "./Category/Category";
 export { default as Details } from "./Product Details/Details";
 export { default as OrederPage } from "./OrderPage/OrderPage";
 export { default as SearchPage } from "./SearchPage/SearchPage";
+export { default as UserDetails } from "./UserDetails/UserDetails";
