@@ -2,6 +2,7 @@ import React from "react";
 import "./home.scss";
 import { useGlobalContext } from "../../context";
 import { Loading } from "../../Components/Modals/index";
+import Location from "../../Components/Location/Location";
 import {
 	Navbar,
 	Topheader,
@@ -34,6 +35,7 @@ function Home() {
 			/>
 			<Subscription />
 			<Footer />
+			<Location />
 		</div>
 	);
 }
