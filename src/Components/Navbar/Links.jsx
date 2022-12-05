@@ -37,7 +37,7 @@ export const Links = ({ className }) => {
 					className={className}
 					onClick={() => {
 						handleModals("signup", true);
-						handleModals("login", false);
+						// handleModals("login", false);
 					}}
 				>
 					<span>{signup}</span>
@@ -54,7 +54,7 @@ export const Links = ({ className }) => {
 					className={className}
 					onClick={() => {
 						handleModals("login", true);
-						handleModals("signup", false);
+						// handleModals("signup", false);
 					}}
 				>
 					<span>{login}</span>

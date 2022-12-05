@@ -62,15 +62,20 @@ const AppProvider = ({ children }) => {
 		if (isOpen) {
 			app.style.height = "100vh";
 			app.style.overflowY = "hidden";
-			elementId.style.transform = "translateY(0px)";
-			elementId.style.opacity = "1";
 			elementId.style.position = "fixed";
+			elementId.style.zIndex = "1";
+			elementId.style.opacity = "1";
+
 			return true;
 		} else {
 			app.style.height = "unset";
 			app.style.overflowY = "scroll";
-			elementId.style.transform = "translateY(-100vh)";
+			elementId.style.zIndex = "-1";
 			elementId.style.opacity = "0";
+			if (id === "loading") {
+				app.style.height = "100vh";
+				app.style.overflowY = "hidden";
+			}
 			return false;
 		}
 	};

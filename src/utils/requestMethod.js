@@ -1,6 +1,6 @@
 import axios from "axios";
 const local__server = "http://localhost:4000/api";
-const cloud__server = "https://mahbub-commerce.herokuapp.com/api";
+const cloud__server = "https://shop-api-etl3.onrender.com";
 const BASE_URL = cloud__server;
 const userToken = localStorage.getItem("userToken");
 const adminToken = localStorage.getItem("adminToken");

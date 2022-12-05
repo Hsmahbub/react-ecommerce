@@ -35,7 +35,7 @@ function Signup() {
 	};
 	const formSubmitHandler = (e) => {
 		e.preventDefault();
-		handleModals("loading", true);
+		handleModals("loading", true,);
 
 		// res from server
 		SignupApi(inputValue, (res) => {
