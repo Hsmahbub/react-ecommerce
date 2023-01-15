@@ -1,7 +1,8 @@
 @import "../../utils/responsive-breakpoint.scss";
 @import "../../utils/mixin.scss";
 .feature-product {
-	background-color: #333333;
+	max-width: 1240px;
+	margin: auto;
 	width: 100%;
 	@include small-down {
 		padding-left: 0.5rem !important;
@@ -9,17 +10,13 @@
 	}
 	padding-bottom: 2rem;
 	.inner-feature-product {
-		display: flex;
-		flex-direction: column;
 		width: 100%;
-		flex: wrap;
 		.description {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
 			margin-top: 5rem;
 			justify-content: center;
-			color: white;
 			@include heading-and-title;
 			@include medium-down {
 				margin-top: 2rem;
@@ -29,7 +26,6 @@
 			min-height: 500px;
 			border-radius: 10px;
 			margin-top: 2rem;
-			// background-color: rgba(255, 255, 255, 0.5);
 			display: flex;
 			flex-wrap: wrap;
 			justify-content: center;

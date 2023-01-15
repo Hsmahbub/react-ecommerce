@@ -33,6 +33,7 @@ function Login() {
 		handleModals("loading", true);
 		LoginApi(inputData, (res) => {
 			if (res.data) {
+				console.log(res)
 				if (res.data.error) {
 					setError(res.data.error);
 				} else {

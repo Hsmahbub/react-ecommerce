@@ -2,24 +2,22 @@
 .product-details {
 	@include medium-down {
 		padding: 0.7rem;
-		flex-wrap: wrap;
+		grid-template-columns: repeat(1, 1fr);
 	}
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 1rem;
 	max-width: 1200px;
-	padding: 2.8rem;
+	min-height: 600px;
+	padding: 3rem;
 	margin: auto;
-	display: flex;
 	.img-container {
-		margin-right: 2rem;
 		@include medium-down {
 			margin-right: 0;
 		}
 		.product-img {
-			width: 300px;
-			height: 350px;
 			@include medium-down {
-				width: 337px;
 				margin: auto;
-				height: 300px;
 			}
 			img {
 				width: 100%;
@@ -30,7 +28,6 @@
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			width: 337px;
 			margin: auto;
 			height: 100px;
 			img {

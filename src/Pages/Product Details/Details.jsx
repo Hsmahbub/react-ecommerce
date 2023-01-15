@@ -6,7 +6,7 @@ import { AddToCartApi } from "../../Api Method/cart";
 import { GetSingleProductApi } from "../../Api Method/product";
 import { toastObj } from "../../utils/toastObj";
 import "./details.scss";
-import { Navbar, Footer } from "../../Components/index";
+import { Navbar, Footer, Loading } from "../../Components/index";
 import { ImgContainer, Quantity, Select } from "./SubComponents";
 function Details() {
 	const { user, cartItem, setCartItem, handleModals } = useGlobalContext();
@@ -59,7 +59,11 @@ function Details() {
 			<Navbar />
 			{product ? (
 				<div className="product-details">
-					{product.img && <ImgContainer img={product.img} />}
+					{product.img ? (
+						<ImgContainer img={product.img} />
+					) : (
+						<Loading />
+					)}
 					<div className="info-container">
 						<h2>{product.title}</h2>
 						<div className="desc">{product.desc}</div>
