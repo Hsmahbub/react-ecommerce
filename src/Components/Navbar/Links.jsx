@@ -62,6 +62,18 @@ export const Links = ({ className }) => {
 			)}
 		</>
 	);
+
+	const orderC = user && (
+		<p
+			className={className}
+			onClick={() => {
+				navigate("/order");
+				window.location.reload();
+			}}
+		>
+			<span>Order</span>
+		</p>
+	);
 	return (
 		<>
 			<p
@@ -74,15 +86,7 @@ export const Links = ({ className }) => {
 				<span>home</span>
 			</p>
 
-			<p
-				className={className}
-				onClick={() => {
-					navigate("/order");
-					window.location.reload();
-				}}
-			>
-				<span>Order</span>
-			</p>
+			{orderC}
 			{signupC}
 			{loginC}
 			{logoutC}

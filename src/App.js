@@ -1,29 +1,20 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Admin from "./Admin/Admin";
+import { AdminLogin, AdminSignup } from "./Admin/Components/index.js";
 import "./App.css";
 import {
-	Shipping,
-	Login,
-	Signup,
 	BillingForm,
-	Loading,
+	Loading, Login, Shipping, Signup
 } from "./Components/Modals/index.js";
-import { AdminLogin, AdminSignup } from "./Admin/Components/index.js";
 import {
-	Carts,
-	SearchPage,
-	Checkout,
-	Details,
-	OrederPage,
-	Home,
-	UserDetails
+	Carts, Checkout,
+	Details, Home, OrederPage, SearchPage, UserDetails
 } from "./Pages/index";
 function App() {
 	return (
-		<div className="App">
+		<div className="App" >
 			<ToastContainer
 				position="top-right"
 				autoClose={5000}

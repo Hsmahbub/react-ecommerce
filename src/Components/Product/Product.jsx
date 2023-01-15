@@ -6,6 +6,7 @@ function Product({ item }) {
 	const { title, img, price } = item;
 	const productDetailsHandler = (item) => {
 		navigate(`/product/${item._id}`);
+		window.scrollTo(0, 0);
 	};
 	return (
 		<div

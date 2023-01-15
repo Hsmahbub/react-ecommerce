@@ -8,8 +8,10 @@ import { toastObj } from "../../utils/toastObj";
 import "./details.scss";
 import { Navbar, Footer, Loading } from "../../Components/index";
 import { ImgContainer, Quantity, Select } from "./SubComponents";
+import { useRef } from "react";
 function Details() {
 	const { user, cartItem, setCartItem, handleModals } = useGlobalContext();
+	const scrollRef = useRef();
 	const navigate = useNavigate();
 	const location = useLocation();
 	const id = location.pathname.split("/")[2];
@@ -54,8 +56,9 @@ function Details() {
 			}
 		}
 	};
+
 	return (
-		<>
+		<div className="product-details-page">
 			<Navbar />
 			{product ? (
 				<div className="product-details">
@@ -119,7 +122,7 @@ function Details() {
 				</div>
 			) : null}
 			<Footer />
-		</>
+		</div>
 	);
 }
 
