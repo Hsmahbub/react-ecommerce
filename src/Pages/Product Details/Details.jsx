@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState, } from "react";
+import { useLocation, useNavigate, } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useGlobalContext } from "../../context";
 import { AddToCartApi } from "../../Api Method/cart";
@@ -8,10 +9,8 @@ import { toastObj } from "../../utils/toastObj";
 import "./details.scss";
 import { Navbar, Footer, Loading } from "../../Components/index";
 import { ImgContainer, Quantity, Select } from "./SubComponents";
-import { useRef } from "react";
 function Details() {
-	const { user, cartItem, setCartItem, handleModals } = useGlobalContext();
-	const scrollRef = useRef();
+	const { user, cartData, setCartData, handleModals } = useGlobalContext();
 	const navigate = useNavigate();
 	const location = useLocation();
 	const id = location.pathname.split("/")[2];
@@ -19,42 +18,54 @@ function Details() {
 	const [color, setColor] = useState("");
 	const [size, setSize] = useState("");
 	const [quantity, setQuantity] = useState(1);
-	const isCartAdded = cartItem.findIndex((i) => i._id === id) > -1;
+	const [isCartAdded, setIsCartAdded] = useState(false);
+	const total_price = product.price * quantity;
 	const item = {
 		productId: id,
 		quantity,
 		color,
 		size,
+		total_price,
 	};
-	const total = product.price * quantity;
-	// destructured variable
+	// get the product details for db
 	useEffect(() => {
 		GetSingleProductApi(id, (res) => {
-			setProduct(res.data.success);
-			res.errorMsg && console.log(res.errorMsg, res.err);
-		});
-	}, [id]);
-	// funtion
-	const handleBuyOrCart = (item, isBuy) => {
-		!color && toast.warning("Please select a color", toastObj);
-		!size && toast.warning("Please select a size", toastObj);
-		if (color && size) {
-			if (!user) {
-				handleModals("login", true);
-			} else {
-				AddToCartApi(item, (res) => {
-					if (res.data.success) {
-						if (isBuy) {
-							localStorage.setItem("selectedItem", [id]);
-							navigate(`/checkout/`);
-						} else {
-							toast.success("Added", toastObj);
-						}
-						setCartItem(res.data.success.products);
-					}
-				});
+			if (res.status === 200) {
+				setProduct(res?.data);
+				setColor(res?.data?.color[0]);
+				setSize(res?.data?.size[0]);
 			}
+			for (const item of cartData || []) {
+				item?.productId?.includes(id) && setIsCartAdded(true);
+			}
+		});
+	}, [id, cartData]);
+	// funtion
+	// buy product
+	const handleBuyProduct = () => {
+			AddToCartApi(item, (res) => {
+				if (res.status === 201) {
+					navigate(`/checkout/${res?.data?._id}`);
+					window.location.reload()
+				} else {
+					console.log("something went wrong");
+				}
+			});
+	};
+
+	// add to cart
+	const handleAddCart = () => {
+		if (!user) {
+			handleModals("login", true);
+			return;
 		}
+		AddToCartApi(item, (res) => {
+			if (res.status === 201) {
+				toast.success("Added", toastObj);
+				setCartData((p) => [...p, res?.data]);
+				setIsCartAdded(true);
+			}
+		});
 	};
 
 	return (
@@ -94,7 +105,7 @@ function Details() {
 						<hr />
 						<p className="price">
 							<span>Price: ${product.price}</span>
-							<span>Total: ${total}</span>
+							<span>Total: ${total_price}</span>
 						</p>
 						<Quantity
 							quantity={quantity}
@@ -103,7 +114,7 @@ function Details() {
 						<div className="btn">
 							<button
 								className="buy-btn"
-								onClick={() => handleBuyOrCart(item, true)}
+								onClick={handleBuyProduct}
 							>
 								Buy Now
 							</button>
@@ -112,7 +123,7 @@ function Details() {
 								onClick={() => {
 									isCartAdded
 										? navigate("/carts")
-										: handleBuyOrCart(item, false);
+										: handleAddCart();
 								}}
 							>
 								{isCartAdded ? "Go to Cart" : "Add to Cart"}

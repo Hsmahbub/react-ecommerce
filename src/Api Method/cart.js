@@ -5,26 +5,25 @@ export const GetCartApi = async (cb) => {
 		const res = await userRequest.get(`/carts/`);
 		cb(res);
 	} catch (err) {
-		const error = { errorMsg: "Connection failed", err };
-		cb({ error });
+		cb(err?.response);
 	}
 };
 // create a cart
-export const AddToCartApi = async (
-	{ quantity, productId, color, size },
-	cb
-) => {
-	console.log(productId);
+export const AddToCartApi = async (data, cb) => {
 	try {
-		const res = await userRequest.post(`/carts/${productId}`, {
-			quantity,
-			color,
-			size,
-		});
+		const res = await userRequest.post(`/carts/${data._id}`, data);
 		cb(res);
 	} catch (err) {
-		const error = { errorMsg: "Connection failed", err };
-		console.log(error);
+		cb(err?.response);
+	}
+};
+export const RemoveFromCart = async (prodId, cb) => {
+	try {
+		const res = await userRequest.delete(`/carts/${prodId}`);
+		cb(res);
+	} catch (err) {
+		console.log(err)
+		cb(err?.response);
 	}
 };
 

@@ -1,11 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useEffect, useState } from "react";
 import { FaEnvelope, FaPhone } from "react-icons/fa";
 import { GrMapLocation } from "react-icons/gr";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
-import { GetCartApi } from "../../Api Method/cart";
 import { CreateOrderApi } from "../../Api Method/order";
+import { GetSingleProductApi } from "../../Api Method/product";
 import { Footer, Navbar, Topheader } from "../../Components/index";
 import { useGlobalContext } from "../../context";
 import bkash from "../../utils/bkash.jpg";
@@ -20,8 +21,8 @@ import {
 } from "./SubComponents";
 
 function Checkout() {
-	const { handleModals, user, currentBilling } = useGlobalContext();
-	const selectedItem = localStorage.getItem("selectedItem").split(",");
+	const { handleModals, user, cartData, currentBilling } = useGlobalContext();
+	const selectedItem = useLocation().pathname.split("/")[2].split("_");
 	const navigate = useNavigate();
 	const name = currentBilling.name ? currentBilling.name : user.name;
 	const email = currentBilling.email ? currentBilling.email : user.email;
@@ -29,25 +30,9 @@ function Checkout() {
 	const address = currentBilling.address ? currentBilling.address : "";
 	const cod =
 		"https://png.pngtree.com/png-clipart/20210530/original/pngtree-the-cash-on-delivery-circle-design-png-image_6357123.jpg";
-	const [productQuantity, setProductQuantity] = useState({
-		totalquantity: 0,
-		totalprice: 0,
-	});
+	const [totalPrice, setTotalPrice] = useState(0);
 	const [orderProduct, setOrderProduct] = useState([]);
-	// console.log(productQuantity.totalquantity);
-
 	// total item and total price
-	let totalprice = 0;
-	let totalquantity = 0;
-	for (let i = 0; i < orderProduct.length; i++) {
-		const element = orderProduct[i];
-		let price = element.price * element.quantity;
-		totalprice = price + totalprice;
-		totalquantity = totalquantity + element.quantity;
-	}
-	useEffect(() => {
-		setProductQuantity({ totalquantity, totalprice });
-	}, [totalprice, totalquantity]);
 
 	// payment mehtodh
 	const [paymentMethod, setPaymentMethod] = useState("");
@@ -71,7 +56,7 @@ function Checkout() {
 				handleModals("loading", true);
 				CreateOrderApi(
 					{
-						BillingId: currentBilling._id,
+						billingId: currentBilling._id,
 						cartId: selectedItem,
 					},
 					(res) => {
@@ -84,25 +69,37 @@ function Checkout() {
 			}
 		}
 	};
+
+	// get selected product
 	useEffect(() => {
-		GetCartApi((res) => {
-			let buyable = [];
-			selectedItem.forEach((i) => {
-				const r = res.data.success.products.filter(
-					(item) => item._id === i
-				)[0];
-				buyable.push(r);
+		let products = [];
+		let total_Price = 0;
+		cartData.forEach((i) => {
+			selectedItem.forEach((id, ind, arr) => {
+				if (i._id === id) {
+					total_Price += i?.total_price;
+					GetSingleProductApi(i?.productId, (res) => {
+						if (res?.status === 200) {
+							let product = res?.data;
+							product.total_price = i?.total_price;
+							product.color = i?.color;
+							product.size = i?.size;
+							product.quantity = i?.quantity;
+							products.push(product);
+						}
+					});
+				}
 			});
-			buyable
-				? setOrderProduct(buyable)
-				: setOrderProduct(res.data.success.products);
 		});
-	}, []);
+		setOrderProduct(products);
+		setTotalPrice(total_Price);
+	}, [cartData]);
 
 	// set current billing on localStorage
 	useEffect(() => {
 		localStorage.setItem("currentBillingId", currentBilling._id);
 	}, [currentBilling]);
+
 	return (
 		<div>
 			<Topheader />
@@ -147,8 +144,8 @@ function Checkout() {
 							<div className="subtotal">
 								<h2>Order Summary</h2>
 								<SingleItem
-									first={`items Total (${productQuantity.totalquantity})`}
-									second={`$${productQuantity.totalprice}`}
+									first={`items Total (${orderProduct?.length})`}
+									second={`$${totalPrice}`}
 								/>
 								<SingleItem
 									first="Shipping Free"
@@ -165,17 +162,19 @@ function Checkout() {
 							/>
 							<div className="total">
 								<p>Total</p>
-								<p>{`$${productQuantity.totalprice}`}</p>
+								<p>{`$${totalPrice}`}</p>
 							</div>
 						</div>
 						<div className="order-btn ">
-					<button className="place-order" onClick={handlePlaceOrder}>
-						PLACE ORDER
-					</button>
-				</div>
+							<button
+								className="place-order"
+								onClick={handlePlaceOrder}
+							>
+								PLACE ORDER
+							</button>
+						</div>
 					</div>
 				</div>
-
 			</div>
 			<Footer />
 		</div>

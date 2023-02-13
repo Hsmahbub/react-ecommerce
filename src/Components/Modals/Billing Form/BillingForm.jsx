@@ -4,12 +4,12 @@ import { RiDeleteBack2Fill } from "react-icons/ri";
 import { toast } from "react-toastify";
 import {
 	CreateBillingApi,
-	UpdateBillingApi
+	UpdateBillingApi,
 } from "../../../Api Method/billing";
 import { useGlobalContext } from "../../../context";
 import {
 	billingFormValidator,
-	buttonValidator
+	buttonValidator,
 } from "../../../utils/formValidation";
 import { toastObj } from "../../../utils/toastObj";
 import "./form.scss";
@@ -49,34 +49,30 @@ function BillingForm() {
 		handleModals("loading", true);
 		if (BillingEdit.isEdit) {
 			UpdateBillingApi(inputData, BillingEdit.id, (res) => {
-				if (res.data) {
-					if (res.data.success) {
-						setBillings(res.data.success.address);
-						setInputData(intialInput);
-						handleModals("edit-form", false);
-						toast.success("Billing Updated", toastObj);
-					} else {
-						res.data.error &&
-							toast.error(res.data.error.server, toastObj);
-					}
+				if (res.status === 200) {
+					setBillings((p) => [
+						...p
+							.filter((i) => i._id !== BillingEdit.id)
+							.sort((a, b) => b.createdAt - a.createdAt),
+						res.data,
+					]);
+					setInputData(intialInput);
+					handleModals("edit-form", false);
+					toast.success("Billing Updated", toastObj);
 				} else {
-					toast.error(res.error.errorMsg, toastObj);
+					toast.error(res.data.message, toastObj);
 				}
 				handleModals("loading", false);
 			});
 		} else {
 			CreateBillingApi(inputData, (res) => {
-				if (res.data) {
-					if (res.data.error) {
-						toast.warning(res.data.error.msg, toastObj);
-					} else {
-						toast.success("Billing Added", toastObj);
-						setBillings(res.data.success.address);
-						handleModals("edit-form", false);
-						setInputData(intialInput);
-					}
+				if (res.status === 201) {
+					toast.success("Billing Added", toastObj);
+					setBillings((p) => [...p, res.data]);
+					handleModals("edit-form", false);
+					setInputData(intialInput);
 				} else {
-					toast.error(res.error.errorMsg, toastObj);
+					toast.error(res.data.message, toastObj);
 				}
 				handleModals("loading", false);
 			});

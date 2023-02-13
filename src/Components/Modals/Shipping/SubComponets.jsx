@@ -3,19 +3,15 @@ import { DeleteBillingApi } from "../../../Api Method/billing";
 import { useGlobalContext } from "../../../context";
 import { toastObj } from "../../../utils/toastObj";
 export const Address = ({ item, handleModals }) => {
-	const {
-		billings,
-		setBillings,
-		setBillingEdit,
-		setCurrentBilling,
-	} = useGlobalContext();
+	const { billings, setBillings, setBillingEdit, setCurrentBilling } =
+		useGlobalContext();
 
 	// handle billing delete
 	const BillingHandler = () => {
 		handleModals("loading", true);
 		DeleteBillingApi(item._id, (res) => {
-			if (res.data) {
-				setBillings(billings.filter((i) => i._id !== item._id));
+			if (res.status === 204) {
+				setBillings((p) => p.filter((i) => i._id !== item._id));
 				res.data.success && toast.success(`Billing Deleted`, toastObj);
 				res.data.error && toast.error("Deleting failed");
 			} else {

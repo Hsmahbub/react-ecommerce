@@ -14,8 +14,8 @@ import {
 
 function Home() {
 	const { products } = useGlobalContext();
-	const topProduct = products.slice(1, 16);
-	const featureProduct = products.slice(20, 50);
+	const topProduct = products?.slice(1, 16);
+	const featureProduct = products?.slice(20, 50);
 	return (
 		<div className="home">
 			<Topheader />

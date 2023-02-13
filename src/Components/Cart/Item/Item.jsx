@@ -38,7 +38,7 @@ const Items = ({ item }) => {
 
 	useEffect(() => {
 		setTotalPrice(price * quantity);
-		AddToCartApi({ productId, quantity, color, size }, (res) => {});
+		// AddToCartApi({ productId, quantity, color, size }, (res) => {});
 	}, [quantity, productId, price, size, color]);
 	return (
 		<div className="items">

@@ -21,13 +21,15 @@ function Shipping() {
 				</div>
 				<div className="shipping-data">
 					{billings.length > 0 &&
-						billings.map((item) => (
-							<Address
-								key={item._id}
-								handleModals={handleModals}
-								item={item}
-							/>
-						))}
+						billings
+							.sort((a, b) => a.createdAt - b.createdAt)
+							.map((item) => (
+								<Address
+									key={item._id}
+									handleModals={handleModals}
+									item={item}
+								/>
+							))}
 				</div>
 			</div>
 		</div>

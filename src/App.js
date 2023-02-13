@@ -6,15 +6,23 @@ import { AdminLogin, AdminSignup } from "./Admin/Components/index.js";
 import "./App.css";
 import {
 	BillingForm,
-	Loading, Login, Shipping, Signup
+	Loading,
+	Login,
+	Shipping,
+	Signup,
 } from "./Components/Modals/index.js";
 import {
-	Carts, Checkout,
-	Details, Home, OrederPage, SearchPage, UserDetails
+	Carts,
+	Checkout,
+	Details,
+	Home,
+	OrederPage,
+	SearchPage,
+	UserDetails,
 } from "./Pages/index";
 function App() {
 	return (
-		<div className="App" >
+		<div className="App">
 			<ToastContainer
 				position="top-right"
 				autoClose={5000}
@@ -37,7 +45,10 @@ function App() {
 					<Route path="/product/:id" element={<Details />} />
 					<Route path="/carts" element={<Carts />} />
 					<Route path="/search" element={<SearchPage />} />
-					<Route path="/checkout/" element={<Checkout />} />
+					<Route
+						path="/checkout/:productIds"
+						element={<Checkout />}
+					/>
 					<Route path="/order" element={<OrederPage />} />
 					<Route path="/user" element={<UserDetails />} />
 					<Route path="/admin" element={<Admin />} />

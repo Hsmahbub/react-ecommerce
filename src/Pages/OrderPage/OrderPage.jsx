@@ -2,17 +2,52 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { GetOrderApi } from "../../Api Method/order";
 import { Footer, Navbar } from "../../Components/index";
+import { useGlobalContext } from "../../context";
 import "./orderpage.scss";
 
 function OrderPage() {
 	const [orderdProduct, setOrderdProduct] = useState([]);
+	const { billings, products } = useGlobalContext();
 	useEffect(() => {
 		GetOrderApi((res) => {
-			if (res.data) {
-				res.data.success && setOrderdProduct(res.data.success.orders);
+			console.log(res.data);
+			if (res.status === 200) {
+				// main response mapping
+				const orderData = [];
+				res?.data?.forEach((r) => {
+					// billing mapping
+					let billing = {};
+					let product = {};
+					billings?.forEach((b) => {
+						if (b._id === r.billingId) {
+							billing = b;
+						}
+					});
+					// product mapping
+					products.forEach((p) => {
+						if (p._id === r.productId) {
+							product = p;
+						}
+					});
+					// process order data
+					const createTime = new Date(r.createdAt);
+					const localFormat = createTime.toLocaleString();
+					delete r.createdAt;
+					const { _id, createdAt, updatedAt, ...rest } = billing;
+					const { title, img, desc } = product;
+					orderData.push({
+						...r,
+						...rest,
+						createdAt:localFormat,
+						title,
+						img,
+						desc,
+					});
+				});
+				setOrderdProduct(orderData);
 			}
 		});
-	}, []);
+	}, [billings, products]);
 	return (
 		<div className="orderPage">
 			<Navbar />
@@ -55,8 +90,8 @@ function OrderPage() {
 							<div className="status">
 								<p>status: {item.status}</p>
 								<p>
-									shipping:{item.address.address},
-									{item.address.postcode}
+									{/* shipping:{item.address.},
+									{item.address.postcode} */}
 								</p>
 								<p>placed on : {item.createdAt}</p>
 							</div>
@@ -65,8 +100,7 @@ function OrderPage() {
 				</div>
 			</div>
 			<div className="foo">
-
-			<Footer />
+				<Footer />
 			</div>
 		</div>
 	);

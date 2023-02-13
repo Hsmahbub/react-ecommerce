@@ -16,41 +16,31 @@ const AppProvider = ({ children }) => {
 	const [user, setUser] = useState("");
 	useEffect(() => {
 		LoggedInUserApi((res) => {
-			if (res.data) {
-				res.data.success && setUser(res.data.success);
-			} else {
-				console.log(res.error.errorMsg);
+			if (res?.status === 200) {
+				res.data && setUser(res.data);
 			}
 		});
-	}, [setUser]);
+	}, []);
 
 	// product database method
 	const [products, setProducts] = useState([]);
 	useEffect(() => {
 		GetProductApi((res) => {
-			if (res.data) {
-				res.data.success && setProducts(res.data.success);
-				res.data.error && console.log(res.data.error);
-			} else {
-				console.log(res.error.errorMsg);
+			if (res?.status === 200) {
+				setProducts(res.data);
 			}
 		});
 	}, []);
 
 	// cart Data
-	const [cartData, setCartData] = useState({});
-	const [cartItem, setCartItem] = useState([]);
+	const [cartData, setCartData] = useState([]);
+
 	useEffect(() => {
 		GetCartApi((res) => {
-			if (res.data) {
-				if (res.data.success) {
-					setCartData(res.data.success);
-					setCartItem(res.data.success.products);
-				} else {
-					res.data.error && console.log(res.data.error);
-				}
+			if (res.status === 200) {
+				setCartData(res.data);
 			} else {
-				console.log(res.error.errorMsg);
+				console.log(res.data);
 			}
 		});
 	}, [id, token]);
@@ -89,11 +79,10 @@ const AppProvider = ({ children }) => {
 	});
 	useEffect(() => {
 		GetBillingApi((res) => {
-			if (res.data) {
-				res.data.success && setBillings(res.data.success.address);
-				res.data.error && console.log(res.data.error);
+			if (res?.status === 200) {
+				setBillings(res.data);
 			} else {
-				console.log(res.error.errorMsg);
+				console.log(res?.data.message);
 			}
 		});
 	}, [setBillings]);
@@ -110,7 +99,7 @@ const AppProvider = ({ children }) => {
 					setAdmin(res.data.success);
 				}
 			} else {
-				console.log(res);
+				// console.log(res);
 			}
 		});
 	}, []);
@@ -128,8 +117,6 @@ const AppProvider = ({ children }) => {
 				products,
 
 				// cart
-				cartItem,
-				setCartItem,
 				cartData,
 				setCartData,
 

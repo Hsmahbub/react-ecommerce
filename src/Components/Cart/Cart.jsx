@@ -3,7 +3,7 @@ import { useGlobalContext } from "../../context";
 import Items from "./Item/Item";
 import "./cart.scss";
 import { DeleteCartItemApi } from "../../Api Method/cart";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { toastObj } from "../../utils/toastObj";
@@ -11,13 +11,13 @@ import { toastObj } from "../../utils/toastObj";
 function Carts() {
 	const [selectedItem, setSelectedItem] = useState([]);
 	const navigate = useNavigate();
-	const { cartItem, setCartItem } = useGlobalContext();
-	const isCart = cartItem.length > 0;
+	const { cartData,products, setCartData } = useGlobalContext();
+	const isCart = cartData.length > 0;
 	const isSelected = selectedItem.length > 0;
 	// delete handle
 	const handleDelete = () => {
-		DeleteCartItemApi("0");
-		setCartItem([]);
+		// DeleteCartItemApi("0");
+		setCartData([]);
 	};
 	const handleSelect = (e) => {
 		if (selectedItem.findIndex((i) => i === e.target.value) > -1) {
@@ -33,13 +33,26 @@ function Carts() {
 		localStorage.setItem("selectedItem", selectedItem);
 		isSelected && navigate("/checkout/");
 	};
+
+	useEffect(()=>{
+
+		cartData.forEach(c=>{
+        let product = {}
+		products.forEach(p=>{
+			if(c.productId === p._id){
+				product = p
+			}
+		})
+		})
+
+	},[cartData,products])
 	return (
 		<div className="cart-item">
 			<div className="wrapper">
-				{cartItem.length === 0 ? (
+				{cartData.length === 0 ? (
 					<h3>You have no cart</h3>
 				) : (
-					cartItem.map((item) => (
+					cartData.map((item) => (
 						<div key={item._id}>
 							<input
 								type="checkbox"
@@ -63,8 +76,8 @@ function Carts() {
 					Clear
 				</button>
 				<button
-					disabled={cartItem.length === 0}
-					style={{ cursor: cartItem.length === 0 && "not-allowed" }}
+					disabled={cartData.length === 0}
+					style={{ cursor: cartData.length === 0 && "not-allowed" }}
 					onClick={handleCheckout}
 				>
 					Checkout

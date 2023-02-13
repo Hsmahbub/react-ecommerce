@@ -4,11 +4,7 @@ export const CreateBillingApi = async (billing, cb) => {
 		const res = await userRequest.post(`/billings/`, { billing });
 		cb(res);
 	} catch (err) {
-		const error = {
-			errorMsg: "Connection failed",
-			err,
-		};
-		cb({ error });
+		cb(err?.response);
 	}
 };
 
@@ -17,11 +13,7 @@ export const GetBillingApi = async (cb) => {
 		const res = await userRequest.get(`/billings/`);
 		cb(res);
 	} catch (err) {
-		const error = {
-			errorMsg: "Connection failed",
-			err,
-		};
-		cb({ error });
+		cb(err?.response);
 	}
 };
 
@@ -32,12 +24,7 @@ export const UpdateBillingApi = async (billing, id, cb) => {
 		});
 		cb(res);
 	} catch (err) {
-		console.log(err)
-		let error = {
-			errorMsg: "Connection failed",
-			err,
-		};
-		cb({ error });
+		cb(err?.response);
 	}
 };
 
@@ -46,10 +33,6 @@ export const DeleteBillingApi = async (id, cb) => {
 		const res = await userRequest.delete(`/billings/${id}`);
 		cb(res);
 	} catch (err) {
-		const error = {
-			errorMsg: "Connection failed",
-			err,
-		};
-		cb({ error });
+		cb(err?.response);
 	}
 };

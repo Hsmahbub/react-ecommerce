@@ -1,12 +1,16 @@
 import { userRequest } from "../utils/requestMethod";
 
 // create order api
-export const CreateOrderApi = async ({ BillingId, cartId }, cb) => {
+export const CreateOrderApi = async ({ billingId, cartId }, cb) => {
 	try {
-		const res = await userRequest.post(`/orders/${cartId}`, { BillingId });
+		const orderCartItemsId = cartId;
+		const res = await userRequest.post(`/orders/`, {
+			billingId,
+			orderCartItemsId,
+		});
 		cb(res);
 	} catch (err) {
-		cb(err);
+		cb(err?.response);
 	}
 };
 
@@ -16,6 +20,6 @@ export const GetOrderApi = async (cb) => {
 		const res = await userRequest.get("/orders");
 		cb(res);
 	} catch (err) {
-		cb(err);
+		cb(err?.response);
 	}
 };

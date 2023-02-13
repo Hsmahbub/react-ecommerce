@@ -8,7 +8,7 @@ import { HiShoppingCart } from "react-icons/hi";
 import { useGlobalContext } from "../../context";
 
 function Navbar() {
-	const { user, cartItem,} = useGlobalContext();
+	const { user, cartData } = useGlobalContext();
 	return (
 		<>
 			<Navtop />
@@ -34,7 +34,7 @@ function Navbar() {
 							<div className="carts">
 								<HiShoppingCart />
 								<div className="cart-quantity">
-									{cartItem.length}
+									{cartData?.length}
 								</div>
 							</div>
 						</Link>

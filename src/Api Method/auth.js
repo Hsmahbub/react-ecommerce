@@ -7,6 +7,7 @@ export const SignupApi = async (user, cb) => {
 		});
 		cb(res);
 	} catch (e) {
+		console.log(e);
 		let error = {
 			errorMsg: "Please check your internet connection",
 			error: e,
@@ -19,17 +20,11 @@ export const LoginApi = async (user, cb) => {
 		const res = await publicRequest.post("/auth/login", {
 			user: user,
 		});
-		if (res.data.success) {
-			localStorage.setItem("userToken", res.data.success.token);
-			localStorage.setItem("userId", res.data.success.user._id);
-		}
+		localStorage.setItem("userToken", res?.data?.token);
+		localStorage.setItem("userId", res.data?._id);
 		cb(res);
 	} catch (err) {
-		const error = {
-			errorMsg: "Please check your internet connection",
-			err,
-		};
-		cb({ error });
+		cb(err?.response);
 	}
 };
 
@@ -40,6 +35,7 @@ export const AdminSignupApi = async (user, cb) => {
 		});
 		cb(res);
 	} catch (e) {
+		console.log(e);
 		let error = {
 			errorMsg: "Please check your internet connection",
 			error: e,

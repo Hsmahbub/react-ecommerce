@@ -4,7 +4,8 @@ import { toast } from "react-toastify";
 import { LoginApi } from "../../../Api Method/auth";
 import { useGlobalContext } from "../../../context";
 import {
-	buttonValidator, loginFormValidator
+	buttonValidator,
+	loginFormValidator,
 } from "../../../utils/formValidation";
 import { toastObj } from "../../../utils/toastObj";
 import InputField from "../../Form/InputField";
@@ -32,16 +33,13 @@ function Login() {
 		e.preventDefault();
 		handleModals("loading", true);
 		LoginApi(inputData, (res) => {
-			if (res.data) {
-				console.log(res)
-				if (res.data.error) {
-					setError(res.data.error);
-				} else {
-					handleModals("login", false);
-					window.location.reload();
-				}
+			console.log(res.status);
+			if (res?.status === 200) {
+				handleModals("login", false);
+				console.log(res);
+				window.location.reload();
 			} else {
-				toast.error(res.error.errorMsg, toastObj);
+				toast.error(res.data.message, toastObj);
 			}
 			handleModals("loading", false);
 		});
@@ -49,7 +47,6 @@ function Login() {
 	useEffect(() => {
 		setError({});
 	}, []);
-	useEffect(() => {}, [setInputData]);
 	return (
 		<div id="login">
 			<div className="wrapper">

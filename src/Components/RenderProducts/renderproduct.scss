@@ -1,7 +1,6 @@
 @import "../../utils/responsive-breakpoint.scss";
 @import "../../utils/mixin.scss";
 .feature-product {
-	max-width: 1240px;
 	margin: auto;
 	width: 100%;
 	@include small-down {

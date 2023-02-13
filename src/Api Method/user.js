@@ -28,7 +28,6 @@ export const LoggedInUserApi = async (cb) => {
 		const res = await userRequest.get(`/users`);
 		cb(res);
 	} catch (err) {
-		const error = { errorMsg: "Connection failed", err };
-		cb({ error });
+		cb(err?.response);
 	}
 };
