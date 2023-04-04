@@ -1,61 +1,51 @@
-import { useEffect, useState } from "react";
-import {
-	RiDeleteBin2Fill
-} from "react-icons/ri";
 import { Link } from "react-router-dom";
-import {
-	AddToCartApi,
-	DeleteCartItemApi
-} from "../../../Api Method/cart";
+import { DeleteCartItemApi } from "../../../Api Method/cart";
 import { useGlobalContext } from "../../../context";
 import "./item.scss";
-const Items = ({ item }) => {
-	const { cartItem, setCartItem } = useGlobalContext();
-	const { img, color, title, price, total_price, size } = item;
-	const productId = item._id;
-	const [totalPrice, setTotalPrice] = useState(total_price);
-	const [quantity, setQuantity] = useState(item.quantity);
-	const handleQuantity = (direction) => {
-		if (quantity > 0) {
-			if (direction === "up") {
-				setQuantity((p) => p + 1);
-			}
-			// direction === "up" && setPrice(quantity * price);
-			if (quantity >= 2)
-				if (direction === "down") {
-					setQuantity((p) => p - 1);
-				}
-			// direction === "down" && setPrice(quantity * price);
-		}
-	};
-
+const Items = ({ item, handleSelect }) => {
+	const { cartData, setCartData } = useGlobalContext();
 	// delete handle
-	const handleDelete = () => {
-		DeleteCartItemApi(productId);
-		const filterItem = cartItem.filter((i) => i._id !== productId);
-		setCartItem(filterItem);
+	const handleDelete = (e) => {
+		// e.target.parentNode.parentNode.style.display = "none";
+		DeleteCartItemApi(item._id, (res) => {
+			if (res.status === 204) {
+				console.log("helll");
+				const filterItem = cartData.filter((i) => i._id !== item._id);
+				setCartData(filterItem);
+			}
+		});
 	};
-
-	useEffect(() => {
-		setTotalPrice(price * quantity);
-		// AddToCartApi({ productId, quantity, color, size }, (res) => {});
-	}, [quantity, productId, price, size, color]);
 	return (
-		<div className="items">
-			<p>
-				<Link to={`/product/${item._id}`}>
-					<img src={img} alt="img" width={"50px"} />
+		<ul className="items" id={item._id}>
+			<label htmlFor={item._id} style={{ minWidth: "60px" }}>
+				<li>
+					<input
+						type="checkbox"
+						onChange={handleSelect}
+						id={item._id}
+						value={item._id}
+					/>
+				</li>
+			</label>
+			<li>
+				<Link to={`/product/${item.productId}`}>
+					<img src={item.img} alt="img" width={"120px"} />
 				</Link>
-			</p>
-			<p>
-				<Link to={`/product/${item._id}`}>{title}</Link>
-			</p>
-			<p className="quantity">
-				{`${quantity}x`}
-			</p>
-			<p>${totalPrice}</p>
-			<RiDeleteBin2Fill onClick={handleDelete} className="btn" />
-		</div>
+			</li>
+			<li>
+				<p>{item?.title}</p>
+				<div style={{ color: "#8B7579" }}>
+					<span>price:${item.total_price}</span>
+					<span>quantity:{item.quantity}</span>
+					<br />
+					<span>size:{item.size}</span>
+					<span>color:{item.color}</span>
+				</div>
+				<button className="btn-delete-cart" onClick={handleDelete}>
+					delete
+				</button>
+			</li>
+		</ul>
 	);
 };
 export default Items;

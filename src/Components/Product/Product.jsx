@@ -1,49 +1,55 @@
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import { AddToCartApi, RemoveFromCart } from "../../Api Method/cart";
+import { AddToCartApi, DeleteCartItemApi } from "../../Api Method/cart";
 import "./product.scss";
 import { useGlobalContext } from "../../context";
 import { useEffect, useState } from "react";
 function Product({ item }) {
 	const { setCartData, cartData } = useGlobalContext();
 	const navigate = useNavigate();
-	const [cartIcon, setCartIcon] = useState(
-		"https://cdn-icons-png.flaticon.com/512/8564/8564086.png"
-	);
+	const deleteCartIcon =
+		"https://cdn-icons-png.flaticon.com/512/3756/3756946.png";
+	const addCartIcon =
+		"https://cdn-icons-png.flaticon.com/512/8564/8564086.png";
+	const [cartIcon, setCartIcon] = useState(addCartIcon);
 	const { title, img, price, color, size, _id } = item;
 	const productDetailsHandler = (event) => {
 		if (event.nativeEvent.target.parentNode.className === "cart-icon") {
-			const data = {
-				productId: _id,
-				color: color[0],
-				size: size[0],
-				quantity: 1,
-				total_price: price,
-			};
-			cartIcon.endsWith("86.png")
-				? AddToCartApi(data, (res) => {
-						if (res.status === 201) {
-							setCartData((p) => [...p, res?.data]);
-							setCartIcon(
-								"https://cdn-icons-png.flaticon.com/512/3756/3756946.png"
-							);
-						}
-				  })
-				: RemoveFromCart(item._id, (res) => {
-						if (res?.status === 201) {
-							setCartIcon(
-								"https://cdn-icons-png.flaticon.com/512/8564/8564086.png"
-							);
-							setCartData((p) =>
-								p.filter((i) => i.productId !== item._id)
-							);
-						}
-				  });
+			AddOrDeleteCart();
 		} else {
 			navigate(`/product/${item._id}`);
 			window.scrollTo(0, 0);
 		}
 	};
+
+	// cart delete or add function
+	const AddOrDeleteCart = () => {
+		const data = {
+			productId: _id,
+			color: color[0],
+			size: size[0],
+			quantity: 1,
+			total_price: price,
+		};
+		if (cartIcon.endsWith("86.png")) {
+			AddToCartApi(data, (res) => {
+				if (res.status === 201) {
+					setCartData((p) => [...p, res?.data]);
+					setCartIcon(deleteCartIcon);
+				}
+			});
+		} else {
+			DeleteCartItemApi(item._id, (res) => {
+				if (res?.status === 204) {
+					setCartIcon(addCartIcon);
+					setCartData((p) =>
+						p.filter((i) => i.productId !== item._id)
+					);
+				}
+			});
+		}
+	};
+
 	useEffect(() => {
 		for (const cart of cartData || []) {
 			cart?.productId?.includes(item._id) &&
@@ -51,7 +57,7 @@ function Product({ item }) {
 					"https://cdn-icons-png.flaticon.com/512/3756/3756946.png"
 				);
 		}
-	}, [cartData]);
+	}, [cartData, item._id]);
 	return (
 		<div className="product-box" onClick={productDetailsHandler}>
 			{item.img ? (

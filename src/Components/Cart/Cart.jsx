@@ -1,4 +1,3 @@
-
 import { useGlobalContext } from "../../context";
 import Items from "./Item/Item";
 import "./cart.scss";
@@ -7,17 +6,22 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { toastObj } from "../../utils/toastObj";
+import { customIterator } from "../../utils/functions";
 
 function Carts() {
 	const [selectedItem, setSelectedItem] = useState([]);
 	const navigate = useNavigate();
-	const { cartData,products, setCartData } = useGlobalContext();
+	const { cartData, products, setCartData } = useGlobalContext();
+	const [cartItems, setCartItems] = useState([]);
 	const isCart = cartData.length > 0;
 	const isSelected = selectedItem.length > 0;
 	// delete handle
 	const handleDelete = () => {
-		// DeleteCartItemApi("0");
-		setCartData([]);
+		DeleteCartItemApi("all", (res) => {
+			if (res.status === 204) {
+				setCartData([]);
+			}
+		});
 	};
 	const handleSelect = (e) => {
 		if (selectedItem.findIndex((i) => i === e.target.value) > -1) {
@@ -27,42 +31,42 @@ function Carts() {
 			setSelectedItem((p) => [...p, e.target.value]);
 		}
 	};
-
 	const handleCheckout = () => {
 		!isSelected && toast.warning("Please select an item", toastObj);
-		localStorage.setItem("selectedItem", selectedItem);
-		isSelected && navigate("/checkout/");
+		isSelected &&
+			navigate(
+				`/checkout/${selectedItem.toString().replace(/,/gi, "_")}`
+			);
+		window.scrollTo(0, 0);
 	};
-
-	useEffect(()=>{
-
-		cartData.forEach(c=>{
-        let product = {}
-		products.forEach(p=>{
-			if(c.productId === p._id){
-				product = p
-			}
-		})
-		})
-
-	},[cartData,products])
+	// data processing
+	useEffect(() => {
+		const data = [];
+		cartData.forEach((c) => {
+			let product = customIterator(products, c.productId);
+			products.forEach((p) => {
+				if (c.productId === p._id) {
+					product = p;
+				}
+			});
+			const { createdAt, updatedAt, _id, ...rest } = product;
+			data.push({
+				...rest,
+				...c,
+			});
+		});
+		setCartItems(data);
+	}, [cartData, products]);
+	
 	return (
 		<div className="cart-item">
 			<div className="wrapper">
-				{cartData.length === 0 ? (
+				{cartItems.length === 0 ? (
 					<h3>You have no cart</h3>
 				) : (
-					cartData.map((item) => (
+					cartItems.map((item) => (
 						<div key={item._id}>
-							<input
-								type="checkbox"
-								id={item._id}
-								value={item._id}
-								onChange={handleSelect}
-							/>
-							<label htmlFor={item._id}>
-								<Items item={item} />
-							</label>
+							<Items item={item} handleSelect={handleSelect} />
 						</div>
 					))
 				)}

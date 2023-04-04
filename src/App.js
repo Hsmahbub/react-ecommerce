@@ -1,8 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Admin from "./Admin/Admin";
-import { AdminLogin, AdminSignup } from "./Admin/Components/index.js";
 import "./App.css";
 import {
 	BillingForm,
@@ -51,9 +49,6 @@ function App() {
 					/>
 					<Route path="/order" element={<OrederPage />} />
 					<Route path="/user" element={<UserDetails />} />
-					<Route path="/admin" element={<Admin />} />
-					<Route path="/admin/login" element={<AdminLogin />} />
-					<Route path="/admin/signup" element={<AdminSignup />} />
 				</Routes>
 			</BrowserRouter>
 		</div>

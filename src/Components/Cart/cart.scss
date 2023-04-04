@@ -1,7 +1,6 @@
 @import "../../utils/responsive-breakpoint.scss";
 @import "../../utils/mixin.scss";
 .cart-item {
-	
 	.wrapper {
 		border: 1px solid black;
 		h3 {
@@ -11,13 +10,14 @@
 		}
 	}
 	.update-and-clear {
+		margin-top: 1rem;
 		display: flex;
-		align-items: flex-end;
-		justify-content: flex-end;
 		button {
-			background: rgba(54, 228, 175, 0.178);
+			font-size: 18px;
+			color: red;
 			padding: 0.5rem 1rem;
-			border: 1px solid;
+			border: none;
+			background-color: yellowgreen;
 			margin-left: 0.5rem;
 			cursor: pointer;
 		}

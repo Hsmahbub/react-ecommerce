@@ -17,22 +17,13 @@ export const AddToCartApi = async (data, cb) => {
 		cb(err?.response);
 	}
 };
-export const RemoveFromCart = async (prodId, cb) => {
-	try {
-		const res = await userRequest.delete(`/carts/${prodId}`);
-		cb(res);
-	} catch (err) {
-		console.log(err)
-		cb(err?.response);
-	}
-};
 
-export const DeleteCartItemApi = async (productId) => {
+
+export const DeleteCartItemApi = async (productId, cb) => {
 	try {
 		const res = await userRequest.delete(`/carts/${productId}`);
-		console.log(res);
+		cb(res);
 	} catch (err) {
-		const error = { errorMsg: "Connection failed", err };
-		console.log(error);
+		cb(err?.response);
 	}
 };

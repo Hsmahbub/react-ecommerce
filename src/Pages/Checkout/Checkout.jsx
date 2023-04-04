@@ -10,6 +10,7 @@ import { GetSingleProductApi } from "../../Api Method/product";
 import { Footer, Navbar, Topheader } from "../../Components/index";
 import { useGlobalContext } from "../../context";
 import bkash from "../../utils/bkash.jpg";
+import { customIterator } from "../../utils/functions";
 import nagad from "../../utils/nagod.jpg";
 import { toastObj } from "../../utils/toastObj";
 import "./checkout.scss";
@@ -21,7 +22,8 @@ import {
 } from "./SubComponents";
 
 function Checkout() {
-	const { handleModals, user, cartData, currentBilling } = useGlobalContext();
+	const { handleModals, user, products, cartData, currentBilling } =
+		useGlobalContext();
 	const selectedItem = useLocation().pathname.split("/")[2].split("_");
 	const navigate = useNavigate();
 	const name = currentBilling.name ? currentBilling.name : user.name;
@@ -72,28 +74,21 @@ function Checkout() {
 
 	// get selected product
 	useEffect(() => {
-		let products = [];
-		let total_Price = 0;
-		cartData.forEach((i) => {
-			selectedItem.forEach((id, ind, arr) => {
-				if (i._id === id) {
-					total_Price += i?.total_price;
-					GetSingleProductApi(i?.productId, (res) => {
-						if (res?.status === 200) {
-							let product = res?.data;
-							product.total_price = i?.total_price;
-							product.color = i?.color;
-							product.size = i?.size;
-							product.quantity = i?.quantity;
-							products.push(product);
-						}
-					});
-				}
+		let data = [];
+		let total_price = 0;
+		selectedItem.forEach((id) => {
+			let carts = customIterator(cartData,id)
+			let product = customIterator(products,carts?.productId)
+			total_price += carts.total_price;
+			const { createdAt, updateAt, _id, ...rest } = product;
+			data.push({
+				...carts,
+				...rest,
 			});
 		});
-		setOrderProduct(products);
-		setTotalPrice(total_Price);
-	}, [cartData]);
+		setOrderProduct(data);
+		setTotalPrice(total_price);
+	}, [cartData, products]);
 
 	// set current billing on localStorage
 	useEffect(() => {
@@ -113,8 +108,8 @@ function Checkout() {
 					{/* billing product details  */}
 					<div className="bill-product-details">
 						{orderProduct &&
-							orderProduct.map((item) => (
-								<ProuductItem product={item} key={item._id} />
+							orderProduct.map((item,ind) => (
+								<ProuductItem product={item} key={ind} />
 							))}
 					</div>
 					<div className="billing-details">

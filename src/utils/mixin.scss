@@ -88,43 +88,43 @@
 	.items {
 		width: 100%;
 		border-bottom: 1px solid rgb(231, 188, 188);
-		display: flex;
+		display: grid;
+		list-style: none;
+		grid-template-columns: repeat(3, 1fr);
+		@include small-down {
+			grid-template-columns: repeat(3, 1fr);
+		}
 		background-color: white;
 		align-items: center;
-		margin-bottom: 1rem;
-
-		justify-content: space-around;
-		p {
-			max-width: 100px;
+		justify-content: center;
+		li {
 			margin: 1rem;
 			@include small-down {
 				margin: 0.2rem;
 				font-size: 12px;
 			}
+			div > span {
+				margin-right: 10px;
+				font-weight: 500;
+			}
+		}
+		label {
+			height: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
 		}
 		.btn {
 			cursor: pointer;
 		}
-		.quantity {
-			position: relative;
-			.up {
-				display: none;
-				position: absolute;
-				top: -15px;
-				cursor: pointer;
-			}
-			.down {
-				display: none;
-				bottom: -15px;
-				position: absolute;
-				cursor: pointer;
-			}
-			&:hover .up {
-				display: block;
-			}
-			&:hover .down {
-				display: block;
-			}
+		.btn-delete-cart {
+			background-color: yellowgreen;
+			border: none;
+			outline: none;
+			padding: 0.5rem 1rem;
+			font-size: 18px;
+			cursor: pointer;
+			color: red;
 		}
 	}
 }

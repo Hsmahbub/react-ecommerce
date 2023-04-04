@@ -40,7 +40,6 @@ function Details() {
 			}
 		});
 	}, [id, cartData]);
-	// funtion
 	// buy product
 	const handleBuyProduct = () => {
 			AddToCartApi(item, (res) => {
