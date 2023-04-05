@@ -43,7 +43,7 @@ function Product({ item }) {
 				if (res?.status === 204) {
 					setCartIcon(addCartIcon);
 					setCartData((p) =>
-						p.filter((i) => i.productId !== item._id)
+						p.filter((i) => i.productId._id !== item._id)
 					);
 				}
 			});
@@ -52,7 +52,7 @@ function Product({ item }) {
 
 	useEffect(() => {
 		for (const cart of cartData || []) {
-			cart?.productId?.includes(item._id) &&
+			cart?.productId?._id === (item._id) &&
 				setCartIcon(
 					"https://cdn-icons-png.flaticon.com/512/3756/3756946.png"
 				);

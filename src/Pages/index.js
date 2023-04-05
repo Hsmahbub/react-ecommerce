@@ -6,3 +6,5 @@ export { default as Details } from "./Product Details/Details";
 export { default as OrederPage } from "./OrderPage/OrderPage";
 export { default as SearchPage } from "./SearchPage/SearchPage";
 export { default as UserDetails } from "./UserDetails/UserDetails";
+export { default as Login } from "./Login/Login";
+export { default as Signup } from "./Signup/Signup";

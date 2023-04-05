@@ -21,7 +21,6 @@
     align-items: center;
     gap: 20px;
     position: absolute;
-    backface-visibility: hidden;
     padding: 65px 45px;
     border-radius: 15px;
     box-shadow: inset 2px 2px 10px rgba(0,0,0,1),
@@ -34,8 +33,7 @@
     justify-content: center;
     align-items: center;
     gap: 20px;
-    backface-visibility: hidden;
-    transform: rotateY(-180deg);
+
     padding: 65px 45px;
     border-radius: 15px;
     box-shadow: inset 2px 2px 10px rgba(0,0,0,1),
@@ -49,7 +47,7 @@
     color: white;
   }
   
-  .input {
+  .input-field {
     width: 245px;
     min-height: 45px;
     color: #fff;
@@ -63,16 +61,16 @@
     1px 1px 10px rgba(255, 255, 255, 0.6);
   }
   
-  .input::placeholder {
+  .input-field::placeholder {
     color: #999;
   }
   
-  .input:focus.input::placeholder {
+  .input-field:focus.input-field::placeholder {
     transition: 0.3s;
     opacity: 0;
   }
   
-  .input:focus {
+  .input-field:focus {
     transform: scale(1.05);
     box-shadow: 6px 6px 10px rgba(0,0,0,1),
     1px 1px 10px rgba(255, 255, 255, 0.6),
@@ -80,7 +78,7 @@
     inset -1px -1px 5px rgba(255, 255, 255, 0.6);
   }
   
-  .btn {
+  .submit-btn {
     padding: 10px 35px;
     cursor: pointer;
     background-color: #212121;
@@ -94,7 +92,7 @@
     transition: 0.35s;
   }
   
-  .btn:hover {
+  .submit-btn:hover {
     transform: scale(1.05);
     box-shadow: 6px 6px 10px rgba(0,0,0,1),
     1px 1px 10px rgba(255, 255, 255, 0.6),
@@ -102,7 +100,7 @@
     inset -1px -1px 5px rgba(255, 255, 255, 0.6);
   }
   
-  .btn:focus {
+  .submit-btn:focus {
     transform: scale(1.05);
     box-shadow: 6px 6px 10px rgba(0,0,0,1),
     1px 1px 10px rgba(255, 255, 255, 0.6),

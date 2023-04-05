@@ -8,10 +8,7 @@ import "./cart.css";
 function Carts() {
 	return (
 		<div className="cart section__padding">
-			<div className="page__index">
-				<a href="#">Home </a> &gt;&gt; <a href="#">Page </a>&gt;&gt;
-				<a href="#">Shop </a>&gt;&gt;<a href="#">Cart</a>
-			</div>
+			<h1>Carts</h1>
 			<Cart />
 		</div>
 	);

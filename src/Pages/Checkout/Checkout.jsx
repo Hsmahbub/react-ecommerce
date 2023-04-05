@@ -18,11 +18,10 @@ import {
 	SingelItem2,
 	SingleItem,
 } from "./SubComponents";
-
+import { useLoaderData } from "react-router-dom";
 function Checkout() {
-	const { handleModals, user, products, cartData, currentBilling } =
-		useGlobalContext();
-	const selectedItem = useLocation().pathname.split("/")[2].split("_");
+	const { data, arrayOfId, totalPrice, totalItems } = useLoaderData()
+	const { handleModals, user, currentBilling } = useGlobalContext();
 	const navigate = useNavigate();
 	const name = currentBilling.name ? currentBilling.name : user.name;
 	const email = currentBilling.email ? currentBilling.email : user.email;
@@ -30,8 +29,6 @@ function Checkout() {
 	const address = currentBilling.address ? currentBilling.address : "";
 	const cod =
 		"https://png.pngtree.com/png-clipart/20210530/original/pngtree-the-cash-on-delivery-circle-design-png-image_6357123.jpg";
-	const [totalPrice, setTotalPrice] = useState(0);
-	const [orderProduct, setOrderProduct] = useState([]);
 	// total item and total price
 
 	// payment mehtodh
@@ -57,7 +54,7 @@ function Checkout() {
 				CreateOrderApi(
 					{
 						billingId: currentBilling._id,
-						cartId: selectedItem,
+						cartId: arrayOfId,
 					},
 					(res) => {
 						console.log(res.data)
@@ -69,25 +66,7 @@ function Checkout() {
 			}
 		}
 	};
-
-	// get selected product
-	useEffect(() => {
-		let data = [];
-		let total_price = 0;
-		selectedItem.forEach((id) => {
-			let carts = customIterator(cartData, id)
-			let product = customIterator(products, carts?.productId)
-			total_price += carts.total_price;
-			const { createdAt, updateAt, _id, ...rest } = product;
-			data.push({
-				...carts,
-				...rest,
-			});
-		});
-		setOrderProduct(data);
-		setTotalPrice(total_price);
-	}, [cartData, products]);
-
+	// console.log(data.reduce((a, b) => (a.total_price.toString() + b.total_price.toString())))
 	// set current billing on localStorage
 	useEffect(() => {
 		localStorage.setItem("currentBillingId", currentBilling._id);
@@ -100,8 +79,8 @@ function Checkout() {
 			<div className="billings">
 				{/* billing product details  */}
 				<div className="bill-product-details">
-					{orderProduct &&
-						orderProduct.map((item, ind) => (
+					{data &&
+						data.map((item, ind) => (
 							<ProuductItem product={item} key={ind} />
 						))}
 				</div>
@@ -132,7 +111,7 @@ function Checkout() {
 						<div className="subtotal">
 							<h2>Order Summary</h2>
 							<SingleItem
-								first={`items Total (${orderProduct?.length})`}
+								first={`items Total (${totalItems})`}
 								second={`$${totalPrice}`}
 							/>
 							<SingleItem

@@ -42,15 +42,15 @@ export const ProuductItem = ({ product }) => {
 			<div className="img">
 				<img
 					width={"150px"}
-					src={product.img && product.img[1]}
+					src={product?.productId?.img && product?.productId?.img[1]}
 					alt="img"
 				/>
 			</div>
 			<div className="item">
-				<p>{product.title}</p>
-				<p>{product.desc}</p>
+				<p>{product.productId.title}</p>
+				<p>{product.productId.desc}</p>
 				<p>
-					<span>price:${product.price},</span>
+					<span>price:${product.productId.price},</span>
 					<span>quantity:{product.quantity},</span><br />
 					{product.color && <span>color:{product.color},</span>}
 					{product.size && <span>size:{product.size},</span>} <br />

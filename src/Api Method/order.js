@@ -19,17 +19,17 @@ export const GetOrderApi = async () => {
 	try {
 		return await userRequest.get("/orders");
 	} catch (err) {
+		console.log(err.response);
 		return err.response;
 	}
 };
 
 export const validateOrder = async (props) => {
 	try {
-		console.log(props);
 		await userRequest.get(
 			`/orders/validate/${props.params.order_id}/${props.params.createdAt}`
 		);
-		return;
+		return "";
 	} catch (error) {
 		window.location.assign("/home");
 		return "";

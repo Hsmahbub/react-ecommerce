@@ -10,7 +10,15 @@ import {
 	Signup,
 } from "./Components/Modals/index.js";
 import { Footer, Navbar, Topheader } from "./Components";
+import { useLoaderData } from "react-router-dom";
+import { useGlobalContext } from "./context";
+import { useEffect } from "react";
 function App() {
+	const { data } = useLoaderData();
+	const { setCartData } = useGlobalContext();
+	useEffect(() => {
+		setCartData(data);
+	}, []);
 	return (
 		<div className="App">
 			<ToastContainer

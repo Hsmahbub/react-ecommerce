@@ -6,13 +6,11 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { toastObj } from "../../utils/toastObj";
-import { customIterator } from "../../utils/functions";
 
 function Carts() {
 	const [selectedItem, setSelectedItem] = useState([]);
+	const { cartData, setCartData } = useGlobalContext()
 	const navigate = useNavigate();
-	const { cartData, products, setCartData } = useGlobalContext();
-	const [cartItems, setCartItems] = useState([]);
 	const isCart = cartData.length > 0;
 	const isSelected = selectedItem.length > 0;
 	// delete handle
@@ -23,6 +21,7 @@ function Carts() {
 			}
 		});
 	};
+
 	const handleSelect = (e) => {
 		if (selectedItem.findIndex((i) => i === e.target.value) > -1) {
 			let item = selectedItem.filter((i) => i !== e.target.value);
@@ -39,32 +38,16 @@ function Carts() {
 			);
 		window.scrollTo(0, 0);
 	};
+
 	// data processing
-	useEffect(() => {
-		const data = [];
-		cartData.forEach((c) => {
-			let product = customIterator(products, c.productId);
-			products.forEach((p) => {
-				if (c.productId === p._id) {
-					product = p;
-				}
-			});
-			const { createdAt, updatedAt, _id, ...rest } = product;
-			data.push({
-				...rest,
-				...c,
-			});
-		});
-		setCartItems(data);
-	}, [cartData, products]);
-	
+
 	return (
 		<div className="cart-item">
 			<div className="wrapper">
-				{cartItems.length === 0 ? (
+				{cartData.length === 0 ? (
 					<h3>You have no cart</h3>
 				) : (
-					cartItems.map((item) => (
+					cartData.map((item) => (
 						<div key={item._id}>
 							<Items item={item} handleSelect={handleSelect} />
 						</div>

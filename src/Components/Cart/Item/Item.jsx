@@ -9,7 +9,6 @@ const Items = ({ item, handleSelect }) => {
 		// e.target.parentNode.parentNode.style.display = "none";
 		DeleteCartItemApi(item._id, (res) => {
 			if (res.status === 204) {
-				console.log("helll");
 				const filterItem = cartData.filter((i) => i._id !== item._id);
 				setCartData(filterItem);
 			}
@@ -28,12 +27,12 @@ const Items = ({ item, handleSelect }) => {
 				</li>
 			</label>
 			<li>
-				<Link to={`/product/${item.productId}`}>
-					<img src={item.img} alt="img" width={"120px"} />
+				<Link to={`/product/${item.productId._id}`}>
+					<img src={item?.productId?.img} alt="img" width={"120px"} />
 				</Link>
 			</li>
 			<li>
-				<p>{item?.title}</p>
+				<p>{item?.productId?.title}</p>
 				<div style={{ color: "#8B7579" }}>
 					<span>price:${item.total_price}</span>
 					<span>quantity:{item.quantity}</span>

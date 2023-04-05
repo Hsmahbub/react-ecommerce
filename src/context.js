@@ -4,13 +4,10 @@ import { LoggedInAdminApi } from "./Api Method/admin";
 import { useState, useEffect, useContext, createContext } from "react";
 import { GetProductApi } from "./Api Method/product";
 import { LoggedInUserApi } from "./Api Method/user";
-import { GetCartApi } from "./Api Method/cart";
 // import Items from "./Components/Cart/Item/Item";
 
 const AppContext = createContext();
 const AppProvider = ({ children }) => {
-	const id = localStorage.getItem("userId");
-	const token = localStorage.getItem("token");
 	const [isLoading, setIsLoading] = useState(false);
 	// auth and user database method
 	const [user, setUser] = useState("");
@@ -23,27 +20,10 @@ const AppProvider = ({ children }) => {
 	}, []);
 
 	// product database method
-	const [products, setProducts] = useState([]);
-	useEffect(() => {
-		GetProductApi((res) => {
-			if (res?.status === 200) {
-				setProducts(res.data);
-			}
-		});
-	}, []);
 
 	// cart Data
 	const [cartData, setCartData] = useState([]);
 
-	useEffect(() => {
-		GetCartApi((res) => {
-			if (res.status === 200) {
-				setCartData(res.data);
-			} else {
-				console.log(res.data);
-			}
-		});
-	}, [id, token]);
 
 	// handleModals
 	const handleModals = (id, isOpen) => {
@@ -112,10 +92,7 @@ const AppProvider = ({ children }) => {
 				//auth
 				user,
 				setUser,
-
-				//product
-				products,
-
+				
 				// cart
 				cartData,
 				setCartData,

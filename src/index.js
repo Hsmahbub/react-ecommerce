@@ -4,38 +4,57 @@ import {
 	Navigate,
 	RouterProvider,
 	createBrowserRouter,
-	redirect,
-	useNavigate,
 } from "react-router-dom";
+import { GetOrderApi, validateOrder } from "./Api Method/order";
 import App from "./App";
+import OrderSucces from "./Components/OrderSucces/OrderSucces";
 import {
 	Carts,
 	Checkout,
 	Details,
 	Home,
+	Login,
 	OrederPage,
 	SearchPage,
+	Signup,
 	UserDetails,
 } from "./Pages/index";
 import AppProvider from "./context";
 import "./index.css";
-import Login from "./Pages/Login/Login";
-import { GetOrderApi, validateOrder } from "./Api Method/order";
-import OrderSucces from "./Components/OrderSucces/OrderSucces";
-import { userRequest } from "./utils/requestMethod";
+import { GetCartApi } from "./Api Method/cart";
+import { GetProductApi } from "./Api Method/product";
 
 const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <App />,
+		loader: GetCartApi,
 		children: [
 			{
 				path: "/home",
 				element: <Home />,
+				loader: GetProductApi,
 			},
 			{
 				path: "/checkout/:productIds",
 				element: <Checkout />,
+				loader: async ({ request, params }) => {
+					const cart = await GetCartApi();
+					const productId = params.productIds;
+					const arrayOfId = productId?.split("_");
+					console.log(arrayOfId);
+					const data = cart.data.filter((i) =>
+						arrayOfId.includes(i._id)
+					);
+
+					const totalPrice = data
+						.map((i) => i.total_price)
+						.reduce((a, b) => a + b);
+					const totalItems = data
+						.map((i) => i.quantity)
+						.reduce((a, b) => a + b);
+					return { data, arrayOfId, totalPrice, totalItems };
+				},
 			},
 			{
 				path: "/order-confirm/:order_id/:createdAt",
@@ -45,18 +64,9 @@ const router = createBrowserRouter([
 			{
 				path: "carts",
 				element: <Carts />,
-				loader: ({ request }) =>
-					fetch("/api/dashboard.json", {
-						signal: request.signal,
-					}),
 			},
 			{
 				path: "orders",
-				element: <OrederPage />,
-				loader: GetOrderApi,
-			},
-			{
-				path: "order_place_success",
 				element: <OrederPage />,
 				loader: GetOrderApi,
 			},
@@ -75,6 +85,10 @@ const router = createBrowserRouter([
 			{
 				path: "login",
 				element: <Login />,
+			},
+			{
+				path: "signup",
+				element: <Signup />,
 			},
 			{
 				path: "",

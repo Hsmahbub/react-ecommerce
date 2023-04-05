@@ -1,11 +1,11 @@
 import { userRequest } from "../utils/requestMethod";
 // get carts
-export const GetCartApi = async (cb) => {
+export const GetCartApi = async () => {
 	try {
 		const res = await userRequest.get(`/carts/`);
-		cb(res);
+		return res;
 	} catch (err) {
-		cb(err?.response);
+		return err?.response;
 	}
 };
 // create a cart
@@ -17,7 +17,6 @@ export const AddToCartApi = async (data, cb) => {
 		cb(err?.response);
 	}
 };
-
 
 export const DeleteCartItemApi = async (productId, cb) => {
 	try {

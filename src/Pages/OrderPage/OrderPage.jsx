@@ -10,12 +10,13 @@ function OrderPage() {
 	// const [orderdProduct, setOrderdProduct] = useState([]);
 	const { data } = useLoaderData()
 
+
 	return (
 		<div className="orderPage">
 			<div className="order">
 				<h1>Orders</h1>
 				<div className="order-list">
-					{data.map((item) => (
+					{data && data.map((item) => (
 						<div className="order-item" key={item._id}>
 							<div className="img">
 								<Link to={`/product/${item.productId}`}>
@@ -46,8 +47,8 @@ function OrderPage() {
 							<div className="status">
 								<p>status: {item.status}</p>
 								{item?.billingId && <p>
-									shipping:{item?.productId?.address},
-									{item?.productId?.address?.postcode}
+									shipping:{item?.billingId?.address},
+									{item?.billingId?.address?.postcode}
 								</p>}
 								<p>placed on : {new Date(item.createdAt).toLocaleString()}</p>
 							</div>

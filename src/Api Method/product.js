@@ -1,10 +1,10 @@
 import { publicRequest } from "../utils/requestMethod";
 export const GetProductApi = async (cb) => {
 	try {
-		const res = await publicRequest.get("/products");
-		cb(res);
+		return await publicRequest.get("/products");
 	} catch (err) {
-		cb(err?.response);
+		console.log(err.response);
+		return err?.response;
 	}
 };
 export const GetSingleProductApi = async (productId, cb) => {
