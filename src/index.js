@@ -4,6 +4,8 @@ import {
 	Navigate,
 	RouterProvider,
 	createBrowserRouter,
+	redirect,
+	useNavigate,
 } from "react-router-dom";
 import App from "./App";
 import {
@@ -18,7 +20,9 @@ import {
 import AppProvider from "./context";
 import "./index.css";
 import Login from "./Pages/Login/Login";
-import { GetOrderApi } from "./Api Method/order";
+import { GetOrderApi, validateOrder } from "./Api Method/order";
+import OrderSucces from "./Components/OrderSucces/OrderSucces";
+import { userRequest } from "./utils/requestMethod";
 
 const router = createBrowserRouter([
 	{
@@ -32,10 +36,11 @@ const router = createBrowserRouter([
 			{
 				path: "/checkout/:productIds",
 				element: <Checkout />,
-				loader: ({ request }) =>
-					fetch("/api/dashboard.json", {
-						signal: request.signal,
-					}),
+			},
+			{
+				path: "/order-confirm/:order_id/:createdAt",
+				element: <OrderSucces />,
+				loader: validateOrder,
 			},
 			{
 				path: "carts",
@@ -47,6 +52,11 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "orders",
+				element: <OrederPage />,
+				loader: GetOrderApi,
+			},
+			{
+				path: "order_place_success",
 				element: <OrederPage />,
 				loader: GetOrderApi,
 			},

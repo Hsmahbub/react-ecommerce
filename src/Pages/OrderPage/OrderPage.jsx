@@ -9,6 +9,7 @@ import { useLoaderData } from 'react-router-dom';
 function OrderPage() {
 	// const [orderdProduct, setOrderdProduct] = useState([]);
 	const { data } = useLoaderData()
+
 	return (
 		<div className="orderPage">
 			<div className="order">

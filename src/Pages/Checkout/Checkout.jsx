@@ -6,8 +6,6 @@ import { GrMapLocation } from "react-icons/gr";
 import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { CreateOrderApi } from "../../Api Method/order";
-import { GetSingleProductApi } from "../../Api Method/product";
-import { Footer, Navbar, Topheader } from "../../Components/index";
 import { useGlobalContext } from "../../context";
 import bkash from "../../utils/bkash.jpg";
 import { customIterator } from "../../utils/functions";
@@ -62,9 +60,9 @@ function Checkout() {
 						cartId: selectedItem,
 					},
 					(res) => {
+						console.log(res.data)
 						handleModals("loading", false);
-						navigate("/order");
-						window.location.reload();
+						navigate(`/order-confirm/${res?.data?._id}/${res?.data?.createdAt}`)
 						toast.warning("Thanks for Shopping with us", toastObj);
 					}
 				);
@@ -98,10 +96,7 @@ function Checkout() {
 	return (
 
 		<div className="checkout section__padding">
-			<div className="page__index">
-				<a href="#">Home </a> &gt;&gt; <a href="#">Page </a>&gt;&gt;
-				<a href="#">Shop </a>&gt;&gt;<a href="#">Checkout</a>
-			</div>
+			<h1>Checkout</h1>
 			<div className="billings">
 				{/* billing product details  */}
 				<div className="bill-product-details">
