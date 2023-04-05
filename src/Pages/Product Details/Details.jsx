@@ -69,7 +69,7 @@ function Details() {
 
 	return (
 		<div className="product-details-page">
-			<Navbar />
+			
 			{product ? (
 				<div className="product-details">
 					{product.img ? (
@@ -131,7 +131,7 @@ function Details() {
 					</div>
 				</div>
 			) : null}
-			<Footer />
+		
 		</div>
 	);
 }

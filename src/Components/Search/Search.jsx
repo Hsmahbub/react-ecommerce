@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./search.scss";
-function Navtop() {
+function Search() {
 	const navigate = useNavigate();
 	const [search, setSearch] = useState("");
 	return (
@@ -28,4 +28,4 @@ function Navtop() {
 	);
 }
 
-export default Navtop;
+export default Search;

@@ -3,7 +3,6 @@
 .order {
 	max-width: 1200px;
 	height: 100%;
-	background: rgb(218, 224, 222);
 	padding: 1rem;
 	margin: 0 auto;
 	min-height: 50vh;
@@ -12,6 +11,7 @@
 	}
 	.order-list {
 		.order-item {
+			border-radius: 8px;
 			margin-bottom: 0.5rem;
 			position: relative;
 			display: flex;
@@ -29,6 +29,7 @@
 			p {
 				max-width: 500px;
 				margin: 0.2rem 0;
+				font-weight: 500;
 				span {
 					margin-right: 0.3rem;
 				}

@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
@@ -9,15 +9,7 @@ import {
 	Shipping,
 	Signup,
 } from "./Components/Modals/index.js";
-import {
-	Carts,
-	Checkout,
-	Details,
-	Home,
-	OrederPage,
-	SearchPage,
-	UserDetails,
-} from "./Pages/index";
+import { Footer, Navbar, Topheader } from "./Components";
 function App() {
 	return (
 		<div className="App">
@@ -37,20 +29,10 @@ function App() {
 			<Login />
 			<Signup />
 			<Loading />
-			<BrowserRouter>
-				<Routes>
-					<Route path="/" element={<Home />} />
-					<Route path="/product/:id" element={<Details />} />
-					<Route path="/carts" element={<Carts />} />
-					<Route path="/search" element={<SearchPage />} />
-					<Route
-						path="/checkout/:productIds"
-						element={<Checkout />}
-					/>
-					<Route path="/order" element={<OrederPage />} />
-					<Route path="/user" element={<UserDetails />} />
-				</Routes>
-			</BrowserRouter>
+			<Topheader />
+			<Navbar />
+			<Outlet />
+			<Footer />
 		</div>
 	);
 }

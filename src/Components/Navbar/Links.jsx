@@ -1,10 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/anchor-has-content */
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import { useGlobalContext } from "../../context";
 import { LogoutApi } from "../../Api Method/auth";
 import { useGlobalContext } from "../../context";
+import homeIcon from './icons/home.png'
+import orderIcon from './icons/order.png'
+import loginIcon from './icons/login.png'
+import logoutIcon from './icons/logout.png'
 export const Links = ({ className }) => {
 	const navigate = useNavigate();
 	const { user, handleModals } = useGlobalContext();
@@ -23,7 +27,8 @@ export const Links = ({ className }) => {
 						window.location.reload();
 					}}
 				>
-					<span>{logout}</span>
+					<img src={logoutIcon} width={'30px'} alt="" />
+					{/* <span>{logout}</span> */}
 				</p>
 			)}
 		</>
@@ -52,6 +57,7 @@ export const Links = ({ className }) => {
 			{login && (
 				<p
 					className={className}
+					style={{padding:'.5rem'}}
 					onClick={() => {
 						handleModals("login", true);
 						// handleModals("signup", false);
@@ -66,24 +72,21 @@ export const Links = ({ className }) => {
 	const orderC = user && (
 		<p
 			className={className}
-			onClick={() => {
-				navigate("/order");
-				window.location.reload();
-			}}
 		>
-			<span>Order</span>
+			<Link to={'/orders'}>
+				<img src={orderIcon} width={'30px'} alt="" />
+			</Link>
 		</p>
 	);
 	return (
 		<>
 			<p
 				className={className}
-				onClick={() => {
-					navigate("/");
-					window.location.reload();
-				}}
+				style={{ display: !user ? 'none' : 'initial' }}
 			>
-				<span>home</span>
+				<Link to={'/home'}>
+					<img src={homeIcon} width={'30px'} alt="" />
+				</Link>
 			</p>
 
 			{orderC}

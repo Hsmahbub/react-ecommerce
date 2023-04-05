@@ -50,6 +50,9 @@
 		@include small-up{
 			margin-top: 2rem;
 		}
+		@include medium-down{
+			padding-bottom: 6rem;
+		}
 		color: white;
 		height: 50px;
 		line-height: 50px;
@@ -57,7 +60,7 @@
 		background-color: #333333;
 		p {
 			@include medium-down {
-				font-size: 10px;
+				font-size: 11px;
 			}
 		}
 	}

@@ -4,12 +4,9 @@ import { useGlobalContext } from "../../context";
 import { Loading } from "../../Components/Modals/index";
 import Location from "../../Components/Location/Location";
 import {
-	Navbar,
-	Topheader,
 	Sliders,
 	RenderProducts,
 	Subscription,
-	Footer,
 } from "../../Components/index";
 
 function Home() {
@@ -18,8 +15,7 @@ function Home() {
 	const featureProduct = products?.slice(20, 50);
 	return (
 		<div className="home">
-			<Topheader />
-			<Navbar />
+		
 			<Sliders />
 			<RenderProducts
 				products={topProduct}
@@ -34,8 +30,6 @@ function Home() {
 				sectionTitle=" Featured Product"
 			/>
 			<Subscription />
-			<Footer />
-			<Location />
 		</div>
 	);
 }

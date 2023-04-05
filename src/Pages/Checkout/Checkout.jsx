@@ -77,8 +77,8 @@ function Checkout() {
 		let data = [];
 		let total_price = 0;
 		selectedItem.forEach((id) => {
-			let carts = customIterator(cartData,id)
-			let product = customIterator(products,carts?.productId)
+			let carts = customIterator(cartData, id)
+			let product = customIterator(products, carts?.productId)
 			total_price += carts.total_price;
 			const { createdAt, updateAt, _id, ...rest } = product;
 			data.push({
@@ -96,83 +96,81 @@ function Checkout() {
 	}, [currentBilling]);
 
 	return (
-		<div>
-			<Topheader />
-			<Navbar />
-			<div className="checkout section__padding">
-				<div className="page__index">
-					<a href="#">Home </a> &gt;&gt; <a href="#">Page </a>&gt;&gt;
-					<a href="#">Shop </a>&gt;&gt;<a href="#">Checkout</a>
+
+		<div className="checkout section__padding">
+			<div className="page__index">
+				<a href="#">Home </a> &gt;&gt; <a href="#">Page </a>&gt;&gt;
+				<a href="#">Shop </a>&gt;&gt;<a href="#">Checkout</a>
+			</div>
+			<div className="billings">
+				{/* billing product details  */}
+				<div className="bill-product-details">
+					{orderProduct &&
+						orderProduct.map((item, ind) => (
+							<ProuductItem product={item} key={ind} />
+						))}
 				</div>
-				<div className="billings">
-					{/* billing product details  */}
-					<div className="bill-product-details">
-						{orderProduct &&
-							orderProduct.map((item,ind) => (
-								<ProuductItem product={item} key={ind} />
-							))}
-					</div>
-					<div className="billing-details">
-						{/* billing details  */}
-						<div className="bill">
-							<h2>Shipping {"&"} Billing </h2>
-							<div className="address">
-								<div className="location-edit">
-									<p>
-										<span>
-											<GrMapLocation />
-										</span>
-										<span>{name}</span>
-									</p>
-									<button
-										onClick={() =>
-											handleModals("shipping", true)
-										}
-									>
-										ADD
-									</button>
-								</div>
-								<div className="shipping">{address}</div>
+				<div className="billing-details">
+					{/* billing details  */}
+					<div className="bill">
+						<h2>Shipping {"&"} Billing </h2>
+						<div className="address">
+							<div className="location-edit">
+								<p>
+									<span>
+										<GrMapLocation />
+									</span>
+									<span>{name}</span>
+								</p>
+								<button
+									onClick={() =>
+										handleModals("shipping", true)
+									}
+								>
+									ADD
+								</button>
 							</div>
-							<SingelItem2 icon={<FaEnvelope />} text={email} />
-							<SingelItem2 icon={<FaPhone />} text={phone} />
-							<div className="subtotal">
-								<h2>Order Summary</h2>
-								<SingleItem
-									first={`items Total (${orderProduct?.length})`}
-									second={`$${totalPrice}`}
-								/>
-								<SingleItem
-									first="Shipping Free"
-									second="Free"
-								/>
-							</div>
-							<Payment
-								option={[
-									{ img: bkash, name: "bkash" },
-									{ img: nagad, name: "nagad" },
-									{ img: cod, name: "cod" },
-								]}
-								handlePaymentMethod={handlePaymentMethod}
+							<div className="shipping">{address}</div>
+						</div>
+						<SingelItem2 icon={<FaEnvelope />} text={email} />
+						<SingelItem2 icon={<FaPhone />} text={phone} />
+						<div className="subtotal">
+							<h2>Order Summary</h2>
+							<SingleItem
+								first={`items Total (${orderProduct?.length})`}
+								second={`$${totalPrice}`}
 							/>
-							<div className="total">
-								<p>Total</p>
-								<p>{`$${totalPrice}`}</p>
-							</div>
+							<SingleItem
+								first="Shipping Free"
+								second="Free"
+							/>
 						</div>
-						<div className="order-btn ">
-							<button
-								className="place-order"
-								onClick={handlePlaceOrder}
-							>
-								PLACE ORDER
-							</button>
+						<Payment
+							option={[
+								{ img: bkash, name: "bkash" },
+								{ img: nagad, name: "nagad" },
+								{ img: cod, name: "cod" },
+							]}
+							handlePaymentMethod={handlePaymentMethod}
+						/>
+						<div className="total">
+							<p>Total</p>
+							<p>{`$${totalPrice}`}</p>
 						</div>
+					</div>
+					<div className="order-btn ">
+						<button
+							className="place-order"
+							onClick={handlePlaceOrder}
+						>
+							PLACE ORDER
+						</button>
 					</div>
 				</div>
 			</div>
-			<Footer />
 		</div>
+
+
 	);
 }
 

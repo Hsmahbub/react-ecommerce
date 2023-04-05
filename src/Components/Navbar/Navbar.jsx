@@ -1,22 +1,21 @@
 import React from "react";
 import "./navbar.scss";
 import { ToggleItem } from "./ToggleItem/ToggleItem";
-import Navtop from "./Search/Search";
 import Links from "./Links";
 import { Link } from "react-router-dom";
 import { HiShoppingCart } from "react-icons/hi";
 import { useGlobalContext } from "../../context";
+import shoppingCartIcon from './icons/cart.png'
 
 function Navbar() {
 	const { user, cartData } = useGlobalContext();
 	return (
 		<>
-			<Navtop />
 			<nav className="navbar section__padding">
 				<div className="innerNav">
 					<div className="logo">
 						<p>
-							<Link to={"/"}>
+							<Link to={"/home"}>
 								<span className="color">RENOSHOP</span>
 								<span>BEE</span>
 							</Link>
@@ -32,7 +31,7 @@ function Navbar() {
 					<div className="search-and-other">
 						<Link to={"/carts"}>
 							<div className="carts">
-								<HiShoppingCart />
+								<img src={shoppingCartIcon} width={'30px'} alt="" />
 								<div className="cart-quantity">
 									{cartData?.length}
 								</div>

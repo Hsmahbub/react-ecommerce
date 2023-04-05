@@ -11,8 +11,6 @@
 // Add a scroll event listener to the window
 window.addEventListener("scroll", () => {
 	const stickyElement = document.querySelector(".navbar");
-	const searchElement = document.querySelector(".search-input-field");
-	console.log(stickyElement);
 	const stickyPosition = stickyElement?.offsetTop;
 	const searchElementPosition = stickyElement?.offsetTop;
 	// Get the current scroll position

@@ -15,11 +15,10 @@ export const CreateOrderApi = async ({ billingId, cartId }, cb) => {
 };
 
 // get order api
-export const GetOrderApi = async (cb) => {
+export const GetOrderApi = async () => {
 	try {
-		const res = await userRequest.get("/orders");
-		cb(res);
+		return await userRequest.get("/orders");
 	} catch (err) {
-		cb(err?.response);
+		return err.response;
 	}
 };
