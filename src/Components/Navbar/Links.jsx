@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/anchor-has-content */
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate,Navigate } from "react-router-dom";
 // import { useGlobalContext } from "../../context";
 import { LogoutApi } from "../../Api Method/auth";
 import { useGlobalContext } from "../../context";
@@ -56,11 +56,10 @@ export const Links = ({ className }) => {
 				<p
 					className={className}
 					style={{ padding: '.5rem' }}
-					onClick={() => {
-						navigate('/login')
-					}}
 				>
-					<span>{login}</span>
+					<Link to={'/login'} >
+						<span>{login}</span>
+					</Link>
 				</p>
 			)}
 		</>

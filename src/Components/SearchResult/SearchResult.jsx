@@ -1,35 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import { searchProductApi } from "../../Api Method/product";
-import { toastObj } from "../../utils/toastObj";
 import { RenderProducts } from "../index";
 import "./searchresult.scss";
 import { FilterItem } from "./subcomponents.jsx";
+import { useLocation, useLoaderData } from "react-router-dom";
 
 function SearchResult() {
-	const searchKeyword = localStorage.getItem("searchTerm");
+	const response = useLoaderData()
 	const [filteredProducts, setFilteredProducts] = useState([]);
 	const [filterKeyword, setFilterKeyword] = useState({});
-
+	const location = useLocation()
+	const search = new URLSearchParams(location.search).get('keyword')
 	const handleChange = (e) => {
 		setFilterKeyword({ ...filterKeyword, [e.target.name]: e.target.value });
 	};
-	console.log(filterKeyword);
 	useEffect(() => {
-		searchProductApi(searchKeyword, (res) => {
-			if (res.data) {
-				if (res.data.success) {
-					setFilteredProducts(res.data.success);
-				}
-			} else {
-				toast.error("something went wrong", toastObj);
-			}
-		});
-	},[]);
+		setFilteredProducts(response?.data || [])
+	}, [response])
 	return (
 		<div className="search-result">
-			<p>Search Keyword: {searchKeyword}</p>
-			<div className="filterBox">
+			<p>Search Keyword: {search}</p>
+			<div className="filterBox" style={{ display: 'none' }}>
 				<h2>Filter</h2>
 				<div className="wrapper">
 					<FilterItem
@@ -52,6 +42,7 @@ function SearchResult() {
 			<div className="result">
 				<RenderProducts
 					products={filteredProducts}
+					status={response}
 					sectionSubtitle={""}
 					sectionTitle="Search Products"
 				/>

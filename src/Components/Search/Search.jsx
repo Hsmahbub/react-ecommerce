@@ -9,6 +9,7 @@ function Search() {
 			<input
 				type="text"
 				placeholder="Search your product"
+				value={search}
 				onChange={(e) => {
 					setSearch(e.target.value);
 				}}
@@ -16,9 +17,8 @@ function Search() {
 			<button>
 				<span
 					onClick={() => {
-						localStorage.setItem("searchTerm", search);
-						navigate("/search");
-						window.location.reload();
+						navigate(`/search/?keyword=${search}`);
+						setSearch('')
 					}}
 				>
 					Search

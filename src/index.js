@@ -23,7 +23,8 @@ import {
 import AppProvider from "./context";
 import "./index.css";
 import { GetCartApi } from "./Api Method/cart";
-import { GetProductApi } from "./Api Method/product";
+import { GetProductApi, searchProductApi } from "./Api Method/product";
+import Search from "./Components/Search/Search";
 
 const router = createBrowserRouter([
 	{
@@ -76,10 +77,6 @@ const router = createBrowserRouter([
 				element: <Details />,
 			},
 			{
-				path: "search",
-				element: <SearchPage />,
-			},
-			{
 				path: "profile",
 				element: <UserDetails />,
 			},
@@ -90,6 +87,11 @@ const router = createBrowserRouter([
 			{
 				path: "signup",
 				element: <Signup />,
+			},
+			{
+				path: "search",
+				element: <SearchPage />,
+				loader: searchProductApi,
 			},
 		],
 	},

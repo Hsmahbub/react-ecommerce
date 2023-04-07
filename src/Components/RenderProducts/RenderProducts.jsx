@@ -2,7 +2,7 @@ import React from "react";
 import { Loading, Product } from "../index";
 import "./renderproduct.scss";
 
-function RenderProducts({ products, sectionTitle, sectionSubtitle }) {
+function RenderProducts({ products, sectionTitle, sectionSubtitle, status }) {
 	return (
 		<section className="section__padding feature-product">
 			<div className="inner-feature-product">
@@ -17,7 +17,7 @@ function RenderProducts({ products, sectionTitle, sectionSubtitle }) {
 					}}
 				>
 					{!products.length > 0 ? (
-						<Loading />
+						status === 404 ? <img src='https://media.tenor.com/IHdlTRsmcS4AAAAC/404.gif' alt="404 not found" /> : <Loading />
 					) : (
 						<div className="wrapper">
 							{products.map((item) => (

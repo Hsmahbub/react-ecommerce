@@ -5,11 +5,13 @@ import Links from "./Links";
 import { Link } from "react-router-dom";
 import { useGlobalContext } from "../../context";
 import shoppingCartIcon from './icons/cart.png'
+import Search from "../Search/Search";
 
 function Navbar() {
 	const { user, cartData } = useGlobalContext();
 	return (
 		<>
+		<Search></Search>
 			<nav className="navbar section__padding">
 				<div className="innerNav">
 					<div className="logo">
@@ -27,6 +29,7 @@ function Navbar() {
 						</div>
 					</div>
 					{/* search  */}
+					
 					<div className="search-and-other">
 						<Link to={"/carts"}>
 							<div className="carts">

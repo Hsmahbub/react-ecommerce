@@ -16,9 +16,15 @@ export const GetSingleProductApi = async (productId, cb) => {
 	}
 };
 
-export const searchProductApi = async (keyword, cb) => {
-	const res = await publicRequest.get(`products/search/${keyword}`);
-	cb(res);
+export const searchProductApi = async ({ request }) => {
+	try {
+		return await publicRequest.get(
+			`products/search/${request.url.split("=")[1]}`
+		);
+	} catch (error) {
+		return error.response.status
+		
+	}
 };
 
 export const AddProductApi = async (product, cb) => {};
