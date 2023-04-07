@@ -2,10 +2,10 @@ import { userRequest } from "../utils/requestMethod";
 // get carts
 export const GetCartApi = async () => {
 	try {
-		const res = await userRequest.get(`/carts/`);
+		const res = await userRequest.get(`/carts`);
 		return res;
 	} catch (err) {
-		return err?.response;
+		return [{}];
 	}
 };
 // create a cart

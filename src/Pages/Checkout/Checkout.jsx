@@ -3,12 +3,11 @@
 import { useEffect, useState } from "react";
 import { FaEnvelope, FaPhone } from "react-icons/fa";
 import { GrMapLocation } from "react-icons/gr";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { CreateOrderApi } from "../../Api Method/order";
 import { useGlobalContext } from "../../context";
 import bkash from "../../utils/bkash.jpg";
-import { customIterator } from "../../utils/functions";
 import nagad from "../../utils/nagod.jpg";
 import { toastObj } from "../../utils/toastObj";
 import "./checkout.scss";
@@ -57,7 +56,6 @@ function Checkout() {
 						cartId: arrayOfId,
 					},
 					(res) => {
-						console.log(res.data)
 						handleModals("loading", false);
 						navigate(`/order-confirm/${res?.data?._id}/${res?.data?.createdAt}`)
 						toast.warning("Thanks for Shopping with us", toastObj);
@@ -66,8 +64,7 @@ function Checkout() {
 			}
 		}
 	};
-	// console.log(data.reduce((a, b) => (a.total_price.toString() + b.total_price.toString())))
-	// set current billing on localStorage
+
 	useEffect(() => {
 		localStorage.setItem("currentBillingId", currentBilling._id);
 	}, [currentBilling]);

@@ -1,16 +1,9 @@
-import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { GetOrderApi } from "../../Api Method/order";
-import { Footer, Navbar } from "../../Components/index";
-import { useGlobalContext } from "../../context";
 import "./orderpage.scss";
 import { useLoaderData } from 'react-router-dom';
 
 function OrderPage() {
-	// const [orderdProduct, setOrderdProduct] = useState([]);
 	const { data } = useLoaderData()
-
-
 	return (
 		<div className="orderPage">
 			<div className="order">

@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import "./utils/functions";
 import {
 	Navigate,
 	RouterProvider,
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
 		loader: GetCartApi,
 		children: [
 			{
-				path: "/home",
+				path: "/",
 				element: <Home />,
 				loader: GetProductApi,
 			},
@@ -89,10 +90,6 @@ const router = createBrowserRouter([
 			{
 				path: "signup",
 				element: <Signup />,
-			},
-			{
-				path: "",
-				element: <Navigate to="/home" replace />,
 			},
 		],
 	},

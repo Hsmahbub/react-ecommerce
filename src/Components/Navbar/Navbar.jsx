@@ -3,7 +3,6 @@ import "./navbar.scss";
 import { ToggleItem } from "./ToggleItem/ToggleItem";
 import Links from "./Links";
 import { Link } from "react-router-dom";
-import { HiShoppingCart } from "react-icons/hi";
 import { useGlobalContext } from "../../context";
 import shoppingCartIcon from './icons/cart.png'
 
@@ -15,7 +14,7 @@ function Navbar() {
 				<div className="innerNav">
 					<div className="logo">
 						<p>
-							<Link to={"/home"}>
+							<Link to={"/"}>
 								<span className="color">RENOSHOP</span>
 								<span>BEE</span>
 							</Link>
@@ -33,14 +32,14 @@ function Navbar() {
 							<div className="carts">
 								<img src={shoppingCartIcon} width={'30px'} alt="" />
 								<div className="cart-quantity">
-									{cartData?.length}
+									{cartData?.length||0}
 								</div>
 							</div>
 						</Link>
 						{user && (
 							<>
 								<div className="profile">
-									<Link to={"/user"}>
+									<Link to={"/profile"}>
 										<img
 											src={user.img}
 											alt="user"

@@ -14,12 +14,14 @@
 		display: flex;
 		button {
 			font-size: 18px;
-			color: red;
+		
 			padding: 0.5rem 1rem;
 			border: none;
 			background-color: yellowgreen;
 			margin-left: 0.5rem;
 			cursor: pointer;
+			color: white;
+			border-radius:5px;
 		}
 	}
 }

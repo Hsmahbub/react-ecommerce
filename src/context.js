@@ -2,7 +2,6 @@
 import { GetBillingApi } from "./Api Method/billing";
 import { LoggedInAdminApi } from "./Api Method/admin";
 import { useState, useEffect, useContext, createContext } from "react";
-import { GetProductApi } from "./Api Method/product";
 import { LoggedInUserApi } from "./Api Method/user";
 // import Items from "./Components/Cart/Item/Item";
 

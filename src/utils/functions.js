@@ -1,14 +1,4 @@
-﻿const customIterator = (arr, compareWith) => {
-	let values = {};
-	arr.forEach((i) => {
-		if (i._id === compareWith) {
-			values = i;
-		}
-	});
-	return values;
-};
-
-// Add a scroll event listener to the window
+﻿// Add a scroll event listener to the window
 window.addEventListener("scroll", () => {
 	const stickyElement = document.querySelector(".navbar");
 	const stickyPosition = stickyElement?.offsetTop;
@@ -26,5 +16,3 @@ window.addEventListener("scroll", () => {
 		stickyElement.classList.remove("sticky");
 	}
 });
-
-export { customIterator };

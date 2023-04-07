@@ -20,8 +20,8 @@ export const LoginApi = async (user, cb) => {
 		const res = await publicRequest.post("/auth/login", {
 			user: user,
 		});
-		localStorage.setItem("userToken", res?.data?.token);
-		localStorage.setItem("userId", res.data?._id);
+		localStorage.setItem("userToken", res?.data.user?.token);
+		localStorage.setItem("userId", res.data.user?._id);
 		cb(res);
 	} catch (err) {
 		cb(err?.response);

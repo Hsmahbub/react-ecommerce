@@ -7,7 +7,6 @@ import { LogoutApi } from "../../Api Method/auth";
 import { useGlobalContext } from "../../context";
 import homeIcon from './icons/home.png'
 import orderIcon from './icons/order.png'
-import loginIcon from './icons/login.png'
 import logoutIcon from './icons/logout.png'
 export const Links = ({ className }) => {
 	const navigate = useNavigate();
@@ -41,8 +40,7 @@ export const Links = ({ className }) => {
 				<p
 					className={className}
 					onClick={() => {
-						handleModals("signup", true);
-						// handleModals("login", false);
+						navigate('/signup')
 					}}
 				>
 					<span>{signup}</span>
@@ -57,10 +55,9 @@ export const Links = ({ className }) => {
 			{login && (
 				<p
 					className={className}
-					style={{padding:'.5rem'}}
+					style={{ padding: '.5rem' }}
 					onClick={() => {
-						handleModals("login", true);
-						// handleModals("signup", false);
+						navigate('/login')
 					}}
 				>
 					<span>{login}</span>
@@ -84,7 +81,7 @@ export const Links = ({ className }) => {
 				className={className}
 				style={{ display: !user ? 'none' : 'initial' }}
 			>
-				<Link to={'/home'}>
+				<Link to={'/'}>
 					<img src={homeIcon} width={'30px'} alt="" />
 				</Link>
 			</p>

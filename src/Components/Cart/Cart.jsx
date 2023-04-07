@@ -11,7 +11,7 @@ function Carts() {
 	const [selectedItem, setSelectedItem] = useState([]);
 	const { cartData, setCartData } = useGlobalContext()
 	const navigate = useNavigate();
-	const isCart = cartData.length > 0;
+	const isCart = cartData?.length > 0;
 	const isSelected = selectedItem.length > 0;
 	// delete handle
 	const handleDelete = () => {
@@ -44,7 +44,7 @@ function Carts() {
 	return (
 		<div className="cart-item">
 			<div className="wrapper">
-				{cartData.length === 0 ? (
+				{!cartData?.length? (
 					<h3>You have no cart</h3>
 				) : (
 					cartData.map((item) => (
@@ -63,8 +63,8 @@ function Carts() {
 					Clear
 				</button>
 				<button
-					disabled={cartData.length === 0}
-					style={{ cursor: cartData.length === 0 && "not-allowed" }}
+					disabled={cartData?.length}
+					style={{ cursor: cartData?.length && "not-allowed" }}
 					onClick={handleCheckout}
 				>
 					Checkout
