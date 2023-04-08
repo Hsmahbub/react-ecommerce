@@ -64,7 +64,7 @@ function Carts() {
 				</button>
 				<button
 					disabled={!cartData?.length}
-					style={{ cursor: cartData?.length && "not-allowed" }}
+					style={{ cursor: !cartData?.length && "not-allowed" }}
 					onClick={handleCheckout}
 				>
 					Checkout

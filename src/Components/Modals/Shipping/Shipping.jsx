@@ -2,9 +2,10 @@ import React from "react";
 import { RiDeleteBack2Fill } from "react-icons/ri";
 import { useGlobalContext } from "../../../context";
 import "./shipping.scss";
+
 import { Address } from "./SubComponets";
 function Shipping() {
-	const { handleModals, billings } = useGlobalContext();
+	const { handleModals, billings, user } = useGlobalContext();
 	return (
 		<div id="shipping">
 			<div className="wrapper">

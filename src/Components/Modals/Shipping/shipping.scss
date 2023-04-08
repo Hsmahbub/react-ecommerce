@@ -1,4 +1,5 @@
 @import "../../../utils//mixin.scss";
+@import "../../../utils/responsive-breakpoint.scss";
 #shipping {
 	@include modals;
 	.wrapper {
@@ -7,7 +8,10 @@
 		z-index: 1;
 		margin: auto;
 		padding: 2rem;
-		background-color: aliceblue;
+		@include small-down{
+			padding:1rem;
+		}
+		background-color: #0d83e9;
 		button {
 			border: none;
 			outline: none;
@@ -39,21 +43,28 @@
 		}
 		.shipping-data {
 			.address {
+				color: #f9f5f9;
+                border-radius: 8px;
 				position: relative;
 				margin: 1rem 0;
 				padding: 0.5rem;
 				width: 100%;
-				display: flex;
-				align-items: center;
-				background-color: rgb(100, 91, 78);
+				background-color:black;
 				color: #f9f5f9;
 				input {
 					margin-right: 1rem;
 				}
+				.address-btn{
+					display: flex;
+    gap: 1rem;
+    margin-top: .5rem;
+				}
 				button {
-					position: absolute;
-					right: 0.5rem;
-					color: white;
+    background: #ded2d2;
+    color: #0d0606;
+    padding: 0.3rem;
+    border-radius: 3px;
+					
 				}
 				.btn-romove {
 					right: 3rem !important;
@@ -63,6 +74,9 @@
 					line-height: 18px;
 					font-style: italic;
 					font-weight: 300;
+					p{
+						font-weight: 500;
+					}
 				}
 			}
 		}

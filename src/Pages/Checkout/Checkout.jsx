@@ -22,10 +22,6 @@ function Checkout() {
 	const { data, arrayOfId, totalPrice, totalItems } = useLoaderData()
 	const { handleModals, user, currentBilling } = useGlobalContext();
 	const navigate = useNavigate();
-	const name = currentBilling.name ? currentBilling.name : user.name;
-	const email = currentBilling.email ? currentBilling.email : user.email;
-	const phone = currentBilling.phone ? currentBilling.phone : user.phone;
-	const address = currentBilling.address ? currentBilling.address : "";
 	const cod =
 		"https://png.pngtree.com/png-clipart/20210530/original/pngtree-the-cash-on-delivery-circle-design-png-image_6357123.jpg";
 	// total item and total price
@@ -64,13 +60,8 @@ function Checkout() {
 			}
 		}
 	};
-
-	useEffect(() => {
-		localStorage.setItem("currentBillingId", currentBilling._id);
-	}, [currentBilling]);
-
+	
 	return (
-
 		<div className="checkout section__padding">
 			<h1>Checkout</h1>
 			<div className="billings">
@@ -91,7 +82,7 @@ function Checkout() {
 									<span>
 										<GrMapLocation />
 									</span>
-									<span>{name}</span>
+									<span>{currentBilling?.name}</span>
 								</p>
 								<button
 									onClick={() =>
@@ -101,10 +92,10 @@ function Checkout() {
 									ADD
 								</button>
 							</div>
-							<div className="shipping">{address}</div>
+							<div className="shipping">{currentBilling?.address}</div>
 						</div>
-						<SingelItem2 icon={<FaEnvelope />} text={email} />
-						<SingelItem2 icon={<FaPhone />} text={phone} />
+						<SingelItem2 icon={<FaEnvelope />} text={currentBilling?.email} />
+						<SingelItem2 icon={<FaPhone />} text={currentBilling?.phone} />
 						<div className="subtotal">
 							<h2>Order Summary</h2>
 							<SingleItem

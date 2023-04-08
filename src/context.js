@@ -8,12 +8,21 @@ import { LoggedInUserApi } from "./Api Method/user";
 const AppContext = createContext();
 const AppProvider = ({ children }) => {
 	const [isLoading, setIsLoading] = useState(false);
-	// auth and user database method
+
+	//billings
+	const [billings, setBillings] = useState([]);
+	const [currentBilling, setCurrentBilling] = useState({});
+	const [BillingEdit, setBillingEdit] = useState({
+		isEdit: false,
+		id: "",
+	});
+
 	const [user, setUser] = useState("");
 	useEffect(() => {
 		LoggedInUserApi((res) => {
 			if (res?.status === 200) {
 				res.data && setUser(res.data);
+				setCurrentBilling(res.data.default_billing);
 			}
 		});
 	}, []);
@@ -22,7 +31,6 @@ const AppProvider = ({ children }) => {
 
 	// cart Data
 	const [cartData, setCartData] = useState([]);
-
 
 	// handleModals
 	const handleModals = (id, isOpen) => {
@@ -49,13 +57,6 @@ const AppProvider = ({ children }) => {
 		}
 	};
 
-	//billings
-	const [billings, setBillings] = useState([]);
-	const [currentBilling, setCurrentBilling] = useState({});
-	const [BillingEdit, setBillingEdit] = useState({
-		isEdit: false,
-		id: "",
-	});
 	useEffect(() => {
 		GetBillingApi((res) => {
 			if (res?.status === 200) {
@@ -64,7 +65,7 @@ const AppProvider = ({ children }) => {
 				console.log(res?.data.message);
 			}
 		});
-	}, [setBillings]);
+	}, []);
 
 	//adming
 	const [admin, setAdmin] = useState({});
@@ -91,7 +92,7 @@ const AppProvider = ({ children }) => {
 				//auth
 				user,
 				setUser,
-				
+
 				// cart
 				cartData,
 				setCartData,
@@ -112,8 +113,7 @@ const AppProvider = ({ children }) => {
 				//admin
 				admin,
 				setAdmin,
-			}}
-		>
+			}}>
 			{children}
 		</AppContext.Provider>
 	);

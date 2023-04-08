@@ -31,6 +31,7 @@ export const UpdateBillingApi = async (billing, id, cb) => {
 export const DeleteBillingApi = async (id, cb) => {
 	try {
 		const res = await userRequest.delete(`/billings/${id}`);
+		console.log(res)
 		cb(res);
 	} catch (err) {
 		cb(err?.response);

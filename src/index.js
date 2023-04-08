@@ -44,7 +44,6 @@ const router = createBrowserRouter([
 					const cart = await GetCartApi();
 					const productId = params.productIds;
 					const arrayOfId = productId?.split("_");
-					console.log(arrayOfId);
 					const data = cart.data.filter((i) =>
 						arrayOfId.includes(i._id)
 					);
