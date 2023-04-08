@@ -81,11 +81,20 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "login",
-				element: <Login />,
+				element: !localStorage.getItem("userId") ? (
+					<Login />
+				) : (
+					<Navigate to={"/"} />
+				),
 			},
 			{
 				path: "signup",
-				element: <Signup />,
+
+				element: !localStorage.getItem("userId") ? (
+					<Signup />
+				) : (
+					<Navigate to={"/"} />
+				),
 			},
 			{
 				path: "search",

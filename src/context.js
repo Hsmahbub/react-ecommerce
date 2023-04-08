@@ -42,17 +42,12 @@ const AppProvider = ({ children }) => {
 			elementId.style.position = "fixed";
 			elementId.style.zIndex = "1";
 			elementId.style.opacity = "1";
-
 			return true;
 		} else {
 			app.style.height = "unset";
 			app.style.overflowY = "scroll";
 			elementId.style.zIndex = "-1";
 			elementId.style.opacity = "0";
-			if (id === "loading") {
-				app.style.height = "100vh";
-				app.style.overflowY = "hidden";
-			}
 			return false;
 		}
 	};

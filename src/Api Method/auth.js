@@ -6,13 +6,9 @@ export const SignupApi = async (user, cb) => {
 			user: user,
 		});
 		cb(res);
+		console.log(res)
 	} catch (e) {
-		console.log(e);
-		let error = {
-			errorMsg: "Please check your internet connection",
-			error: e,
-		};
-		cb({ error });
+		cb(e.response);
 	}
 };
 export const LoginApi = async (user, cb) => {
